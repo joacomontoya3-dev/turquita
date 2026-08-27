@@ -361,3 +361,68 @@ const legend = items => `<div class="legend">` + items.map(it =>
 </div>`;
   writeFileSync('OpcionD.dc.html', head + helmet + body + tail());
 }
+
+/* ============ export SVG de la Opción B (para Figma) ============ */
+{
+  const b = { x0: 54, x1: 664, y0: 14, y1: 296 };
+  const all = [...assets.map(a => idx[a.key]), bench].flat();
+  const lo = Math.floor(Math.min(...all) / 20) * 20, hi = Math.ceil(Math.max(...all) / 20) * 20;
+  const ticks = []; for (let v = lo; v <= hi; v += 40) ticks.push(v);
+  const series = [...assets.map(a => ({ name: a.short, c: a.color, d: idx[a.key] })),
+                  { name: 'Índice 60/40', c: T.muted, d: bench, ref: true }]
+                 .sort((p, q) => q.d[N-1] - p.d[N-1]);
+  const best = series[0], worst = series[series.length - 1];
+  const gap = portIdx[N-1] - bench[N-1];
+
+  const txt = (x, y, s, o = {}) =>
+    `<text x="${x}" y="${y}"${o.anchor ? ` text-anchor="${o.anchor}"` : ''} font-size="${o.size || 12}"`
+    + ` font-weight="${o.weight || 400}" fill="${o.fill || T.ink}"`
+    + `${o.ls ? ` letter-spacing="${o.ls}"` : ''}>${s}</text>`;
+
+  const plot = `<g transform="translate(48, 252)">
+    ${gridY(ticks.filter(v => v !== 100), lo, hi, b, v => v)}
+    <line x1="${b.x0}" y1="${R(sy(100, lo, hi, b))}" x2="${b.x1}" y2="${R(sy(100, lo, hi, b))}" stroke="${T.axis}" stroke-width="1"></line>
+    <text x="${b.x0 - 10}" y="${R(sy(100, lo, hi, b)) + 4}" text-anchor="end" font-size="11" font-weight="600" fill="${T.ink2}">100</text>
+    <line x1="${b.x0}" y1="${b.y1}" x2="${b.x1}" y2="${b.y1}" stroke="${T.axis}" stroke-width="1"></line>
+    ${series.map(s2 => `<path d="${line(s2.d, lo, hi, b)}" fill="none" stroke="${s2.c}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"${s2.ref ? ' stroke-opacity="0.85"' : ''}></path>`).join('\n    ')}
+    ${series.map(s2 => endDot(b.x1, sy(s2.d[N-1], lo, hi, b), s2.c)).join('\n    ')}
+    ${series.map(s2 => {
+        const y = R(sy(s2.d[N-1], lo, hi, b)) + 4;
+        return txt(b.x1 + 12, y, s2.name, { size: 11.5, weight: s2.ref ? 400 : 500, fill: s2.ref ? T.muted : T.ink2 })
+          + txt(b.x1 + 118, y, Math.round(s2.d[N-1]), { size: 11.5, weight: 600, anchor: 'end', fill: s2.ref ? T.muted : T.ink });
+      }).join('\n    ')}
+    ${gridX(b, 322)}
+  </g>`;
+
+  const kpi = (x, label, value, sub, o = {}) =>
+    txt(x, 182, label, { size: 11, fill: T.muted })
+    + txt(x, 210, value, { size: 22, weight: 600, fill: o.vFill || T.ink })
+    + txt(x, 230, sub, { size: 12, fill: o.sFill || T.ink2 });
+
+  const legendItems = [...assets.map(a => ({ c: a.color, t: a.short })), { c: T.muted, t: 'Índice 60/40 (referencia)' }];
+  let lx = 48;
+  const legendSvg = legendItems.map(it => {
+    const g = `<rect x="${lx}" y="637" width="14" height="2" rx="1" fill="${it.c}"></rect>`
+      + txt(lx + 22, 642, it.t, { size: 12, fill: T.ink2 });
+    lx += 22 + it.t.length * 6.4 + 22;
+    return g;
+  }).join('\n  ');
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="880" height="710" viewBox="0 0 880 710" font-family="IBM Plex Sans, Segoe UI, sans-serif">
+  <rect width="880" height="710" fill="${T.plane}"></rect>
+  <rect x="18" y="18" width="844" height="674" rx="4" fill="${T.surface}" stroke="${T.border}"></rect>
+  ${txt(48, 60, 'OPCIÓN B · COMPARATIVA RELATIVA', { size: 10.5, weight: 600, fill: T.muted, ls: 0.95 })}
+  ${txt(48, 88, 'Cada activo indexado a base 100 en el primer mes', { size: 21, weight: 600 })}
+  ${txt(48, 112, 'Todo arranca en 100, así que las líneas comparan rentabilidad y no tamaño de', { size: 12.5, fill: T.ink2 })}
+  ${txt(48, 129, 'posición. Un mismo eje para todo: sin segundo eje y sin que la posición más grande', { size: 12.5, fill: T.ink2 })}
+  ${txt(48, 146, 'tape a las demás.', { size: 12.5, fill: T.ink2 })}
+  ${kpi(48,  'Mejor activo', best.name, `${pct0(best.d[N-1] - 100)} en 3 años`, { sFill: T.up })}
+  ${kpi(200, 'Peor activo', worst.name, `${pct0(worst.d[N-1] - 100)} en 3 años`)}
+  ${kpi(340, 'Cartera vs. índice', `${gap >= 0 ? '+' : '-'}${Math.abs(Math.round(gap))} pts`, 'sobre el índice, en base 100', { vFill: T.up })}
+  ${plot}
+  <line x1="48" y1="616" x2="832" y2="616" stroke="${T.border}"></line>
+  ${legendSvg}
+</svg>
+`;
+  writeFileSync('opcion-b.svg', svg);
+}

@@ -24,6 +24,12 @@ Después vuelve a sembrar el canvas con el helper de la skill `design`
 (`seed-canvas.mjs --template payload.template.html`), pasando los cuatro
 artboards y `canvas.json`, y republica `rendimiento-inversiones.html`.
 
+## Export a Figma
+
+`gen.mjs` escribe también `opcion-b.svg`: la Opción B como SVG independiente,
+para arrastrar a Figma con capas editables. La fuente va referenciada por nombre
+(no incrustada), porque Figma resuelve tipografías por nombre y no lee `@font-face`.
+
 ## Notas
 
 - **Los datos son sintéticos.** `gen.mjs` genera 36 meses (sep 2023 → ago 2026)
