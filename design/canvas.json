@@ -1,0 +1,15 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",    "title": "Opción A · Valor frente a lo aportado", "x": 0,    "y": 0,    "w": 880, "h": 710 },
+    { "file": "OpcionB.dc.html", "title": "Opción B · Comparativa base 100",       "x": 960,  "y": 0,    "w": 880, "h": 710 },
+    { "file": "OpcionC.dc.html", "title": "Opción C · Múltiplos pequeños",         "x": 0,    "y": 1030,  "w": 880, "h": 710 },
+    { "file": "OpcionD.dc.html", "title": "Opción D · Paneles apilados",           "x": 960,  "y": 1030,  "w": 880, "h": 710 }
+  ],
+  "annotations": [
+    { "id": "nota-a", "x": 0,   "y": 742,  "w": 420, "text": "A FAVOR\nResponde la pregunta que de verdad importa: ¿cuánto de esto lo ha puesto el mercado y cuánto lo he puesto yo? El área entre las dos líneas es la respuesta, sin cálculos.\n\nEN CONTRA\nNo dice qué activo tira del conjunto. Y en euros absolutos los primeros meses parecen planos aunque la rentabilidad fuera buena." },
+    { "id": "nota-b", "x": 960, "y": 742,  "w": 420, "text": "A FAVOR\nAl arrancar todo en 100, compara rendimiento puro. Es la única de las cuatro que te dice si vas por delante o por detrás del índice.\n\nEN CONTRA\nBorra el tamaño: una posición de 300 € pesa lo mismo en el gráfico que una de 20.000 €. Un activo pequeño y disparado parece más importante de lo que es." },
+    { "id": "nota-c", "x": 0,   "y": 1772, "w": 420, "text": "A FAVOR\nCuatro líneas en un plano se cruzan y se tapan; separadas, cada una se lee limpia. El orden de mejor a peor ya es información, y la escala común mantiene las pendientes comparables.\n\nEN CONTRA\nComparar exige mover la vista entre paneles. Y la escala compartida aplasta a la renta fija, que se mueve poco." },
+    { "id": "nota-d", "x": 960, "y": 1772, "w": 420, "text": "A FAVOR\nSepara dos magnitudes que no comparten escala en dos paneles sobre el mismo eje de tiempo. La línea de arriba sube suave; la de abajo enseña los sustos que esa suavidad esconde.\n\nEN CONTRA\nEs la más densa de leer y no desglosa por activo: habla de la cartera como un todo." }
+  ],
+  "launch": { "view": "canvas" }
+}
