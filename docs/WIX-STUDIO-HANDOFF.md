@@ -15,9 +15,10 @@ No armes página por página. Armá el sistema primero y las páginas salen sola
 3. Temas de texto
 4. Custom CSS
 5. Catálogo en Wix Stores
-6. Páginas
+6. Video (ver `VIDEO.md` — es la mitad del diseño)
+7. Páginas
 
-Si hacés los pasos 1 a 4 primero, la página 6 tarda una tarde. Si empezás por la 6,
+Si hacés los pasos 1 a 4 primero, la página 7 tarda una tarde. Si empezás por la 6,
 vas a estar retocando tamaños de fuente a mano para siempre.
 
 ---
@@ -142,7 +143,12 @@ algunas fichas la tienen y otras no, la grilla se ve descuidada.
 | Carrito lateral + barra de envío gratis | Side Cart nativo. La barra es el ajuste "Free shipping goal" |
 | Tabla de specs | Product Info Sections |
 | Acordeones | Accordion de Wix Studio |
-| Página "How to mate" | Página normal. **No la pongas en un embed** — es tu mejor contenido para Google |
+| Página "How to mate" | Página normal con un Video Box por paso. **No la pongas en un embed** — es tu mejor contenido para Google |
+| Hero a sangre | Sección con fondo de video, o Video Box del tamaño de la sección. Loop + Mute + Play automático |
+| Degradado sobre el video | Color Overlay sobre el Video Box con el degradado — **no** el slider de opacidad del video |
+| Carrusel de reels | Repeater horizontal con un Video Box por celda |
+| Video en la ficha | Wix Stores acepta video en la galería de medios del producto |
+| Video al pasar el mouse en la grilla | **No se puede.** El Product Gallery sólo cambia a una segunda imagen. Usá un fotograma fijo ahí |
 
 ## 7. Breakpoints
 
@@ -159,7 +165,11 @@ gente vea seis productos y se vaya.
 
 ## 8. Lo que hay que verificar antes de publicar
 
-- [ ] Ningún texto sobre foto sin panel o capa de oscurecimiento
+- [ ] Ningún texto sobre foto o video sin el degradado
+- [ ] Todos los clips en automático sin pista de audio (eliminada, no silenciada)
+- [ ] Un solo clip en automático arriba del pliegue
+- [ ] Poster frame cargado en cada video
+- [ ] LCP por debajo de 2,5 s en PageSpeed Insights
 - [ ] Los precios tachados sólo en los kits, y con el ahorro real
 - [ ] El pop-up de moneda, afuera
 - [ ] Un solo termo con opción de color
