@@ -1,0 +1,1277 @@
+<title>Mate Coast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+/* ============================================================
+   MATE COAST — design tokens
+   Every value here maps to a Wix Studio token. See docs/WIX-STUDIO-HANDOFF.md
+   ============================================================ */
+:root{
+  /* — surfaces — */
+  --ground:#E7E9E4;      /* bleached salt grey-green — page ground */
+  --paper:#F2F3F0;       /* raised surface */
+  --panel:#DCE0D8;       /* product image panel */
+  --panel-2:#D2D8CB;     /* product panel, alt rhythm */
+  --band:#2E3A24;        /* dark editorial band */
+  --band-fg:#E7E9E4;
+
+  /* — ink — */
+  --ink:#16190F;         /* olive-black, not neutral */
+  --ink-2:#5A6152;       /* muted */
+  --line:#C6CBC0;        /* hairline */
+  --line-2:#B0B7A8;
+
+  /* — brand — */
+  --olive:#5A6E3E;       /* logo green */
+  --yerba:#B7D14A;       /* fresh-ground yerba — the only saturated colour */
+  --clay:#C08A4E;        /* calabaza gourd — illustration only, never UI */
+
+  /* — controls — */
+  --btn-bg:#2E3A24;
+  --btn-fg:#F2F3F0;
+  --btn-bg-h:#16190F;
+  --focus:#5A6E3E;
+
+  /* — type — */
+  --f-display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --f-body:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
+  --f-mono:'DM Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+
+  --t-display:clamp(2.6rem,6.6vw,6rem);
+  --t-h1:clamp(1.9rem,4vw,3.25rem);
+  --t-h2:clamp(1.4rem,2.4vw,2.1rem);
+  --t-h3:1.0625rem;
+  --t-body:1rem;
+  --t-sm:.8125rem;
+  --t-micro:.6875rem;
+
+  /* — space & shape — */
+  --gut:clamp(16px,3vw,40px);
+  --r:2px;
+  --max:1560px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#14170F; --paper:#1B1F15; --panel:#242A1C; --panel-2:#2B3222;
+    --band:#0F120A; --band-fg:#E7E9E4;
+    --ink:#E7E9E4; --ink-2:#98A28C; --line:#333A29; --line-2:#414A34;
+    --olive:#8FA96A; --yerba:#B7D14A; --clay:#C99A62;
+    --btn-bg:#E7E9E4; --btn-fg:#14170F; --btn-bg-h:#FFFFFF; --focus:#B7D14A;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14170F; --paper:#1B1F15; --panel:#242A1C; --panel-2:#2B3222;
+  --band:#0F120A; --band-fg:#E7E9E4;
+  --ink:#E7E9E4; --ink-2:#98A28C; --line:#333A29; --line-2:#414A34;
+  --olive:#8FA96A; --yerba:#B7D14A; --clay:#C99A62;
+  --btn-bg:#E7E9E4; --btn-fg:#14170F; --btn-bg-h:#FFFFFF; --focus:#B7D14A;
+}
+
+/* ============================================================ base */
+*{box-sizing:border-box}
+html{scroll-padding-top:96px}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--f-body); font-size:var(--t-body); line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+hr{border:0;border-top:1px solid var(--line);margin:0}
+
+h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:600;line-height:1.02;
+  letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.rule{border-top:1px solid var(--line)}
+
+/* — the mono voice: labels, specs, prices — */
+.mono{font-family:var(--f-mono);font-weight:400;font-variant-numeric:tabular-nums}
+.lbl{font-family:var(--f-mono);font-size:var(--t-micro);text-transform:uppercase;
+  letter-spacing:.16em;color:var(--ink-2)}
+.lbl-ink{color:var(--ink)}
+
+.display{font-family:var(--f-display);font-size:var(--t-display);font-weight:700;
+  font-variation-settings:'wdth' 105;line-height:.92;letter-spacing:-.035em}
+.h1{font-size:var(--t-h1)}
+.h2{font-size:var(--t-h2);font-variation-settings:'wdth' 100}
+.h3{font-size:var(--t-h3);font-family:var(--f-body);font-weight:600;letter-spacing:-.01em}
+.lede{font-size:clamp(1rem,1.5vw,1.1875rem);line-height:1.5;color:var(--ink-2);max-width:56ch}
+.prose{max-width:65ch;color:var(--ink-2)}
+
+/* ============================================================ buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.9rem 1.5rem;border-radius:var(--r);font-family:var(--f-mono);
+  font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.14em;
+  background:var(--btn-bg);color:var(--btn-fg);transition:background .18s ease;
+  text-align:center;min-height:48px}
+.btn:hover{background:var(--btn-bg-h)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
+.btn-ghost:hover{background:transparent;border-color:var(--ink)}
+.btn-block{width:100%}
+.btn-express{background:var(--ink);color:var(--ground);font-family:var(--f-body);
+  font-size:.9375rem;letter-spacing:0;text-transform:none;font-weight:600}
+.btn-express.gpay{background:var(--paper);color:var(--ink);border:1px solid var(--line-2)}
+
+/* ============================================================ header */
+.announce{background:var(--band);color:var(--band-fg);overflow:hidden}
+.announce-track{display:flex;gap:3rem;padding:.6rem 0;white-space:nowrap;
+  font-family:var(--f-mono);font-size:var(--t-micro);text-transform:uppercase;
+  letter-spacing:.16em;animation:slide 38s linear infinite}
+.announce-track span{display:flex;gap:3rem}
+.announce-track b{font-weight:400;color:var(--yerba)}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+header.site{position:sticky;top:0;z-index:40;background:var(--ground);
+  border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);
+  padding-block:.85rem;max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.logo{font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 88;
+  font-size:.9375rem;line-height:.86;letter-spacing:.01em;color:var(--olive);
+  text-transform:uppercase;flex:none}
+nav.main{display:flex;gap:1.4rem;flex:1;overflow-x:auto;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{font-family:var(--f-mono);font-size:var(--t-micro);text-transform:uppercase;
+  letter-spacing:.14em;color:var(--ink-2);padding-block:.3rem;white-space:nowrap;
+  border-bottom:1px solid transparent}
+nav.main a:hover{color:var(--ink)}
+nav.main a[aria-current]{color:var(--ink);border-bottom-color:var(--ink)}
+.bar-end{display:flex;gap:1.1rem;align-items:center;flex:none}
+.bar-end button{font-family:var(--f-mono);font-size:var(--t-micro);
+  text-transform:uppercase;letter-spacing:.14em;color:var(--ink-2)}
+.bar-end button:hover{color:var(--ink)}
+.cart-btn{color:var(--ink)!important}
+.cart-n{font-variant-numeric:tabular-nums}
+
+/* ============================================================ product illustrations */
+.pimg{position:relative;aspect-ratio:4/5;background:var(--panel);
+  display:grid;place-items:center;overflow:hidden;border-radius:var(--r);
+  --ill-1:var(--band);--ill-2:var(--clay)}
+.pimg svg{width:58%;height:auto;aspect-ratio:5/6;transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.pimg.alt{background:var(--panel-2)}
+.s1{fill:var(--ill-1)}
+.s2{fill:var(--ill-2)}
+.s3{fill:var(--ill-1);opacity:.35}
+.card:hover .pimg{background:var(--panel-2)}
+.card:hover .pimg svg{transform:scale(1.045) rotate(-1.5deg)}
+.pimg .tag{position:absolute;top:.7rem;left:.7rem;background:var(--yerba);color:#16190F;
+  font-family:var(--f-mono);font-size:var(--t-micro);text-transform:uppercase;
+  letter-spacing:.12em;padding:.25rem .5rem;border-radius:var(--r)}
+
+/* ============================================================ product card */
+.grid-p{display:grid;gap:clamp(1rem,2vw,1.75rem) clamp(.75rem,1.4vw,1.25rem);
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,235px),1fr))}
+.card{display:flex;flex-direction:column;gap:.7rem}
+.card-meta{display:grid;grid-template-columns:1fr auto;gap:.15rem .75rem;align-items:baseline}
+.card-name{font-weight:600;font-size:.9375rem;letter-spacing:-.01em}
+.card-price{font-family:var(--f-mono);font-size:.875rem;font-variant-numeric:tabular-nums}
+.card-was{color:var(--ink-2);text-decoration:line-through;margin-right:.4rem;font-size:.8125rem}
+.card-sub{grid-column:1/-1;font-size:var(--t-sm);color:var(--ink-2)}
+</style>
+<style>
+/* ============================================================ sections */
+.sec{padding-block:clamp(3rem,7vw,6rem)}
+.sec-tight{padding-block:clamp(2rem,4vw,3.25rem)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:1rem;margin-bottom:clamp(1.25rem,3vw,2.25rem)}
+.sec-head a{font-family:var(--f-mono);font-size:var(--t-micro);text-transform:uppercase;
+  letter-spacing:.14em;border-bottom:1px solid var(--line-2);padding-bottom:.15rem}
+.sec-head a:hover{border-color:var(--ink)}
+
+/* ============================================================ hero */
+.hero{padding-top:clamp(2.5rem,6vw,5rem);padding-bottom:clamp(2rem,4vw,3rem)}
+.hero-grid{display:grid;gap:clamp(1.75rem,4vw,3rem);grid-template-columns:1fr}
+@media(min-width:900px){.hero-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:end}}
+.hero h1{margin-bottom:1.5rem}
+.hero h1 em{font-style:normal;color:var(--olive)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.75rem}
+.hero-spec{display:flex;flex-wrap:wrap;gap:1.25rem 2rem;margin-top:2rem;
+  padding-top:1.25rem;border-top:1px solid var(--line)}
+.hero-spec div{display:flex;flex-direction:column;gap:.15rem}
+.hero-spec b{font-family:var(--f-mono);font-weight:500;font-size:1.0625rem;
+  font-variant-numeric:tabular-nums}
+.specimens{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.specimens figcaption{margin-top:.5rem}
+
+/* ============================================================ category rail */
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(190px,1fr);
+  gap:.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem}
+.rail::-webkit-scrollbar{height:2px}
+.rail::-webkit-scrollbar-thumb{background:var(--line-2)}
+.cat{scroll-snap-align:start;display:flex;flex-direction:column;gap:.6rem}
+.cat .pimg{aspect-ratio:1;background:var(--panel-2)}
+.cat:hover .pimg{background:var(--panel)}
+.cat-name{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;
+  font-weight:600;font-size:.9375rem}
+.cat-name span{font-family:var(--f-mono);font-size:var(--t-micro);color:var(--ink-2)}
+
+/* ============================================================ dark band / kit feature */
+.band{background:var(--band);color:var(--band-fg)}
+.band .lbl,.band .lede,.band .prose{color:#A7B196}
+.band .btn{background:var(--yerba);color:#16190F}
+.band .btn:hover{background:#C8DE68}
+.band .btn-ghost{background:transparent;color:var(--band-fg);border-color:#4A5840}
+.band .pimg{--ill-1:#E7E9E4;background:#3A4830}
+.kit{display:grid;gap:clamp(1.5rem,4vw,3.5rem);grid-template-columns:1fr;
+  padding-block:clamp(2.5rem,6vw,5rem);align-items:center}
+@media(min-width:860px){.kit{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}}
+.kit-imgs{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.kit-list{list-style:none;margin:1.75rem 0 0;padding:0;display:grid;gap:0}
+.kit-list li{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:baseline;
+  padding-block:.85rem;border-top:1px solid #45523B}
+.kit-list li:last-child{border-bottom:1px solid #45523B}
+.kit-list .n{font-family:var(--f-mono);font-size:var(--t-micro);color:var(--yerba)}
+.kit-list .v{font-family:var(--f-mono);font-size:var(--t-sm);color:#A7B196;
+  font-variant-numeric:tabular-nums}
+.kit-price{display:flex;align-items:baseline;gap:.75rem;margin-top:1.75rem}
+.kit-price b{font-family:var(--f-mono);font-weight:500;font-size:1.75rem;
+  font-variant-numeric:tabular-nums}
+.kit-price s{color:#8B9578;font-family:var(--f-mono);font-size:1rem}
+.kit-price .save{background:var(--yerba);color:#16190F;font-family:var(--f-mono);
+  font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.12em;padding:.2rem .45rem}
+
+/* ============================================================ ritual steps */
+.steps{display:grid;gap:1px;background:var(--line);border-block:1px solid var(--line)}
+@media(min-width:700px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{background:var(--ground);padding:clamp(1.25rem,2.5vw,2rem);display:flex;
+  flex-direction:column;gap:.6rem}
+.step .n{font-family:var(--f-mono);font-size:var(--t-micro);color:var(--olive);
+  letter-spacing:.16em}
+.step p{color:var(--ink-2);font-size:.9375rem}
+.step .note{font-family:var(--f-mono);font-size:var(--t-sm);color:var(--ink);
+  padding-top:.4rem;margin-top:auto}
+.step .note::before{content:"→ ";color:var(--olive)}
+
+/* ============================================================ etiquette */
+.etq{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+  margin:0;padding:0;list-style:none}
+@media(min-width:760px){.etq{grid-template-columns:1fr 1fr}}
+.etq li{background:var(--ground);padding:1.25rem 1.4rem;list-style:none;display:grid;gap:.35rem}
+.etq b{font-weight:600;font-size:.9375rem}
+.etq p{color:var(--ink-2);font-size:.9375rem}
+.etq .es{font-family:var(--f-mono);font-size:var(--t-micro);color:var(--olive);
+  text-transform:uppercase;letter-spacing:.14em}
+
+/* ============================================================ trust row */
+.trust{display:grid;gap:1px;background:var(--line);border-block:1px solid var(--line)}
+@media(min-width:640px){.trust{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.trust{grid-template-columns:repeat(4,1fr)}}
+.trust div{background:var(--ground);padding:1.4rem var(--gut);display:grid;gap:.3rem}
+.trust b{font-weight:600;font-size:.9375rem}
+.trust p{font-size:var(--t-sm);color:var(--ink-2)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--yerba);
+  margin-right:.45rem;vertical-align:middle}
+
+/* ============================================================ filters (PLP) */
+.filters{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;
+  padding-block:1.25rem;border-bottom:1px solid var(--line)}
+.chip{font-family:var(--f-mono);font-size:var(--t-micro);text-transform:uppercase;
+  letter-spacing:.13em;padding:.5rem .8rem;border:1px solid var(--line-2);
+  border-radius:var(--r);color:var(--ink-2);white-space:nowrap}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.count{margin-left:auto;font-family:var(--f-mono);font-size:var(--t-micro);
+  color:var(--ink-2);letter-spacing:.13em}
+
+/* ============================================================ PDP */
+.pdp{display:grid;gap:clamp(1.5rem,4vw,3.5rem);grid-template-columns:1fr;
+  padding-block:clamp(1.5rem,3vw,2.5rem)}
+@media(min-width:920px){.pdp{grid-template-columns:minmax(0,1.25fr) minmax(360px,.85fr);
+  align-items:start}}
+.gallery{display:grid;gap:.5rem}
+.gallery .pimg:first-child{aspect-ratio:1;max-height:74vh}
+.gallery-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.gallery-thumbs .pimg{aspect-ratio:1}
+@media(min-width:920px){.pdp-info{position:sticky;top:96px}}
+.pdp-price{font-family:var(--f-mono);font-size:1.5rem;font-weight:500;
+  font-variant-numeric:tabular-nums;margin-top:.6rem}
+.pdp-gst{font-family:var(--f-mono);font-size:var(--t-micro);color:var(--ink-2);
+  letter-spacing:.1em;margin-left:.5rem;text-transform:uppercase}
+.swatches{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+.sw{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-2);
+  position:relative}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 1px var(--ground),0 0 0 2px var(--ink)}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line-2);
+  border-radius:var(--r);height:48px}
+.qty button{width:42px;height:100%;font-family:var(--f-mono);font-size:1rem}
+.qty span{width:34px;text-align:center;font-family:var(--f-mono);
+  font-variant-numeric:tabular-nums}
+.buy{display:grid;grid-template-columns:auto 1fr;gap:.5rem;margin-top:1.25rem}
+.express{display:grid;gap:.5rem;margin-top:.5rem}
+@media(min-width:520px){.express{grid-template-columns:1fr 1fr}}
+.express-note{font-family:var(--f-mono);font-size:var(--t-micro);color:var(--ink-2);
+  text-align:center;letter-spacing:.1em;text-transform:uppercase;margin-top:.35rem}
+
+/* spec table — the "gear" voice */
+.spec{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:.9375rem}
+.spec th,.spec td{text-align:left;padding:.7rem 0;border-top:1px solid var(--line);
+  vertical-align:baseline}
+.spec th{font-family:var(--f-mono);font-size:var(--t-micro);text-transform:uppercase;
+  letter-spacing:.14em;color:var(--ink-2);font-weight:400;width:42%}
+.spec td{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:.875rem}
+
+.pickup{display:flex;gap:.7rem;align-items:flex-start;margin-top:1.25rem;
+  padding:.9rem 1rem;border:1px solid var(--line);border-radius:var(--r);
+  background:var(--paper)}
+.pickup p{font-size:var(--t-sm);color:var(--ink-2)}
+.pickup b{font-size:.9375rem;color:var(--ink);font-weight:600}
+
+details.acc{border-top:1px solid var(--line)}
+details.acc:last-of-type{border-bottom:1px solid var(--line)}
+details.acc summary{list-style:none;cursor:pointer;padding:1rem 0;display:flex;
+  justify-content:space-between;align-items:center;gap:1rem;font-weight:600;font-size:.9375rem}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";font-family:var(--f-mono);color:var(--ink-2)}
+details.acc[open] summary::after{content:"–"}
+details.acc .body{padding-bottom:1.25rem;color:var(--ink-2);font-size:.9375rem;
+  display:grid;gap:.7rem;max-width:60ch}
+details.acc ol,details.acc ul{margin:0;padding-left:1.1rem;display:grid;gap:.45rem}
+
+/* ============================================================ cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,12,7,.42);z-index:60;
+  opacity:0;pointer-events:none;transition:opacity .28s ease}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);z-index:70;
+  background:var(--ground);border-left:1px solid var(--line);
+  transform:translateX(100%);transition:transform .32s cubic-bezier(.3,.8,.3,1);
+  display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 1.25rem;border-bottom:1px solid var(--line)}
+.drawer-body{flex:1;overflow-y:auto;padding:0 1.25rem}
+.drawer-foot{border-top:1px solid var(--line);padding:1.1rem 1.25rem;display:grid;gap:.75rem}
+.ship-bar{display:grid;gap:.45rem}
+.ship-track{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.ship-fill{height:100%;background:var(--yerba);width:0;transition:width .4s ease}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:.9rem;
+  padding-block:1rem;border-bottom:1px solid var(--line);align-items:start}
+.line .pimg{aspect-ratio:4/5}
+.line .pimg svg{width:70%}
+.line-name{font-weight:600;font-size:.875rem;line-height:1.3}
+.line-var{font-family:var(--f-mono);font-size:var(--t-micro);color:var(--ink-2);
+  margin-top:.2rem;text-transform:uppercase;letter-spacing:.1em}
+.line-qty{display:inline-flex;align-items:center;gap:.55rem;margin-top:.5rem;
+  font-family:var(--f-mono);font-size:var(--t-sm)}
+.line-qty button{color:var(--ink-2);width:18px}
+.line-qty button:hover{color:var(--ink)}
+.line-price{font-family:var(--f-mono);font-size:.875rem;font-variant-numeric:tabular-nums}
+.totals{display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.empty{padding:3rem 0;text-align:center;color:var(--ink-2);display:grid;gap:1rem;
+  justify-items:center}
+
+/* ============================================================ footer */
+footer.site{background:var(--band);color:var(--band-fg);padding-block:clamp(2.5rem,5vw,4rem)}
+footer.site .lbl{color:#8B9578}
+.f-grid{display:grid;gap:2rem;grid-template-columns:1fr}
+@media(min-width:700px){.f-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.f-grid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+.f-col{display:grid;gap:.55rem;align-content:start}
+.f-col a{font-size:.9375rem;color:#C6CFB8;width:fit-content;
+  border-bottom:1px solid transparent}
+.f-col a:hover{color:var(--band-fg);border-color:#5C6B4E}
+.f-col p{font-size:.9375rem;color:#A7B196}
+.f-bottom{margin-top:clamp(2rem,4vw,3rem);padding-top:1.25rem;border-top:1px solid #45523B;
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+.pay{display:flex;gap:.4rem;flex-wrap:wrap}
+.pay span{font-family:var(--f-mono);font-size:var(--t-micro);border:1px solid #45523B;
+  padding:.28rem .5rem;color:#A7B196;border-radius:var(--r)}
+
+/* ============================================================ system view */
+.tokens{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:620px){.tokens{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.tokens{grid-template-columns:repeat(4,1fr)}}
+.tok{background:var(--ground);padding:1rem}
+.tok .chipc{height:64px;border-radius:var(--r);border:1px solid var(--line);margin-bottom:.7rem}
+.tok b{display:block;font-size:.875rem;font-weight:600}
+.tok code{font-family:var(--f-mono);font-size:var(--t-sm);color:var(--ink-2)}
+.scale{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.scale div{background:var(--ground);padding:1rem;display:flex;flex-wrap:wrap;gap:1rem;
+  align-items:baseline;justify-content:space-between}
+.map{width:100%;border-collapse:collapse;font-size:.9375rem}
+.map th,.map td{text-align:left;padding:.75rem .9rem;border:1px solid var(--line);
+  vertical-align:top}
+.map th{font-family:var(--f-mono);font-size:var(--t-micro);text-transform:uppercase;
+  letter-spacing:.14em;color:var(--ink-2);font-weight:400;background:var(--paper)}
+.map td:first-child{font-weight:600}
+.map .tag-n{font-family:var(--f-mono);font-size:var(--t-micro);padding:.15rem .4rem;
+  border-radius:var(--r);background:var(--panel);color:var(--ink);white-space:nowrap}
+.scroll-x{overflow-x:auto}
+
+/* ============================================================ motion */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+
+<!-- ============================================================
+     Product illustrations.
+     PLACEHOLDERS. Every one of these is a photography slot —
+     see docs/CONTENT.md for the shot list that replaces them.
+     ============================================================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-gourd" viewBox="0 0 200 240">
+      <rect class="s1" x="124" y="14" width="9" height="74" rx="4.5" transform="rotate(14 128 51)"/>
+      <rect class="s1" x="117" y="4" width="24" height="10" rx="5" transform="rotate(14 129 9)"/>
+      <path class="s2" d="M100 84c34 0 56 25 56 63 0 42-25 73-56 73s-56-31-56-73c0-38 22-63 56-63Z"/>
+      <path class="s3" d="M100 84c34 0 56 25 56 63 0 6-.5 12-1.5 17H45.5c-1-5-1.5-11-1.5-17 0-38 22-63 56-63Z"/>
+      <rect class="s1" x="40" y="72" width="120" height="20" rx="10"/>
+      <circle class="s3" cx="66" cy="176" r="2.6"/><circle class="s3" cx="72" cy="196" r="2.6"/>
+      <circle class="s3" cx="84" cy="210" r="2.6"/><circle class="s3" cx="116" cy="210" r="2.6"/>
+      <circle class="s3" cx="128" cy="196" r="2.6"/><circle class="s3" cx="134" cy="176" r="2.6"/>
+      <path class="s2" d="M42 168c-16 5-22 16-19 29l19-8Z"/>
+    </symbol>
+    <symbol id="i-mate-art" viewBox="0 0 200 240">
+      <rect class="s1" x="124" y="14" width="9" height="74" rx="4.5" transform="rotate(14 128 51)"/>
+      <rect class="s1" x="117" y="4" width="24" height="10" rx="5" transform="rotate(14 129 9)"/>
+      <path class="s2" d="M100 84c34 0 56 25 56 63 0 42-25 73-56 73s-56-31-56-73c0-38 22-63 56-63Z"/>
+      <rect class="s1" x="46" y="104" width="108" height="36"/>
+      <path class="s2" d="M58 112h12v20H58zm24 0h12v20H82zm24 0h12v20h-12zm24 0h12v20h-12z"/>
+      <rect class="s1" x="40" y="72" width="120" height="20" rx="10"/>
+    </symbol>
+    <symbol id="i-mate-resin" viewBox="0 0 200 240">
+      <rect class="s1" x="124" y="14" width="9" height="74" rx="4.5" transform="rotate(14 128 51)"/>
+      <rect class="s1" x="117" y="4" width="24" height="10" rx="5" transform="rotate(14 129 9)"/>
+      <path class="s2" d="M52 86h96l-11 128a14 14 0 0 1-14 13H77a14 14 0 0 1-14-13Z"/>
+      <rect class="s1" x="44" y="72" width="112" height="20" rx="10"/>
+      <path class="s3" d="M52 86h96l-3 34H55Z"/>
+    </symbol>
+    <symbol id="i-mate-steel" viewBox="0 0 200 240">
+      <path class="s1" d="M60 78h80l-8 140a12 12 0 0 1-12 11H80a12 12 0 0 1-12-11Z"/>
+      <rect class="s1" x="54" y="64" width="92" height="16" rx="8"/>
+      <path class="s3" d="M76 86h10l-6 138h-3a6 6 0 0 1-6-6Z"/>
+    </symbol>
+    <symbol id="i-bombilla" viewBox="0 0 200 240">
+      <rect class="s1" x="88" y="18" width="26" height="13" rx="6.5"/>
+      <rect class="s1" x="94" y="28" width="13" height="132" rx="6.5"/>
+      <path class="s2" d="M91 158h19l7 48a10 10 0 0 1-10 12H94a10 10 0 0 1-10-12Z"/>
+      <circle class="s3" cx="96" cy="176" r="2.4"/><circle class="s3" cx="105" cy="176" r="2.4"/>
+      <circle class="s3" cx="96" cy="190" r="2.4"/><circle class="s3" cx="105" cy="190" r="2.4"/>
+      <circle class="s3" cx="100" cy="204" r="2.4"/>
+    </symbol>
+    <symbol id="i-termo" viewBox="0 0 200 240">
+      <rect class="s1" x="80" y="14" width="46" height="32" rx="9"/>
+      <rect class="s2" x="70" y="44" width="66" height="182" rx="14"/>
+      <rect class="s3" x="70" y="96" width="66" height="42"/>
+      <path class="s1" d="M136 84h14a12 12 0 0 1 12 12v66a12 12 0 0 1-12 12h-14v-15h11V99h-11Z"/>
+      <path class="s1" d="M22 168h44l-5 50a10 10 0 0 1-10 9H37a10 10 0 0 1-10-9Z"/>
+    </symbol>
+    <symbol id="i-yerba" viewBox="0 0 200 240">
+      <path class="s2" d="M50 62h100v168H50z"/>
+      <path class="s1" d="M50 62l16-24h68l16 24z"/>
+      <rect class="s3" x="66" y="108" width="68" height="52" rx="2"/>
+      <rect class="s1" x="66" y="182" width="42" height="8" rx="4"/>
+    </symbol>
+    <symbol id="i-yerbera" viewBox="0 0 200 240">
+      <rect class="s2" x="26" y="96" width="72" height="128" rx="10"/>
+      <rect class="s1" x="20" y="78" width="84" height="22" rx="8"/>
+      <rect class="s2" x="112" y="128" width="62" height="96" rx="10"/>
+      <rect class="s1" x="106" y="112" width="74" height="20" rx="8"/>
+      <rect class="s3" x="38" y="140" width="48" height="34" rx="2"/>
+    </symbol>
+    <symbol id="i-canasto" viewBox="0 0 200 240">
+      <path class="s1" d="M70 92V76a30 30 0 0 1 60 0v16h-16V76a14 14 0 0 0-28 0v16Z"/>
+      <path class="s2" d="M34 92h132l-14 132H48z"/>
+      <path class="s3" d="M34 92h132l-4 38H38z"/>
+    </symbol>
+    <symbol id="i-kit" viewBox="0 0 200 240">
+      <path class="s2" d="M56 122c22 0 36 16 36 41 0 27-16 47-36 47s-36-20-36-47c0-25 14-41 36-41Z"/>
+      <rect class="s1" x="20" y="114" width="72" height="14" rx="7"/>
+      <rect class="s1" x="70" y="72" width="7" height="48" rx="3.5" transform="rotate(14 73 96)"/>
+      <path class="s2" d="M112 92h64v118h-64z"/>
+      <path class="s1" d="M112 92l11-17h42l11 17z"/>
+      <rect class="s3" x="124" y="124" width="40" height="34" rx="2"/>
+      <rect class="s1" x="150" y="34" width="11" height="52" rx="5.5"/>
+      <path class="s2" d="M148 84h15l5 32a8 8 0 0 1-8 9h-9a8 8 0 0 1-8-9Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="announce" role="region" aria-label="Store announcements">
+  <div class="announce-track">
+    <span>
+      <b>Free shipping over $99</b><span>Click &amp; Collect — Broadbeach store</span>
+      <span>Sundays at Surfers Paradise Markets</span><span>Ships Australia-wide from the Gold Coast</span>
+    </span>
+    <span aria-hidden="true">
+      <b>Free shipping over $99</b><span>Click &amp; Collect — Broadbeach store</span>
+      <span>Sundays at Surfers Paradise Markets</span><span>Ships Australia-wide from the Gold Coast</span>
+    </span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="bar">
+    <a class="logo" href="#/" aria-label="Mate Coast — home">Mate<br>Coast</a>
+    <nav class="main" id="nav" aria-label="Main">
+      <a href="#/shop">Shop all</a>
+      <a href="#/shop/mates">Mates</a>
+      <a href="#/shop/bombillas">Bombillas</a>
+      <a href="#/shop/termos">Termos</a>
+      <a href="#/shop/yerba">Yerba</a>
+      <a href="#/shop/kits">Kits</a>
+      <a href="#/ritual">How to mate</a>
+      <a href="#/system">Design system</a>
+    </nav>
+    <div class="bar-end">
+      <button type="button">Search</button>
+      <button type="button" class="cart-btn" id="cartOpen" aria-haspopup="dialog">
+        Bag&nbsp;<span class="cart-n" id="cartN">(0)</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ============================================================ HOME -->
+<section class="view" id="v-home">
+
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <p class="lbl" style="margin-bottom:1.25rem">Gold Coast, QLD — since 2019</p>
+        <h1 class="display">Share a mate<br>with your <em>mates</em>.</h1>
+        <p class="lede">Argentine mate gear, stocked in Broadbeach and shipped Australia-wide.
+          Never used one? Start with a kit — the gourd, the bombilla, the yerba and
+          everything you need to know, in one box.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#/product/starter-kit">Shop the starter kit</a>
+          <a class="btn btn-ghost" href="#/ritual">Never had mate? Start here</a>
+        </div>
+        <div class="hero-spec">
+          <div><span class="lbl">Water</span><b>70–80 °C</b></div>
+          <div><span class="lbl">Never</span><b>Boiling</b></div>
+          <div><span class="lbl">Rounds per fill</span><b>10–15</b></div>
+          <div><span class="lbl">Shared by</span><b>Everyone</b></div>
+        </div>
+      </div>
+      <div class="specimens">
+        <figure style="margin:0">
+          <div class="pimg"><svg><use href="#i-gourd"/></svg></div>
+          <figcaption class="lbl">Calabaza</figcaption>
+        </figure>
+        <figure style="margin:0">
+          <div class="pimg alt" style="--ill-2:#5A6E3E"><svg><use href="#i-termo"/></svg></div>
+          <figcaption class="lbl">Termo 1 L</figcaption>
+        </figure>
+        <figure style="margin:0">
+          <div class="pimg"><svg><use href="#i-bombilla"/></svg></div>
+          <figcaption class="lbl">Bombilla</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust">
+    <div><b><span class="dot"></span>Click &amp; Collect</b><p>Broadbeach store — ready in 2 hours, free.</p></div>
+    <div><b>Sundays at the markets</b><p>Surfers Paradise Beachfront Markets, 4–9 pm.</p></div>
+    <div><b>Apple&nbsp;Pay &amp; Google&nbsp;Pay</b><p>Two taps, no account needed.</p></div>
+    <div><b>Ships Australia-wide</b><p>Free over $99. Flat $9.95 under.</p></div>
+  </div>
+
+  <div class="wrap sec">
+    <div class="sec-head">
+      <h2 class="h2">Shop by what you need</h2>
+      <a href="#/shop">All products</a>
+    </div>
+    <div class="rail" id="catRail"></div>
+  </div>
+
+  <!-- Kit feature: replaces the permanent 50%-off mechanic with a real reason to buy more -->
+  <div class="band">
+    <div class="wrap kit">
+      <div class="kit-imgs">
+        <div class="pimg"><svg><use href="#i-mate-resin"/></svg></div>
+        <div class="pimg"><svg><use href="#i-bombilla"/></svg></div>
+        <div class="pimg"><svg><use href="#i-yerba"/></svg></div>
+      </div>
+      <div>
+        <p class="lbl" style="color:var(--yerba)">Start here — 01</p>
+        <h2 class="h1" style="margin-top:.75rem">Everything you need,<br>nothing you don't.</h2>
+        <p class="lede" style="margin-top:1rem">Buying your first mate means buying three things
+          that have to work together. This is the combination we hand people at the markets
+          every Sunday.</p>
+        <ul class="kit-list">
+          <li><span class="n">01</span><span>Mate Entre Ríos — resin, alpaca rim</span><span class="v">250 ml</span></li>
+          <li><span class="n">02</span><span>Bombilla Spring — stainless steel</span><span class="v">18 cm</span></li>
+          <li><span class="n">03</span><span>Verde Flor Hierbas Serranas</span><span class="v">1 kg</span></li>
+          <li><span class="n">04</span><span>Curing &amp; cebado card, in English</span><span class="v">Free</span></li>
+        </ul>
+        <div class="kit-price">
+          <b>$69.00</b><s>$77.00</s><span class="save">Save $8</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn" href="#/product/starter-kit">Add the starter kit</a>
+          <a class="btn btn-ghost" href="#/ritual">How it works</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap sec">
+    <div class="sec-head">
+      <h2 class="h2">Best sellers</h2>
+      <a href="#/shop">See all 16</a>
+    </div>
+    <div class="grid-p" id="bestGrid"></div>
+  </div>
+
+  <div class="wrap sec-tight">
+    <div class="sec-head">
+      <h2 class="h2">The ritual, in three minutes</h2>
+      <a href="#/ritual">Full guide</a>
+    </div>
+  </div>
+  <div class="steps" id="stepsPreview"></div>
+
+  <div class="wrap sec">
+    <div class="hero-grid">
+      <div>
+        <p class="lbl">The community</p>
+        <h2 class="h1" style="margin-top:.75rem">There's a WhatsApp group,<br>and you're invited.</h2>
+        <p class="lede" style="margin-top:1rem">Argentines, Uruguayans, Brazilians and a growing
+          number of Australians who got curious. Rondas on the beach, yerba group buys, and
+          people who will happily tell you your bombilla is on backwards.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#/">Join the group</a>
+        </div>
+      </div>
+      <div class="specimens">
+        <div class="pimg alt"><svg><use href="#i-canasto"/></svg></div>
+        <div class="pimg" style="--ill-2:#5A6E3E"><svg><use href="#i-yerbera"/></svg></div>
+        <div class="pimg alt"><svg><use href="#i-gourd"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SHOP (PLP) -->
+<section class="view" id="v-shop" hidden>
+  <div class="wrap">
+    <div class="sec-tight">
+      <p class="lbl">Shop</p>
+      <h1 class="h1" id="plpTitle" style="margin-top:.6rem">All products</h1>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
+    <div style="padding-block:clamp(1.5rem,3vw,2.25rem)">
+      <div class="grid-p" id="plpGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PRODUCT (PDP) -->
+<section class="view" id="v-product" hidden>
+  <div class="wrap">
+    <p class="lbl" style="padding-top:1.25rem">
+      <a href="#/shop" style="border-bottom:1px solid var(--line-2)">Shop</a>
+      &nbsp;/&nbsp;<span id="pdpCrumb">Product</span>
+    </p>
+    <div class="pdp">
+      <div class="gallery">
+        <div class="pimg" id="pdpImg"><svg><use href="#i-gourd" id="pdpUse"/></svg></div>
+        <div class="gallery-thumbs" id="pdpThumbs"></div>
+      </div>
+
+      <div class="pdp-info">
+        <p class="lbl" id="pdpCat">Mates</p>
+        <h1 class="h1" id="pdpName" style="margin-top:.5rem">Product</h1>
+        <p class="pdp-price"><span id="pdpPrice">$0.00</span><span class="pdp-gst">GST incl.</span></p>
+        <p class="prose" style="margin-top:1rem" id="pdpBlurb"></p>
+
+        <div id="pdpVariants" hidden>
+          <p class="lbl" style="margin-top:1.5rem">Colour — <span id="pdpVarName" class="lbl-ink"></span></p>
+          <div class="swatches" id="pdpSwatches"></div>
+        </div>
+
+        <div class="buy">
+          <div class="qty">
+            <button type="button" id="qMinus" aria-label="Decrease quantity">−</button>
+            <span id="qVal" aria-live="polite">1</span>
+            <button type="button" id="qPlus" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="button" class="btn btn-block" id="addBtn">Add to bag — <span id="addPrice"></span></button>
+        </div>
+        <div class="express">
+          <button type="button" class="btn btn-express" id="apay">Apple&nbsp;Pay</button>
+          <button type="button" class="btn btn-express gpay" id="gpay">Buy with G&nbsp;Pay</button>
+        </div>
+        <p class="express-note">Checkout in two taps — no account</p>
+
+        <div class="pickup">
+          <span class="dot" style="margin-top:.55rem"></span>
+          <div>
+            <b>In stock — Broadbeach store</b>
+            <p>Free Click &amp; Collect, usually ready in 2 hours. 12 Queensland Ave, Broadbeach QLD 4218.</p>
+          </div>
+        </div>
+
+        <table class="spec">
+          <caption class="sr">Product specifications</caption>
+          <tbody id="pdpSpec"></tbody>
+        </table>
+
+        <div style="margin-top:2rem">
+          <details class="acc" open>
+            <summary>How to cure a new mate</summary>
+            <div class="body">
+              <p>Only natural calabaza and wood mates need curing. Steel, glass and resin
+                are ready to use out of the box.</p>
+              <ol>
+                <li>Fill the gourd with used yerba and top it up with 70–80&nbsp;°C water.</li>
+                <li>Leave it 24 hours, topping up the water as it soaks in.</li>
+                <li>Tip it out and scrape the soft inner pulp away with a teaspoon.</li>
+                <li>Rinse, then dry it mouth-down out of direct sun for two days.</li>
+              </ol>
+              <p><b>Never</b> use soap, and never put it in the dishwasher. A cured gourd
+                that stays dry between uses lasts decades.</p>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>Shipping &amp; Click &amp; Collect</summary>
+            <div class="body">
+              <ul>
+                <li>Free standard shipping Australia-wide on orders over $99.</li>
+                <li>Flat $9.95 under $99. Express $14.95, 1–2 business days to most of QLD and NSW.</li>
+                <li>Free Click &amp; Collect from the Broadbeach store, ready in about 2 hours.</li>
+                <li>Sundays 4–9 pm we're at the Surfers Paradise Beachfront Markets — reserve online, pick up at the stall.</li>
+              </ul>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>Returns</summary>
+            <div class="body">
+              <p>30 days, unused and in its packaging, for a refund or exchange. Yerba can only
+                be returned unopened. Curing a gourd counts as using it — ask us first if
+                you're unsure.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="h2">Complete the set</h2><a href="#/shop">Shop all</a></div>
+      <div class="grid-p" id="crossGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ RITUAL -->
+<section class="view" id="v-ritual" hidden>
+  <div class="wrap sec">
+    <p class="lbl">The guide</p>
+    <h1 class="display" style="margin-top:1rem;max-width:14ch">How to mate.</h1>
+    <p class="lede" style="margin-top:1.5rem">Mate is not tea. You don't brew it once and drink it —
+      you refill the same gourd ten or fifteen times, and you pass it around. Here's the whole
+      thing, start to finish, in about three minutes of reading.</p>
+    <div class="hero-spec" style="max-width:640px">
+      <div><span class="lbl">Water</span><b>70–80 °C</b></div>
+      <div><span class="lbl">Yerba</span><b>⅔ of the gourd</b></div>
+      <div><span class="lbl">Rounds</span><b>10–15</b></div>
+      <div><span class="lbl">Caffeine</span><b>≈ 80 mg / serve</b></div>
+    </div>
+  </div>
+
+  <div class="wrap sec-tight"><h2 class="h2">Cebando, step by step</h2></div>
+  <div class="steps" id="stepsFull"></div>
+
+  <div class="wrap sec">
+    <div class="hero-grid">
+      <div>
+        <p class="lbl">Etiquette</p>
+        <h2 class="h1" style="margin-top:.75rem">The five unwritten rules</h2>
+        <p class="lede" style="margin-top:1rem">Nobody will explain these to you, and everyone
+          will notice if you break them. Now you know.</p>
+      </div>
+      <div class="specimens">
+        <div class="pimg"><svg><use href="#i-gourd"/></svg></div>
+        <div class="pimg alt"><svg><use href="#i-termo"/></svg></div>
+        <div class="pimg"><svg><use href="#i-yerba"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap" style="padding-bottom:clamp(3rem,7vw,6rem)">
+    <ul class="etq">
+      <li><span class="es">El cebador</span><b>One person pours, for everyone</b>
+        <p>The cebador fills, pours and passes — always back to themselves first, never
+          around the circle hand to hand.</p></li>
+      <li><span class="es">Mate del zonzo</span><b>The first one is the fool's mate</b>
+        <p>It's the bitterest and the weakest. The cebador drinks it themselves. That's the job.</p></li>
+      <li><span class="es">No la muevas</span><b>Never touch the bombilla</b>
+        <p>Moving it collapses the montañita and clogs the filter. This is the one that
+          actually annoys people.</p></li>
+      <li><span class="es">El ruido</span><b>Drink it all — the gurgle is the point</b>
+        <p>Slurping the last of it isn't rude, it's the signal you're done. Handing back a
+          half-full mate is.</p></li>
+      <li><span class="es">Gracias</span><b>"Gracias" means you're out</b>
+        <p>Say it only when you've had enough. Say it early and the gourd stops coming to you —
+          which is how most first-timers accidentally leave the round.</p></li>
+    </ul>
+  </div>
+
+  <div class="band">
+    <div class="wrap kit">
+      <div>
+        <p class="lbl" style="color:var(--yerba)">Curing</p>
+        <h2 class="h1" style="margin-top:.75rem">A new calabaza isn't ready yet.</h2>
+        <p class="lede" style="margin-top:1rem">Natural gourds have a soft inner pulp that has to
+          come out before you drink from them, or your mate will taste like wet cardboard for a
+          month. It takes 24 hours and a teaspoon.</p>
+        <ul class="kit-list">
+          <li><span class="n">01</span><span>Fill with used yerba, top up with 70–80 °C water</span><span class="v">24 h</span></li>
+          <li><span class="n">02</span><span>Scrape the soft pulp out with a teaspoon</span><span class="v">5 min</span></li>
+          <li><span class="n">03</span><span>Rinse, dry mouth-down out of the sun</span><span class="v">2 days</span></li>
+          <li><span class="n">04</span><span>Never soap, never the dishwasher</span><span class="v">Ever</span></li>
+        </ul>
+        <div class="hero-cta"><a class="btn" href="#/shop/mates">Shop calabaza mates</a></div>
+      </div>
+      <div class="kit-imgs">
+        <div class="pimg"><svg><use href="#i-gourd"/></svg></div>
+        <div class="pimg"><svg><use href="#i-yerba"/></svg></div>
+        <div class="pimg"><svg><use href="#i-yerbera"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ DESIGN SYSTEM -->
+<section class="view" id="v-system" hidden>
+  <div class="wrap sec">
+    <p class="lbl">Handoff</p>
+    <h1 class="h1" style="margin-top:.6rem">Design system</h1>
+    <p class="lede" style="margin-top:1rem">Every value on this page is a real token used by the
+      prototype. Copy the hex codes into Wix Studio's Site Colours and the sizes into its Text
+      Themes, and the rest of the build stays consistent on its own.</p>
+  </div>
+
+  <div class="wrap" style="padding-bottom:clamp(2rem,4vw,3rem)">
+    <div class="sec-head"><h2 class="h2">Colour</h2><span class="lbl">Light theme values</span></div>
+    <div class="tokens">
+      <div class="tok"><div class="chipc" style="background:#E7E9E4"></div><b>Ground</b><code>#E7E9E4</code></div>
+      <div class="tok"><div class="chipc" style="background:#F2F3F0"></div><b>Paper</b><code>#F2F3F0</code></div>
+      <div class="tok"><div class="chipc" style="background:#DCE0D8"></div><b>Panel</b><code>#DCE0D8</code></div>
+      <div class="tok"><div class="chipc" style="background:#C6CBC0"></div><b>Hairline</b><code>#C6CBC0</code></div>
+      <div class="tok"><div class="chipc" style="background:#16190F"></div><b>Ink</b><code>#16190F</code></div>
+      <div class="tok"><div class="chipc" style="background:#5A6152"></div><b>Ink muted</b><code>#5A6152</code></div>
+      <div class="tok"><div class="chipc" style="background:#2E3A24"></div><b>Band / buttons</b><code>#2E3A24</code></div>
+      <div class="tok"><div class="chipc" style="background:#5A6E3E"></div><b>Brand olive</b><code>#5A6E3E</code></div>
+      <div class="tok"><div class="chipc" style="background:#B7D14A"></div><b>Yerba accent</b><code>#B7D14A</code></div>
+      <div class="tok"><div class="chipc" style="background:#C08A4E"></div><b>Calabaza</b><code>#C08A4E</code></div>
+    </div>
+    <p class="prose" style="margin-top:1rem;font-size:.9375rem">
+      <b style="color:var(--ink)">The one rule:</b> #B7D14A is the only saturated colour on the
+      site and it never carries text on a light ground — it's for progress bars, in-stock dots,
+      sale flags and links inside the dark band. Everything else is the olive-grey family.
+      #C08A4E appears in illustration only, never in the interface.</p>
+  </div>
+
+  <div class="wrap" style="padding-bottom:clamp(2rem,4vw,3rem)">
+    <div class="sec-head"><h2 class="h2">Type</h2><span class="lbl">3 families, 3 jobs</span></div>
+    <div class="scale">
+      <div><span class="display" style="font-size:2.75rem">Share a mate</span><code class="mono">Archivo 700 · wdth 105 · −.035em</code></div>
+      <div><span class="h1">Everything you need</span><code class="mono">Archivo 600 · clamp(1.9–3.25rem)</code></div>
+      <div><span class="h2">Best sellers</span><code class="mono">Archivo 600 · clamp(1.4–2.1rem)</code></div>
+      <div><span style="font-size:1.0625rem;font-weight:600">Mate San Juan</span><code class="mono">Instrument Sans 600 · 17px</code></div>
+      <div><span>Argentine mate gear, stocked in Broadbeach.</span><code class="mono">Instrument Sans 400 · 16/1.55</code></div>
+      <div><span class="mono">$55.00 · 220 ml · 70–80 °C</span><code class="mono">DM Mono 400 · tabular-nums</code></div>
+      <div><span class="lbl lbl-ink">Click &amp; collect</span><code class="mono">DM Mono · 11px · .16em · uppercase</code></div>
+    </div>
+    <p class="prose" style="margin-top:1rem;font-size:.9375rem">Archivo and DM Mono aren't in Wix's
+      default font list. Download the .woff2 files from Google Fonts and upload them in
+      Wix Studio (Site &rarr; Fonts &rarr; Upload). Instrument Sans is available natively.</p>
+  </div>
+
+  <div class="wrap" style="padding-bottom:clamp(3rem,6vw,5rem)">
+    <div class="sec-head"><h2 class="h2">What this becomes in Wix Studio</h2></div>
+    <div class="scroll-x">
+      <table class="map">
+        <thead><tr><th>Element on this prototype</th><th>How to build it</th><th>Effort</th></tr></thead>
+        <tbody>
+          <tr><td>Announcement marquee</td><td>Wix Studio Announcement Bar. The scrolling motion needs a small Custom Element — or drop the motion, it's decoration.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Sticky header + nav</td><td>Native header, set to "Sticky". Menu items map to Wix Stores categories.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Type hero</td><td>Section + Text elements on the Studio grid. No image, so nothing to optimise.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Category rail</td><td>Repeater in horizontal layout, or a Slideshow. Bind to Stores categories.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Product grid + hover swap</td><td>Wix Stores Product Gallery. Turn on "Show second image on hover" in its settings.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Filter chips</td><td>Wix Stores Product Filter element, restyled. Don't hand-build it.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Colour swatches on PDP</td><td>Product Options → Colour in the Stores dashboard. One product, four colours — not four products.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Apple Pay / Google Pay</td><td>Express checkout buttons, enabled in Settings → Accept Payments. They render on the PDP and in the cart.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Click &amp; Collect line</td><td>Enable Pickup in Shipping &amp; Fulfilment. The stock line above it is a Stores inventory field.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Side cart + free-shipping bar</td><td>Native side cart; the progress bar is a Wix Stores setting ("Free shipping goal").</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Spec table</td><td>Product Info Sections in the Stores dashboard, one row per spec. Consistent across every product.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Accordions</td><td>Wix Studio Accordion element.</td><td><span class="tag-n">Native</span></td></tr>
+          <tr><td>Hairline grid, 2px radii, spacing</td><td>Custom CSS panel (Studio → Dev Mode → CSS). This is where the whole look actually lives.</td><td><span class="tag-n">Custom CSS</span></td></tr>
+          <tr><td>Illustration placeholders</td><td>Nothing to build — these are photography slots. See the shot list.</td><td><span class="tag-n">Photography</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="margin-top:1rem;font-size:.9375rem">Almost none of this needs custom
+      code. That's deliberate: anything built as an embed can't be edited by your friend later,
+      and won't be indexed by Google.</p>
+  </div>
+</section>
+</main>
+
+<!-- ============================================================ FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-col">
+        <p class="logo" style="color:var(--yerba);font-size:1.5rem">Mate<br>Coast</p>
+        <p style="margin-top:.75rem;max-width:34ch">Argentine mate, brought to the Gold Coast.
+          Two locations, one WhatsApp group and a lot of opinions about yerba.</p>
+      </div>
+      <div class="f-col">
+        <p class="lbl">Visit</p>
+        <a href="#/">Store — Broadbeach</a>
+        <a href="#/">Markets — Surfers Paradise, Sundays</a>
+        <p style="margin-top:.4rem">Gold Coast, QLD 4218</p>
+        <a href="#/">0494 012 747</a>
+      </div>
+      <div class="f-col">
+        <p class="lbl">Shop</p>
+        <a href="#/shop/mates">Mates</a><a href="#/shop/bombillas">Bombillas</a>
+        <a href="#/shop/termos">Termos</a><a href="#/shop/yerba">Yerba</a>
+        <a href="#/shop/accesorios">Yerberas &amp; canastos</a><a href="#/shop/kits">Kits</a>
+      </div>
+      <div class="f-col">
+        <p class="lbl">Help</p>
+        <a href="#/ritual">How to mate</a><a href="#/ritual">Curing a new gourd</a>
+        <a href="#/">Shipping &amp; returns</a><a href="#/">Contact</a>
+        <a href="#/">Join the WhatsApp group</a>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p class="lbl">© 2026 Mate Coast — ABN 00 000 000 000 — all prices in AUD, GST included</p>
+      <div class="pay">
+        <span>Apple&nbsp;Pay</span><span>Google&nbsp;Pay</span><span>Visa</span>
+        <span>Mastercard</span><span>Amex</span><span>PayPal</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ CART DRAWER -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Your bag" hidden>
+  <div class="drawer-head">
+    <p class="lbl lbl-ink">Your bag — <span id="drawerN">0</span></p>
+    <button type="button" id="cartClose" class="lbl lbl-ink">Close</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot">
+    <div class="ship-bar">
+      <p class="lbl" id="shipMsg">Free shipping over $99</p>
+      <div class="ship-track"><div class="ship-fill" id="shipFill"></div></div>
+    </div>
+    <div class="totals"><span class="lbl lbl-ink">Subtotal</span><b id="subtotal">$0.00</b></div>
+    <p class="lbl">GST included — shipping calculated at checkout</p>
+    <button type="button" class="btn btn-block">Checkout</button>
+    <div class="express">
+      <button type="button" class="btn btn-express">Apple&nbsp;Pay</button>
+      <button type="button" class="btn btn-express gpay">Buy with G&nbsp;Pay</button>
+    </div>
+  </div>
+</aside>
+
+<script>
+/* ============================================================
+   Catalogue.
+   Products and prices marked REAL come from the live matecoast.com store.
+   Items marked NEW are proposals — see docs/CONTENT.md before publishing.
+   ============================================================ */
+var CATS = [
+  {id:'mates',      name:'Mates',              sub:'Calabaza, wood, steel'},
+  {id:'bombillas',  name:'Bombillas',          sub:'The straw does the filtering'},
+  {id:'termos',     name:'Termos',             sub:'Holds 70–80 °C all day'},
+  {id:'yerba',      name:'Yerba',              sub:'Con palo & despalada'},
+  {id:'accesorios', name:'Yerberas & canastos',sub:'Carry the whole round'},
+  {id:'kits',       name:'Kits',               sub:'Start here'}
+];
+
+var P = [
+  /* NEW — the strategic addition: bundles instead of a permanent 50% off */
+  {id:'starter-kit',n:'The Starter Kit',cat:'kits',price:69,was:77,ill:'i-kit',tone:'clay',flag:'Save $8',
+   blurb:'The three things you actually need, in the combination we hand people at the markets every Sunday. Comes with a curing and cebado card written in plain English.',
+   spec:[['Mate','Entre Ríos — 250 ml'],['Bombilla','Spring — 18 cm'],['Yerba','Verde Flor — 1 kg'],['Curing needed','No'],['Best for','First mate']]},
+  {id:'goldcoast-set',n:'The Gold Coast Set',cat:'kits',price:159,was:180,ill:'i-termo',tone:'olive',flag:'Save $21',
+   blurb:'Everything for a ronda on the sand: a leather-wrapped calabaza, an alpaca bombilla, a one-litre termo and a kilo of yerba.',
+   spec:[['Mate','San Juan — 220 ml'],['Bombilla','Alpaca — 19 cm'],['Termo','1 L, 12 h hot'],['Yerba','Verde Flor — 1 kg'],['Curing needed','Yes — 24 h']]},
+
+  /* REAL — mates */
+  {id:'mate-san-juan',n:'Mate San Juan',cat:'mates',price:55,ill:'i-gourd',tone:'clay',
+   blurb:'Natural calabaza gourd in hand-stitched leather with an alpaca rim. The classic — it gets better the more you drink from it.',
+   spec:[['Material','Calabaza & leather'],['Rim','Alpaca'],['Capacity','220 ml'],['Curing needed','Yes — 24 h'],['Dishwasher','Never']]},
+  {id:'mate-neuquen',n:'Mate Neuquén',cat:'mates',price:55,ill:'i-gourd',tone:'coal',
+   blurb:'The same calabaza in blackened leather with a chased alpaca rim. Wider mouth, so it takes a bigger montañita.',
+   spec:[['Material','Calabaza & leather'],['Rim','Chased alpaca'],['Capacity','240 ml'],['Curing needed','Yes — 24 h'],['Dishwasher','Never']]},
+  {id:'mate-entre-rios',n:'Mate Entre Ríos',cat:'mates',price:39,ill:'i-mate-resin',tone:'sand',
+   blurb:'Moulded resin with an alpaca rim. No curing, no babysitting, and it survives being dropped on a tiled kitchen floor.',
+   spec:[['Material','Resin'],['Rim','Alpaca'],['Capacity','250 ml'],['Curing needed','No'],['Dishwasher','Top rack']]},
+  {id:'mate-10',n:'Mate 10',cat:'mates',price:110,ill:'i-mate-art',tone:'clay',flag:'Collector',
+   blurb:'A hand-decorated collector’s mate. Each one is finished individually, so no two are the same — the one you see is the one you get.',
+   spec:[['Material','Calabaza'],['Finish','Hand-painted'],['Capacity','230 ml'],['Curing needed','Yes — 24 h'],['Edition','One of one']]},
+  {id:'steel-mate-cup',n:'Stainless Steel Mate Cup',cat:'mates',price:19,ill:'i-mate-steel',tone:'coal',
+   blurb:'Double-walled steel. Doesn’t burn your hand, doesn’t break in a backpack, doesn’t need curing. The one to take to the beach.',
+   spec:[['Material','304 stainless'],['Wall','Double'],['Capacity','300 ml'],['Curing needed','No'],['Dishwasher','Yes']]},
+
+  /* NEW — bombillas as a proper range */
+  {id:'bombilla-alpaca',n:'Bombilla Alpaca',cat:'bombillas',price:29,ill:'i-bombilla',tone:'coal',
+   blurb:'Alpaca silver with a coiled spring filter. Unscrews in two pieces so you can actually clean it.',
+   spec:[['Material','Alpaca'],['Length','19 cm'],['Filter','Coiled spring'],['Takes apart','Yes'],['Best with','Yerba con palo']]},
+  {id:'bombilla-spring',n:'Bombilla Spring',cat:'bombillas',price:19,ill:'i-bombilla',tone:'olive',
+   blurb:'Stainless steel with a removable spring. The workhorse — this is the one in the starter kit.',
+   spec:[['Material','304 stainless'],['Length','18 cm'],['Filter','Removable spring'],['Takes apart','Yes'],['Dishwasher','Yes']]},
+  {id:'bombilla-pico',n:'Bombilla Pico de Loro',cat:'bombillas',price:35,ill:'i-bombilla',tone:'sand',
+   blurb:'The "parrot’s beak" — a flattened, perforated tip that sits low in the gourd and clogs far less with fine yerba.',
+   spec:[['Material','Alpaca'],['Length','21 cm'],['Filter','Flat perforated'],['Takes apart','No'],['Best with','Despalada']]},
+
+  /* REAL — one product with four colours, not four products */
+  {id:'termo-1l',n:'Termo Mate Coast 1 L',cat:'termos',price:77,ill:'i-termo',tone:'olive',
+   blurb:'Stainless vacuum flask with a pour spout shaped for cebando — it gives you a thin, controllable stream instead of flooding the yerba.',
+   spec:[['Capacity','1 L'],['Stays hot','12 hours'],['Pour','Cebado spout'],['Handle','Fold-away'],['Cup included','Yes — 200 ml']],
+   variants:[{n:'Black',c:'#26261F'},{n:'Forest',c:'#5A6E3E'},{n:'White',c:'#EDEDE7'},{n:'Pink',c:'#E4A8B4'}]},
+
+  /* REAL yerba + two NEW line extensions */
+  {id:'verde-flor',n:'Verde Flor Hierbas Serranas',cat:'yerba',price:19,ill:'i-yerba',tone:'yerba',flag:'Best seller',
+   blurb:'Yerba con palo blended with mountain herbs — peppermint, lemon balm, thyme. Softer than a straight tradicional, and the one most first-timers stay on.',
+   spec:[['Weight','1 kg'],['Type','Con palo'],['Blend','Hierbas serranas'],['Strength','Medium'],['Origin','Argentina']]},
+  {id:'yerba-tradicional',n:'Tradicional Con Palo',cat:'yerba',price:17,ill:'i-yerba',tone:'olive',
+   blurb:'The everyday standard. Stems included, which slows the water down and makes the round last longer.',
+   spec:[['Weight','1 kg'],['Type','Con palo'],['Strength','Strong'],['Rounds','15+'],['Origin','Misiones']]},
+  {id:'yerba-despalada',n:'Despalada Suave',cat:'yerba',price:17,ill:'i-yerba',tone:'sand',
+   blurb:'Stemless and finely milled. Stronger up front, shorter round — and it needs a flat-filter bombilla or it will clog.',
+   spec:[['Weight','1 kg'],['Type','Despalada'],['Strength','Very strong'],['Rounds','8–10'],['Needs','Flat filter']]},
+
+  /* REAL categories from the current footer menu */
+  {id:'yerbera-set',n:'Yerbera & Azucarera Set',cat:'accesorios',price:45,ill:'i-yerbera',tone:'sand',
+   blurb:'Two sealed canisters — one for the kilo of yerba, one for sugar or a second blend. Keeps the yerba from going stale in Queensland humidity.',
+   spec:[['Pieces','2'],['Capacity','1 kg + 500 g'],['Seal','Silicone gasket'],['Material','Powder-coated steel'],['Fits','Canasto matero']]},
+  {id:'canasto',n:'Canasto Matero',cat:'accesorios',price:89,ill:'i-canasto',tone:'clay',
+   blurb:'Waxed canvas and leather carry basket that holds the termo, the gourd, the yerbera and the bombilla upright. Made for the walk to the beach.',
+   spec:[['Material','Waxed canvas & leather'],['Holds','1 L termo + mate + yerbera'],['Base','Reinforced'],['Handle','Leather'],['Water','Resistant']]}
+];
+
+var TONE = {clay:'#C08A4E',coal:'#3A3D32',olive:'#5A6E3E',sand:'#B9A87E',yerba:'#8A9A4E'};
+
+var STEPS = [
+  {n:'01',t:'Fill it two-thirds',p:'Pour dry yerba until the gourd is about two-thirds full. Less than you think — it swells.',note:'Two-thirds. Not to the brim.'},
+  {n:'02',t:'Cover, shake, tilt',p:'Palm over the mouth, shake it upside-down, then tilt it back so the yerba sits in a slope against one wall. That slope is the montañita.',note:'The shake sends the dust to the top, where it can’t clog the filter.'},
+  {n:'03',t:'Wet the low side',p:'Pour cool water into the empty well beside the montañita and let it swell for a minute before any hot water touches it.',note:'Cold water first, always. Hot water on dry yerba burns it.'},
+  {n:'04',t:'Bombilla in, flat side down',p:'Push it into the wet well, filter down, and press it against the base. Then leave it alone for the rest of the round.',note:'Moving it collapses the montañita. This is the cardinal sin.'},
+  {n:'05',t:'Pour 70–80 °C',p:'Aim at the same wet well every time. Never boiling — boiling water strips the yerba bitter in one pour and it never recovers.',note:'Kettle off the boil for two minutes gets you there.'},
+  {n:'06',t:'Drink it all, pass it back',p:'Finish it, gurgle and all, and hand it back to the cebador. Not to the person next to you.',note:'10–15 rounds before it se lava — goes flat.'}
+];
+
+/* ============================================================ helpers */
+function $(s,r){return (r||document).querySelector(s);}
+function money(n){return '$'+n.toFixed(2);}
+function byId(id){for(var i=0;i<P.length;i++){if(P[i].id===id)return P[i];}return P[0];}
+function toneStyle(p){return '--ill-2:'+(TONE[p.tone]||TONE.clay);}
+
+function pimg(p,i,extra){
+  return '<div class="pimg'+((i%2)?' alt':'')+'" style="'+toneStyle(p)+'">'+
+    (p.flag?'<span class="tag">'+p.flag+'</span>':'')+
+    '<svg aria-hidden="true"><use href="#'+p.ill+'"/></svg>'+(extra||'')+'</div>';
+}
+function card(p,i){
+  return '<a class="card" href="#/product/'+p.id+'">'+pimg(p,i)+
+    '<div class="card-meta"><span class="card-name">'+p.n+'</span>'+
+    '<span class="card-price">'+(p.was?'<s class="card-was">'+money(p.was)+'</s>':'')+money(p.price)+'</span>'+
+    '<span class="card-sub">'+catName(p.cat)+'</span></div></a>';
+}
+function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i].name;}return '';}
+function stepHTML(s){
+  return '<article class="step"><span class="n">'+s.n+'</span><h3 class="h3">'+s.t+'</h3>'+
+    '<p>'+s.p+'</p><p class="note">'+s.note+'</p></article>';
+}
+
+/* ============================================================ cart */
+var cart = [];
+try{ cart = JSON.parse(localStorage.getItem('mc-cart')||'[]'); }catch(e){ cart = []; }
+if(!Array.isArray(cart)) cart = [];
+
+function saveCart(){ try{ localStorage.setItem('mc-cart',JSON.stringify(cart)); }catch(e){} }
+function cartCount(){ return cart.reduce(function(a,l){return a+l.q;},0); }
+function cartTotal(){ return cart.reduce(function(a,l){return a+byId(l.id).price*l.q;},0); }
+
+function addToCart(id,q,variant){
+  var found=null;
+  for(var i=0;i<cart.length;i++){ if(cart[i].id===id && cart[i].v===variant){found=cart[i];break;} }
+  if(found){ found.q+=q; } else { cart.push({id:id,q:q,v:variant||''}); }
+  saveCart(); renderCart(); openCart();
+}
+function setQty(idx,q){
+  if(q<=0){ cart.splice(idx,1); } else { cart[idx].q=q; }
+  saveCart(); renderCart();
+}
+
+var FREE_SHIP = 99;
+function renderCart(){
+  var n=cartCount(), total=cartTotal();
+  $('#cartN').textContent='('+n+')';
+  $('#drawerN').textContent=n===1?'1 item':n+' items';
+  $('#subtotal').textContent=money(total);
+
+  var pct = Math.min(100, total/FREE_SHIP*100);
+  $('#shipFill').style.width=pct+'%';
+  $('#shipMsg').textContent = total>=FREE_SHIP
+    ? 'Free shipping unlocked'
+    : money(FREE_SHIP-total)+' away from free shipping';
+
+  var body=$('#drawerBody');
+  if(!cart.length){
+    body.innerHTML='<div class="empty"><p>Your bag is empty.</p>'+
+      '<a class="btn btn-ghost" href="#/product/starter-kit">Shop the starter kit</a></div>';
+    return;
+  }
+  var h='';
+  for(var i=0;i<cart.length;i++){
+    var l=cart[i], p=byId(l.id);
+    h+='<div class="line"><div class="pimg" style="'+toneStyle(p)+'">'+
+      '<svg aria-hidden="true"><use href="#'+p.ill+'"/></svg></div>'+
+      '<div><div class="line-name">'+p.n+'</div>'+
+      (l.v?'<div class="line-var">'+l.v+'</div>':'')+
+      '<div class="line-qty"><button type="button" data-dec="'+i+'" aria-label="Decrease">−</button>'+
+      '<span>'+l.q+'</span><button type="button" data-inc="'+i+'" aria-label="Increase">+</button></div></div>'+
+      '<div class="line-price">'+money(p.price*l.q)+'</div></div>';
+  }
+  body.innerHTML=h;
+}
+$('#drawerBody').addEventListener('click',function(e){
+  var d=e.target.getAttribute('data-dec'), u=e.target.getAttribute('data-inc');
+  if(d!==null&&d!==undefined) setQty(+d,cart[+d].q-1);
+  if(u!==null&&u!==undefined) setQty(+u,cart[+u].q+1);
+});
+
+function openCart(){
+  $('#scrim').hidden=false; $('#drawer').hidden=false;
+  requestAnimationFrame(function(){ $('#scrim').classList.add('open'); $('#drawer').classList.add('open'); });
+  $('#cartClose').focus();
+}
+function closeCart(){
+  $('#scrim').classList.remove('open'); $('#drawer').classList.remove('open');
+  setTimeout(function(){ $('#scrim').hidden=true; $('#drawer').hidden=true; },320);
+}
+$('#cartOpen').addEventListener('click',openCart);
+$('#cartClose').addEventListener('click',closeCart);
+$('#scrim').addEventListener('click',closeCart);
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!$('#drawer').hidden) closeCart(); });
+
+/* ============================================================ static renders */
+$('#catRail').innerHTML = CATS.map(function(c,i){
+  var p=null; for(var k=0;k<P.length;k++){ if(P[k].cat===c.id){p=P[k];break;} }
+  return '<a class="cat" href="#/shop/'+c.id+'">'+
+    '<div class="pimg'+((i%2)?'':' alt')+'" style="'+toneStyle(p)+'">'+
+    '<svg aria-hidden="true"><use href="#'+p.ill+'"/></svg></div>'+
+    '<span class="cat-name">'+c.name+'<span>'+c.sub+'</span></span></a>';
+}).join('');
+
+$('#bestGrid').innerHTML = ['starter-kit','mate-san-juan','termo-1l','verde-flor','mate-entre-rios','bombilla-alpaca','steel-mate-cup','canasto']
+  .map(function(id,i){ return card(byId(id),i); }).join('');
+
+$('#stepsPreview').innerHTML = STEPS.slice(0,3).map(stepHTML).join('');
+$('#stepsFull').innerHTML = STEPS.map(stepHTML).join('');
+
+$('#filters').innerHTML =
+  '<button type="button" class="chip" data-cat="all">All</button>'+
+  CATS.map(function(c){ return '<button type="button" class="chip" data-cat="'+c.id+'">'+c.name+'</button>'; }).join('')+
+  '<span class="count" id="plpCount"></span>';
+$('#filters').addEventListener('click',function(e){
+  var c=e.target.getAttribute('data-cat');
+  if(c) location.hash = (c==='all') ? '#/shop' : '#/shop/'+c;
+});
+
+/* ============================================================ PDP */
+var qty=1, variant='';
+function renderPDP(id){
+  var p=byId(id);
+  qty=1; variant = p.variants ? p.variants[0].n : '';
+  $('#pdpCrumb').textContent=p.n;
+  $('#pdpCat').textContent=catName(p.cat);
+  $('#pdpName').textContent=p.n;
+  $('#pdpPrice').innerHTML=(p.was?'<s class="card-was">'+money(p.was)+'</s>':'')+money(p.price);
+  $('#pdpBlurb').textContent=p.blurb;
+  $('#pdpImg').setAttribute('style',toneStyle(p));
+  $('#pdpUse').setAttribute('href','#'+p.ill);
+  $('#pdpThumbs').innerHTML=[0,1,2].map(function(i){
+    return '<div class="pimg'+(i===1?' alt':'')+'" style="'+toneStyle(p)+(i===2?';opacity:.72':'')+'">'+
+      '<svg aria-hidden="true"><use href="#'+p.ill+'"/></svg></div>';
+  }).join('');
+  $('#pdpSpec').innerHTML=p.spec.map(function(r){
+    return '<tr><th scope="row">'+r[0]+'</th><td>'+r[1]+'</td></tr>';
+  }).join('');
+
+  var vw=$('#pdpVariants');
+  if(p.variants){
+    vw.hidden=false;
+    $('#pdpVarName').textContent=variant;
+    $('#pdpSwatches').innerHTML=p.variants.map(function(v,i){
+      return '<button type="button" class="sw" style="background:'+v.c+'" data-v="'+v.n+'" '+
+        'aria-pressed="'+(i===0)+'" title="'+v.n+'"><span class="sr">'+v.n+'</span></button>';
+    }).join('');
+  } else { vw.hidden=true; }
+
+  var others=P.filter(function(x){return x.cat!==p.cat;}).slice(0,4);
+  $('#crossGrid').innerHTML=others.map(card).join('');
+  syncQty(p);
+}
+function syncQty(p){
+  $('#qVal').textContent=qty;
+  $('#addPrice').textContent=money(p.price*qty);
+}
+$('#pdpSwatches').addEventListener('click',function(e){
+  var v=e.target.closest('[data-v]'); if(!v) return;
+  variant=v.getAttribute('data-v');
+  $('#pdpVarName').textContent=variant;
+  Array.prototype.forEach.call(this.children,function(b){
+    b.setAttribute('aria-pressed', String(b===v));
+  });
+});
+$('#qMinus').addEventListener('click',function(){ if(qty>1){qty--; syncQty(byId(current));} });
+$('#qPlus').addEventListener('click',function(){ if(qty<10){qty++; syncQty(byId(current));} });
+$('#addBtn').addEventListener('click',function(){ addToCart(current,qty,variant); });
+$('#apay').addEventListener('click',function(){ addToCart(current,qty,variant); });
+$('#gpay').addEventListener('click',function(){ addToCart(current,qty,variant); });
+
+/* ============================================================ router */
+var current='starter-kit';
+var VIEWS=['home','shop','product','ritual','system'];
+function show(v){
+  VIEWS.forEach(function(x){ $('#v-'+x).hidden = (x!==v); });
+}
+function renderPLP(cat){
+  var list = cat ? P.filter(function(p){return p.cat===cat;}) : P;
+  $('#plpTitle').textContent = cat ? catName(cat) : 'All products';
+  $('#plpGrid').innerHTML = list.map(card).join('');
+  $('#plpCount').textContent = list.length+' products';
+  Array.prototype.forEach.call($('#filters').querySelectorAll('.chip'),function(b){
+    b.setAttribute('aria-pressed', String(b.getAttribute('data-cat')===(cat||'all')));
+  });
+}
+function route(){
+  var h=(location.hash||'#/').replace(/^#\/?/,'');
+  var seg=h.split('/').filter(Boolean);
+  if(seg[0]==='shop'){ renderPLP(seg[1]||null); show('shop'); }
+  else if(seg[0]==='product'){ current=seg[1]||'starter-kit'; renderPDP(current); show('product'); }
+  else if(seg[0]==='ritual'){ show('ritual'); }
+  else if(seg[0]==='system'){ show('system'); }
+  else { show('home'); }
+
+  Array.prototype.forEach.call($('#nav').children,function(a){
+    if(a.getAttribute('href')==='#/'+h || (h==='' && a.getAttribute('href')==='#/')) a.setAttribute('aria-current','page');
+    else a.removeAttribute('aria-current');
+  });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+route();
+renderCart();
+</script>
