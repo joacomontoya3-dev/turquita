@@ -96,3 +96,54 @@ grande. Así quedó.
 - **Prescindir del video.** Estas tres son sitios de fotografía. Mate Coast tiene video
   propio, que es su ventaja — así que la estructura sigue siendo la de video, con el
   lenguaje visual de estas referencias encima.
+
+
+---
+
+# Segunda tanda: A.P.C., a.v. vattev, BAPE, Slam Jam, Vita Travels
+
+A diferencia de la primera, esta tanda **no es coherente entre sí**. A.P.C. y
+a.v. vattev viven en el mismo mundo que AKILA/AGOLDE/Acne. BAPE es streetwear con
+títulos centrados. Slam Jam tiene una barra lateral fija y paneles en caja. Y Vita
+Travels es azul oscuro con grilla bento y botones tipo píldora — el opuesto exacto de
+todo lo demás.
+
+Cinco de las seis referencias apuntan al mismo lugar, así que la dirección se mantiene.
+De las otras tomé lo que suma sin contradecir.
+
+## Lo que apliqué
+
+**Muestras de color debajo del producto (BAPE).** El termo tiene cuatro colores; ahora
+se ven como cuatro puntitos en la ficha de la grilla. Es la mejor forma de mostrar que
+un producto tiene variantes sin ocupar cuatro lugares — y refuerza la decisión de
+unificar los cuatro termos en uno solo. En Wix salen solos de las Product Options.
+
+**Contador de productos por categoría (Slam Jam).** `Mates (5)`, `Bombillas (3)`. Slam
+Jam lo lleva al extremo con `( 441 Products )` en cada tile. Ayuda a decidir dónde
+entrar, y no cuesta nada: Wix ya sabe cuántos productos tiene cada categoría.
+
+## Lo que no apliqué, y por qué
+
+**La barra de newsletter fija abajo (a.v. vattev).** Tapa contenido en celular. Es la
+misma familia de interrupción que el pop-up de moneda que le sacamos al sitio actual.
+
+**La barra lateral fija de Slam Jam.** Funciona con un catálogo de miles de productos y
+decenas de marcas. Con 16 productos deja la mitad de la pantalla ocupada por un menú
+casi vacío.
+
+**El "Final Sale - Up to 70% Off" de Slam Jam.** Es exactamente el mecanismo que sacamos
+en la auditoría. Que una marca grande lo haga no lo hace correcto para una tienda que
+recién construye su posicionamiento.
+
+**Los números de estadística de Vita Travels** ("100+ países", "1472+ retiros"). Se
+pueden hacer — "2 locales · desde 2019 · envíos a toda Australia" — pero necesito datos
+reales de tu amigo. Si me los pasás, lo armo.
+
+## La pregunta abierta: Vita Travels
+
+Vita Travels es otra cosa: fondo azul muy oscuro, grilla bento, esquinas redondeadas,
+botones píldora, tipografía muy grande y gruesa. Es un lenguaje moderno y funciona muy
+bien para lo que es.
+
+Pero es **incompatible** con las otras cinco. No es un ajuste, es rehacer el diseño.
+Antes de invertir esa pasada hay que decidir cuál de los dos mundos es Mate Coast.

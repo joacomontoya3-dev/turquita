@@ -182,6 +182,8 @@ nav.main a[aria-current]{color:var(--ink)}
 .card-was{color:var(--ink-2);text-decoration:line-through;margin-right:.4rem;font-size:.8125rem}
 .card-ref{font-family:var(--f-mono);font-size:var(--t-micro);color:var(--ink-2);
   letter-spacing:.1em;font-variant-numeric:tabular-nums}
+.card-sw{display:flex;gap:.3rem;justify-content:center;margin-top:.3rem}
+.card-sw i{width:9px;height:9px;border-radius:50%;border:1px solid var(--line-2);display:block}
 .tag{position:absolute;top:.6rem;left:.6rem;z-index:4;font-family:var(--f-mono);
   font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.14em;color:var(--ink)}
 .s1{fill:var(--band)}.s2{fill:var(--clay)}.s3{fill:var(--band);opacity:.3}
@@ -1020,7 +1022,10 @@ function card(p){
     '</div>'+
     '<div class="card-meta"><span class="card-name">'+p.n+'</span>'+
     '<span class="card-price">'+(p.was?'<s class="card-was">'+money(p.was)+'</s>':'')+money(p.price)+'</span>'+
-    '<span class="card-ref">'+p.ref+'</span></div></a>';
+    '<span class="card-ref">'+p.ref+'</span>'+
+    (p.variants?'<span class="card-sw">'+p.variants.map(function(v){
+      return '<i style="background:'+v.c+'" title="'+v.n+'"></i>';}).join('')+'</span>':'')+
+    '</div></a>';
 }
 function stepHTML(s){
   return '<article class="step"><div class="vframe">'+
@@ -1158,9 +1163,11 @@ $('#bestGrid').innerHTML=['starter-kit','mate-san-juan','termo-1l','verde-flor',
 $('#stepsPreview').innerHTML=STEPS.slice(0,3).map(stepHTML).join('');
 $('#stepsFull').innerHTML=STEPS.map(stepHTML).join('');
 
-$('#filters').innerHTML='<button type="button" class="chip" data-cat="all">All</button>'+
-  CATS.map(function(c){return '<button type="button" class="chip" data-cat="'+c.id+'">'+c.name+'</button>';}).join('')+
-  '<span class="count" id="plpCount"></span>';
+$('#filters').innerHTML='<button type="button" class="chip" data-cat="all">All ('+P.length+')</button>'+
+  CATS.map(function(c){
+    var n=P.filter(function(p){return p.cat===c.id;}).length;
+    return '<button type="button" class="chip" data-cat="'+c.id+'">'+c.name+' ('+n+')</button>';
+  }).join('')+'<span class="count" id="plpCount"></span>';
 $('#filters').addEventListener('click',function(e){
   var c=e.target.getAttribute('data-cat');
   if(c) location.hash=(c==='all')?'#/shop':'#/shop/'+c;
