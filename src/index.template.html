@@ -69,6 +69,9 @@ p{margin:0}
 /* the logo used as a graphic element — the biggest thing on the page twice */
 .wordmark{font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 90;
   text-transform:uppercase;letter-spacing:.12em;line-height:.9}
+/* the real logo drops into any wordmark slot as an <img> and takes its height */
+.wordmark-img{width:auto;height:1em;margin-inline:auto}
+.mark .wordmark-img{height:2.2em}
 
 /* words distributed edge to edge across an image */
 .spread{display:flex;justify-content:space-between;align-items:baseline;width:100%;gap:1rem;
@@ -494,6 +497,9 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <a href="#/shop/bombillas">Bombillas</a><a href="#/shop/yerba">Yerba</a>
       <a href="#/ritual">How to mate</a>
     </nav>
+    <!-- LOGO SLOT — replace the text with the real mark:
+         <img src="logo.svg" alt="Mate Coast" class="wordmark-img">
+         Keep the class so the sizing rules still apply. See docs/LOGO.md -->
     <a class="mark" href="#/" aria-label="Mate Coast — home">Mate<br>Coast</a>
     <div class="bar-end">
       <button type="button">Search</button>
@@ -514,7 +520,10 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
     <p class="shot"><b>Hero clip</b> — ronda on the sand, golden hour, hands passing the mate.
       6–8 s, no cuts, muted loop. The wordmark sits over it, so keep the centre uncluttered.</p>
     <div class="hero-in"><div class="wrap">
-      <p class="wordmark hero-mark">Mate Coast</p>
+      <!-- LOGO SLOT — replace the text with the real mark:
+         <img src="logo.svg" alt="Mate Coast" class="wordmark-img">
+         Keep the class so the sizing rules still apply. See docs/LOGO.md -->
+    <p class="wordmark hero-mark">Mate Coast</p>
       <div class="hero-foot">
         <div>
           <p class="eyebrow"><span class="live"></span>Filmed on the Gold Coast — not stock</p>
@@ -880,7 +889,10 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <button type="button" id="shotToggle" aria-pressed="false">Shot notes: off</button>
     </div>
   </div>
-  <p class="wordmark f-mark">Mate Coast</p>
+  <!-- LOGO SLOT — replace the text with the real mark:
+         <img src="logo.svg" alt="Mate Coast" class="wordmark-img">
+         Keep the class so the sizing rules still apply. See docs/LOGO.md -->
+    <p class="wordmark f-mark">Mate Coast</p>
 </footer>
 
 <div class="scrim" id="scrim" hidden></div>
