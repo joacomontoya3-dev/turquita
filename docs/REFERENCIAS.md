@@ -139,11 +139,20 @@ recién construye su posicionamiento.
 pueden hacer — "2 locales · desde 2019 · envíos a toda Australia" — pero necesito datos
 reales de tu amigo. Si me los pasás, lo armo.
 
-## La pregunta abierta: Vita Travels
+## Vita Travels: descartado
 
 Vita Travels es otra cosa: fondo azul muy oscuro, grilla bento, esquinas redondeadas,
 botones píldora, tipografía muy grande y gruesa. Es un lenguaje moderno y funciona muy
-bien para lo que es.
+bien para lo que es — pero es **incompatible** con las otras cinco referencias, y
+adoptarlo no era un ajuste sino rehacer el diseño.
 
-Pero es **incompatible** con las otras cinco. No es un ajuste, es rehacer el diseño.
-Antes de invertir esa pasada hay que decidir cuál de los dos mundos es Mate Coast.
+**Decisión: se descarta.** Mate Coast se queda en el mundo minimal-editorial de AKILA,
+AGOLDE, Acne, A.P.C. y a.v. vattev. Si en algún momento quieren ver la versión oscura,
+es una pasada nueva y completa, no un retoque.
+
+El bloque de estadísticas grandes también queda afuera **hasta tener números reales**.
+Inventar "3.000+ mates entregados" es peor que no ponerlo: si un cliente lo nota, se
+lleva puesta la confianza de todo el resto de la página. Cuando tu amigo pase los datos
+—año de fundación real, gente en el grupo de WhatsApp, pedidos— se arma en diez minutos.
+El número del grupo de WhatsApp es el más valioso de los tres: prueba comunidad, no
+volumen, y es lo que esta marca tiene y la competencia no.
