@@ -39,7 +39,7 @@ progreso de envío gratis.
 
 ## Sistema de diseño
 
-- **Fondo** `#E7E9E4` · **Tinta** `#16190F` · **Marca** `#5A6E3E` · **Acento** `#B7D14A`
+- **Fondo** `#E7E9E4` · **Tinta** `#16190F` · **Marca** `#556643` · **Acento** `#B7D14A`
 - **Archivo** (display) · **Instrument Sans** (texto) · **DM Mono** (datos y rótulos)
 - Radio 2px, cero sombras, filetes de 1px
 

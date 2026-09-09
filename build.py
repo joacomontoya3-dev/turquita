@@ -23,6 +23,11 @@ if token not in tpl:
     sys.exit("template is missing the %s token" % token)
 
 out = tpl.replace(token, json.dumps(clips))
+
+for name, path in (("__LOGO_OLIVE__", "assets/logo/matecoast-olive.png"),
+                   ("__LOGO_LIGHT__", "assets/logo/matecoast-light.png")):
+    blob = (root / path).read_bytes()
+    out = out.replace(name, "data:image/png;base64," + base64.b64encode(blob).decode())
 (root / "index.html").write_text(out, encoding="utf-8")
 
 total = sum(v.stat().st_size for v in vids)

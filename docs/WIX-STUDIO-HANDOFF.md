@@ -34,7 +34,7 @@ variaciones cada uno. Cargá estos en los slots principales:
 | Color 2 | `#F2F3F0` | Superficie elevada (tarjetas, avisos) |
 | Color 3 | `#16190F` | Tinta / texto principal |
 | Color 4 | `#2E3A24` | Banda oscura y botones primarios |
-| Color 5 | `#5A6E3E` | Verde de marca (el del logo) |
+| Color 5 | `#556643` | Verde de marca (el del logo) |
 
 Y estos como colores adicionales:
 

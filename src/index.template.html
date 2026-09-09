@@ -14,8 +14,8 @@
   --band:#141810;        /* video ground and footer */
   --band-fg:#E9EAE6;
   --ink:#16190F; --ink-2:#5A6152; --line:#C9CDC4; --line-2:#B2B8AA;
-  --olive:#5A6E3E; --yerba:#B7D14A; --clay:#C08A4E;
-  --btn-bg:#16190F; --btn-fg:#F4F5F1; --focus:#5A6E3E;
+  --olive:#556643; --yerba:#B7D14A; --clay:#C08A4E;
+  --btn-bg:#16190F; --btn-fg:#F4F5F1; --focus:#556643;
 
   --f-display:'Archivo','Helvetica Neue',Arial,sans-serif;
   --f-body:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
@@ -31,16 +31,20 @@
   --scrim:linear-gradient(to top,rgba(10,12,7,.9) 0%,rgba(10,12,7,.62) 32%,rgba(10,12,7,.1) 72%,rgba(10,12,7,0) 100%);
 }
 @media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .logo-olive{display:none}
+  :root:not([data-theme="light"]) .logo-light{display:block}
   :root:not([data-theme="light"]){
     --ground:#14170F; --tile:#1D2116; --paper:#1D2116; --band:#0B0E07;
     --ink:#E9EAE6; --ink-2:#98A28C; --line:#333A29; --line-2:#414A34;
-    --olive:#8FA96A; --btn-bg:#E9EAE6; --btn-fg:#14170F; --focus:#B7D14A;
+    --olive:#8CA06E; --btn-bg:#E9EAE6; --btn-fg:#14170F; --focus:#B7D14A;
   }
 }
+:root[data-theme="dark"] .logo-olive{display:none}
+:root[data-theme="dark"] .logo-light{display:block}
 :root[data-theme="dark"]{
   --ground:#14170F; --tile:#1D2116; --paper:#1D2116; --band:#0B0E07;
   --ink:#E9EAE6; --ink-2:#98A28C; --line:#333A29; --line-2:#414A34;
-  --olive:#8FA96A; --btn-bg:#E9EAE6; --btn-fg:#14170F; --focus:#B7D14A;
+  --olive:#8CA06E; --btn-bg:#E9EAE6; --btn-fg:#14170F; --focus:#B7D14A;
 }
 
 *{box-sizing:border-box}
@@ -71,7 +75,9 @@ p{margin:0}
   text-transform:uppercase;letter-spacing:.12em;line-height:.9}
 /* the real logo drops into any wordmark slot as an <img> and takes its height */
 .wordmark-img{width:auto;height:1em;margin-inline:auto}
-.mark .wordmark-img{height:2.2em}
+.mark .wordmark-img{height:2.4em}
+/* the olive mark is unreadable on a dark ground, so each theme gets its own file */
+.logo-light{display:none}
 
 /* words distributed edge to edge across an image */
 .spread{display:flex;justify-content:space-between;align-items:baseline;width:100%;gap:1rem;
@@ -500,7 +506,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
     <!-- LOGO SLOT — replace the text with the real mark:
          <img src="logo.svg" alt="Mate Coast" class="wordmark-img">
          Keep the class so the sizing rules still apply. See docs/LOGO.md -->
-    <a class="mark" href="#/" aria-label="Mate Coast — home">Mate<br>Coast</a>
+    <a class="mark" href="#/" aria-label="Mate Coast — home"><img class="wordmark-img logo-olive" src="__LOGO_OLIVE__" alt="Mate Coast"><img class="wordmark-img logo-light" src="__LOGO_LIGHT__" alt="" aria-hidden="true"></a>
     <div class="bar-end">
       <button type="button">Search</button>
       <button type="button" class="cart-btn" id="cartOpen" aria-haspopup="dialog">
@@ -778,7 +784,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <div class="tok"><div class="chipc" style="background:#16190F"></div><b>Ink</b><code>#16190F</code></div>
       <div class="tok"><div class="chipc" style="background:#5A6152"></div><b>Ink muted</b><code>#5A6152</code></div>
       <div class="tok"><div class="chipc" style="background:#141810"></div><b>Video ground</b><code>#141810</code></div>
-      <div class="tok"><div class="chipc" style="background:#5A6E3E"></div><b>Brand olive</b><code>#5A6E3E</code></div>
+      <div class="tok"><div class="chipc" style="background:#556643"></div><b>Brand olive</b><code>#556643</code></div>
       <div class="tok"><div class="chipc" style="background:#B7D14A"></div><b>Yerba accent</b><code>#B7D14A</code></div>
       <div class="tok"><div class="chipc" style="background:#C08A4E"></div><b>Calabaza</b><code>#C08A4E</code></div>
     </div>

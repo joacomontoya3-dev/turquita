@@ -1,52 +1,79 @@
 # El logotipo
 
-El logo aparece en tres lugares del diseño, y en dos de ellos es el elemento más grande
-de la pantalla:
+## El archivo que llegó no es vectorial
 
-| Dónde | Tamaño aproximado | Qué necesita |
-|---|---|---|
-| Header | 14 px de alto | Cualquier formato sirve |
-| Hero, sobre el video | ~200 px de alto en desktop | Vector o PNG grande |
-| Cierre del footer | hasta ~210 px de alto | Vector o PNG grande |
+El `.svg` que me pasaste **no tiene vectores adentro**. Es un PNG de **117 × 76 píxeles**
+metido dentro de una envoltura SVG:
 
-En el prototipo esos tres lugares están rellenados con **texto en Archivo**, que no es el
-logo — es un sustituto para que se vea la composición. Los tres tienen un comentario
-`LOGO SLOT` en `src/index.template.html` que marca exactamente dónde va el archivo real.
+```xml
+<svg viewBox="0 0 117 76">
+  <image width="117" height="76" xlink:href="data:image/png;base64,iVBORw0KGgo..."/>
+</svg>
+```
 
-## Qué pedirle a quien lo diseñó
+Un SVG de verdad tiene etiquetas `<path>` con coordenadas. Éste tiene una sola etiqueta
+`<image>` con una imagen incrustada. Escala exactamente igual de mal que el PNG original
+— la extensión `.svg` no lo convierte en vector.
 
-En orden de preferencia:
+Pasa seguido: algunos exportadores "guardan como SVG" envolviendo el mapa de bits, y
+Canva y varias herramientas online hacen justo esto.
 
-1. **SVG.** Es lo ideal: escala infinito, pesa nada, y Wix lo acepta para el logo del
-   sitio. Si el logo se hizo en Illustrator, es `Archivo → Exportar → SVG`.
-2. **PDF o AI**, y de ahí sale el SVG.
-3. **PNG con fondo transparente, mínimo 2000 px de ancho.** Alcanza para todos los
-   tamaños del diseño, aunque pesa más que el SVG.
+### Cómo verificarlo vos mismo
 
-Lo que **no** alcanza es el PNG chico que circula hoy (~120 px de ancho). A 200 px de
-alto en el hero se ve pixelado, y ese es el primer elemento que ve el visitante.
+Abrí el archivo con cualquier editor de texto (Bloc de notas sirve):
 
-## Dos versiones, no una
+- Si ves `<path d="M12.4 8.1c..."` → **es vectorial**, sirve.
+- Si ves `<image ... base64` → **es un mapa de bits disfrazado**, no sirve para escalar.
 
-Hacen falta dos archivos:
+Con ese chequeo evitás la vuelta entera la próxima vez.
 
-- **Verde** `#5A6E3E` (o el valor exacto del manual, si aparece) — para fondos claros.
-- **Blanco o crema** `#E9EAE6` — para el hero, el footer y cualquier banda de video.
+## Qué hay que conseguir
 
-Un solo archivo verde no sirve para el hero: sobre el video oscuro casi no se lee.
+El archivo original de quien diseñó el logo: **`.ai`, `.eps`, `.pdf` vectorial o un SVG
+con paths**. De cualquiera de esos sale el SVG bueno en un paso.
+
+Si el original se perdió, la alternativa es **redibujarlo**. Se puede vectorizar el PNG
+automáticamente, pero a 117 píxeles de ancho el trazado sale con los bordes irregulares
+y en un logotipo se nota: las letras tienen curvas gruesas y limpias que a esa resolución
+no están. Decime y lo intento, pero el original siempre va a ser mejor.
+
+## Qué se pudo hacer igual
+
+**El verde real de la marca es `#556643`.** Lo medí sobre los píxeles opacos del archivo
+(2153 píxeles, el tono dominante y el promedio ponderado coinciden). Yo venía usando
+`#5A6E3E`, estimado a ojo del thumbnail: era un poco más claro y más amarillo. Ya está
+corregido en todo el sistema de diseño.
+
+**El logo real ya está en el header** del prototipo. Ahí se dibuja a 52 × 34 px, o sea
+una reducción del original — se ve nítido. Es el único lugar del diseño donde el archivo
+actual alcanza.
+
+**Las dos versiones están exportadas** en `assets/logo/`:
+
+| Archivo | Para qué |
+|---|---|
+| `matecoast-olive.png` | Fondos claros. `#556643`, fondo transparente |
+| `matecoast-light.png` | Hero, footer y bandas de video. `#E9EAE6`, fondo transparente |
+| `matecoast-AS-RECEIVED.svg` | El archivo original, como llegó |
+
+La versión clara la generé recoloreando píxel por píxel y respetando el canal alfa, así
+que los bordes suavizados quedaron intactos. Las dos siguen siendo de 117 × 76: sirven
+para el header y para el ícono del navegador, no para el hero.
+
+## Lo que sigue faltando
+
+El hero dibuja el logotipo a unos **200 px de alto** y el cierre del footer todavía más.
+Con 76 px de alto de origen, ampliarlo casi tres veces se ve borroso — y es el primer
+elemento que ve el visitante.
+
+Esos dos lugares siguen con el sustituto tipográfico en Archivo, marcados con un
+comentario `LOGO SLOT` en `src/index.template.html`. Cuando llegue el vector, es cambiar
+esas dos líneas por `<img class="wordmark-img" src="...">` y listo.
 
 ## En Wix Studio
 
-`Site → Logo` acepta SVG. Subí las dos versiones al Media Manager y usá la clara en el
-header cuando esté sobre una sección oscura.
+`Site → Logo` acepta SVG. Subí las dos versiones al Media Manager y usá la clara cuando
+el header esté sobre una sección oscura.
 
-Ojo con un detalle de Wix: si subís un SVG con el color embebido en el archivo, no lo
-podés recolorear desde el editor. Por eso conviene tener los dos archivos exportados
-desde el principio en vez de intentar cambiarle el color después.
-
-## El verde
-
-Del PNG saqué aproximadamente `#5A6E3E` y ese es el valor que usa todo el sistema de
-diseño. **Si el manual de marca tiene el valor oficial, ese manda** — cambialo en el
-bloque `:root` de `src/index.template.html` y en `Site Colours` de Wix, y el resto del
-sitio se acomoda solo, porque todo lo verde sale de esa variable.
+Un detalle: si el SVG trae el color adentro del archivo, **no lo podés recolorear desde
+el editor de Wix**. Por eso conviene tener los dos archivos exportados desde el principio.

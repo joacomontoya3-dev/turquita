@@ -42,8 +42,9 @@ yerberos, yerba, canastos materos, agua para el mate).
 - [ ] Año de fundación (puse 2019)
 - [ ] Umbral de envío gratis (puse $99) y costo del envío estándar (puse $9.95)
 - [ ] Link al grupo de WhatsApp
-- [ ] Manual de marca, si tu amigo lo consigue — sobre todo el verde exacto del logo.
-      Yo usé `#5A6E3E` sacado de la imagen, pero si tiene el valor oficial, ese manda.
+- [x] ~~Verde del logo~~ — medido del archivo: `#556643`. Si el manual de marca trae
+      otro valor oficial, ese manda.
+- [ ] El logo en vectorial de verdad — ver `LOGO.md`
 
 ---
 
