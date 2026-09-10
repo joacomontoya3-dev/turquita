@@ -1,79 +1,63 @@
 # El logotipo
 
-## El archivo que llegó no es vectorial
+**Resuelto.** El vector llegó y ya está en las tres posiciones del diseño.
 
-El `.svg` que me pasaste **no tiene vectores adentro**. Es un PNG de **117 × 76 píxeles**
-metido dentro de una envoltura SVG:
+## Qué llegó
 
-```xml
-<svg viewBox="0 0 117 76">
-  <image width="117" height="76" xlink:href="data:image/png;base64,iVBORw0KGgo..."/>
-</svg>
-```
+`image-1788997883858 copia.svg` — un SVG real exportado de Adobe Illustrator 30.8.1:
+16 paths, cero imágenes incrustadas, 4,7 KB. Escala infinito.
 
-Un SVG de verdad tiene etiquetas `<path>` con coordenadas. Éste tiene una sola etiqueta
-`<image>` con una imagen incrustada. Escala exactamente igual de mal que el PNG original
-— la extensión `.svg` no lo convierte en vector.
+(El primer archivo que probamos era un PNG de 117 × 76 px dentro de una envoltura SVG.
+El chequeo para distinguirlos: abrilo con un editor de texto — si dice `<path d="M..."`
+es vectorial, si dice `<image ... base64` es un mapa de bits disfrazado.)
 
-Pasa seguido: algunos exportadores "guardan como SVG" envolviendo el mapa de bits, y
-Canva y varias herramientas online hacen justo esto.
+## Qué le hice
 
-### Cómo verificarlo vos mismo
+**Unifiqué los nueve verdes.** El original traía nueve tonos casi idénticos repartidos
+entre los paths: `#526340`, `#526642`, `#536643`, `#546542`, `#546543`, `#556543`,
+`#556643`, `#566643` y `#566744`. Son indistinguibles a ojo — típico de un logo
+dibujado a mano y luego vectorizado.
 
-Abrí el archivo con cualquier editor de texto (Bloc de notas sirve):
+**Los pasé a `currentColor`.** Esto es lo importante: el archivo ya no lleva el color
+adentro, lo hereda de CSS. Eso resuelve de una el problema que te había advertido —
+un SVG con el color embebido no se puede recolorear desde el editor de Wix. Ahora un
+solo archivo sirve para fondo claro y para fondo oscuro.
 
-- Si ves `<path d="M12.4 8.1c..."` → **es vectorial**, sirve.
-- Si ves `<image ... base64` → **es un mapa de bits disfrazado**, no sirve para escalar.
+**El verde medido coincide.** Yo había estimado `#556643` decodificando el PNG chico.
+Ese valor está literalmente entre los fills del vector. La paleta del sistema de diseño
+estaba bien.
 
-Con ese chequeo evitás la vuelta entera la próxima vez.
+## Los archivos
 
-## Qué hay que conseguir
+En `assets/logo/`:
 
-El archivo original de quien diseñó el logo: **`.ai`, `.eps`, `.pdf` vectorial o un SVG
-con paths**. De cualquiera de esos sale el SVG bueno en un paso.
-
-Si el original se perdió, la alternativa es **redibujarlo**. Se puede vectorizar el PNG
-automáticamente, pero a 117 píxeles de ancho el trazado sale con los bordes irregulares
-y en un logotipo se nota: las letras tienen curvas gruesas y limpias que a esa resolución
-no están. Decime y lo intento, pero el original siempre va a ser mejor.
-
-## Qué se pudo hacer igual
-
-**El verde real de la marca es `#556643`.** Lo medí sobre los píxeles opacos del archivo
-(2153 píxeles, el tono dominante y el promedio ponderado coinciden). Yo venía usando
-`#5A6E3E`, estimado a ojo del thumbnail: era un poco más claro y más amarillo. Ya está
-corregido en todo el sistema de diseño.
-
-**El logo real ya está en el header** del prototipo. Ahí se dibuja a 52 × 34 px, o sea
-una reducción del original — se ve nítido. Es el único lugar del diseño donde el archivo
-actual alcanza.
-
-**Las dos versiones están exportadas** en `assets/logo/`:
-
-| Archivo | Para qué |
+| Archivo | Cuándo usarlo |
 |---|---|
-| `matecoast-olive.png` | Fondos claros. `#556643`, fondo transparente |
-| `matecoast-light.png` | Hero, footer y bandas de video. `#E9EAE6`, fondo transparente |
-| `matecoast-AS-RECEIVED.svg` | El archivo original, como llegó |
+| `matecoast.svg` | **El de la web.** Hereda el color por CSS. Es el que usa el prototipo |
+| `matecoast-olive.svg` | Verde fijo `#556643`, para fondos claros. Para Wix y para uso general |
+| `matecoast-light.svg` | Claro fijo `#E9EAE6`, para el hero, el footer y las bandas de video |
 
-La versión clara la generé recoloreando píxel por píxel y respetando el canal alfa, así
-que los bordes suavizados quedaron intactos. Las dos siguen siendo de 117 × 76: sirven
-para el header y para el ícono del navegador, no para el hero.
+## Dónde aparece en el diseño
 
-## Lo que sigue faltando
+| Posición | Tamaño | Color |
+|---|---|---|
+| Header | 46 × 30 px | Verde de marca |
+| Hero, sobre el video | hasta 440 × 286 px | Claro |
+| Cierre del footer | hasta 520 × 338 px | Claro |
 
-El hero dibuja el logotipo a unos **200 px de alto** y el cierre del footer todavía más.
-Con 76 px de alto de origen, ampliarlo casi tres veces se ve borroso — y es el primer
-elemento que ve el visitante.
+El lockup es de dos líneas, así que su proporción es 117:76 — bastante alto. Por eso
+en el hero y el footer no ocupa todo el ancho como el de AKILA o AGOLDE, que son de una
+sola línea: a ancho completo quedaría desmesurado de alto. A 42 % y 44 % del viewport
+manda igual sin comerse la página.
 
-Esos dos lugares siguen con el sustituto tipográfico en Archivo, marcados con un
-comentario `LOGO SLOT` en `src/index.template.html`. Cuando llegue el vector, es cambiar
-esas dos líneas por `<img class="wordmark-img" src="...">` y listo.
+En el prototipo se inyecta como un `<symbol>` una sola vez y las tres posiciones lo
+referencian con `<use>`. El `build.py` lo toma de `matecoast.svg` en cada build, así
+que si el logo cambia, se reemplaza ese archivo y se corre `python3 build.py`.
 
 ## En Wix Studio
 
-`Site → Logo` acepta SVG. Subí las dos versiones al Media Manager y usá la clara cuando
-el header esté sobre una sección oscura.
+`Site → Logo` acepta SVG. Subí `matecoast-olive.svg` y `matecoast-light.svg` al Media
+Manager y usá el claro cuando el header esté sobre una sección oscura.
 
-Un detalle: si el SVG trae el color adentro del archivo, **no lo podés recolorear desde
-el editor de Wix**. Por eso conviene tener los dos archivos exportados desde el principio.
+Si algún día querés controlar el color desde el editor en vez de tener dos archivos,
+subí `matecoast.svg` — al no llevar color adentro, hereda el que le pongas.

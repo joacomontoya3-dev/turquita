@@ -13,10 +13,12 @@ sitio a desplegar.
 | `index.html` | El prototipo completo, autocontenido (clips incluidos). Se abre con doble clic. **Generado — no lo edites a mano.** |
 | `src/index.template.html` | La fuente real. Acá se edita. |
 | `assets/video/*.webm` | Clips de placeholder |
+| `assets/logo/*.svg` | El logotipo vectorial, en tres versiones |
 | `build.py` | Mete los clips dentro de `index.html`. Corrélo después de tocar el template o los videos. |
 | `docs/REFERENCIAS.md` | Qué tomé de AKILA, AGOLDE y Acne Studios, y qué decidí no copiar |
 | `docs/AUDITORIA.md` | Los 9 problemas del sitio actual, ordenados por impacto sobre la venta |
 | `docs/DRIVE-INVENTARIO.md` | Índice del Drive de contenido: 78 videos, 54 fotos, duplicados y mapeo a cada hueco del diseño |
+| `docs/LOGO.md` | El vector de marca: qué llegó, cómo quedó normalizado y dónde va |
 | `docs/VIDEO.md` | Lista de tomas, especificaciones de export y cómo montar video en Wix |
 | `docs/WIX-STUDIO-HANDOFF.md` | Paso a paso para reconstruirlo en Wix: tokens, fuentes, CSS, y qué elemento nativo es cada cosa |
 | `docs/CONTENT.md` | Catálogo (qué es real y qué propuse), receta de fotografía, decisión de idioma, textos |

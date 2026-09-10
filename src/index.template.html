@@ -31,16 +31,12 @@
   --scrim:linear-gradient(to top,rgba(10,12,7,.9) 0%,rgba(10,12,7,.62) 32%,rgba(10,12,7,.1) 72%,rgba(10,12,7,0) 100%);
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .logo-olive{display:none}
-  :root:not([data-theme="light"]) .logo-light{display:block}
   :root:not([data-theme="light"]){
     --ground:#14170F; --tile:#1D2116; --paper:#1D2116; --band:#0B0E07;
     --ink:#E9EAE6; --ink-2:#98A28C; --line:#333A29; --line-2:#414A34;
     --olive:#8CA06E; --btn-bg:#E9EAE6; --btn-fg:#14170F; --focus:#B7D14A;
   }
 }
-:root[data-theme="dark"] .logo-olive{display:none}
-:root[data-theme="dark"] .logo-light{display:block}
 :root[data-theme="dark"]{
   --ground:#14170F; --tile:#1D2116; --paper:#1D2116; --band:#0B0E07;
   --ink:#E9EAE6; --ink-2:#98A28C; --line:#333A29; --line-2:#414A34;
@@ -74,10 +70,9 @@ p{margin:0}
 .wordmark{font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 90;
   text-transform:uppercase;letter-spacing:.12em;line-height:.9}
 /* the real logo drops into any wordmark slot as an <img> and takes its height */
-.wordmark-img{width:auto;height:1em;margin-inline:auto}
-.mark .wordmark-img{height:2.4em}
-/* the olive mark is unreadable on a dark ground, so each theme gets its own file */
-.logo-light{display:none}
+/* one vector for every slot — it inherits the CSS colour, so no per-theme file */
+.logo-svg{display:block;fill:currentColor;aspect-ratio:117/76}
+.mark-svg{height:30px;width:auto;margin-inline:auto}
 
 /* words distributed edge to edge across an image */
 .spread{display:flex;justify-content:space-between;align-items:baseline;width:100%;gap:1rem;
@@ -149,8 +144,8 @@ nav.main a[aria-current]{color:var(--ink)}
 .vhero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-in{position:relative;z-index:3;align-self:end;width:100%;color:var(--band-fg);
   padding-bottom:clamp(1.5rem,3.5vw,2.75rem)}
-.hero-mark{font-size:clamp(2.6rem,13vw,11rem);text-align:center;
-  margin-bottom:clamp(1.25rem,3vw,2.25rem);color:var(--band-fg)}
+.hero-mark{width:min(42vw,440px);height:auto;color:var(--band-fg);
+  margin:0 auto clamp(1.25rem,3vw,2.25rem)}
 .hero-foot{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:flex-end;
   justify-content:space-between;border-top:1px solid rgba(233,234,230,.28);padding-top:1.1rem}
 .hero-foot .lede{color:rgba(233,234,230,.86);max-width:40ch}
@@ -380,9 +375,8 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
   letter-spacing:.18em;color:rgba(233,234,230,.5)}
 .f-bottom button:hover,body.notes .f-bottom button{color:var(--yerba)}
 /* the logo as the last thing you see, edge to edge */
-.f-mark{font-size:clamp(2.2rem,15.5vw,13rem);text-align:center;color:var(--band-fg);
-  padding-block:clamp(1.5rem,3vw,2.5rem) clamp(.5rem,1.5vw,1rem);letter-spacing:.02em;
-  white-space:nowrap;overflow:hidden}
+.f-mark{width:min(44vw,520px);height:auto;color:var(--band-fg);
+  margin:clamp(1.5rem,3vw,2.5rem) auto clamp(.5rem,1.5vw,1rem)}
 
 /* ============================================================ system view */
 .tokens{display:grid;gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
@@ -432,6 +426,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
      Product illustrations — every one is a photography or video slot.
      ============================================================ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-logo" viewBox="0 0 117 76">__LOGO_PATHS__</symbol>
   <symbol id="i-gourd" viewBox="0 0 200 240">
     <rect class="s1" x="124" y="14" width="9" height="74" rx="4.5" transform="rotate(14 128 51)"/>
     <rect class="s1" x="117" y="4" width="24" height="10" rx="5" transform="rotate(14 129 9)"/>
@@ -503,10 +498,9 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <a href="#/shop/bombillas">Bombillas</a><a href="#/shop/yerba">Yerba</a>
       <a href="#/ritual">How to mate</a>
     </nav>
-    <!-- LOGO SLOT — replace the text with the real mark:
-         <img src="logo.svg" alt="Mate Coast" class="wordmark-img">
-         Keep the class so the sizing rules still apply. See docs/LOGO.md -->
-    <a class="mark" href="#/" aria-label="Mate Coast — home"><img class="wordmark-img logo-olive" src="__LOGO_OLIVE__" alt="Mate Coast"><img class="wordmark-img logo-light" src="__LOGO_LIGHT__" alt="" aria-hidden="true"></a>
+    <!-- The real vector, injected from assets/logo/matecoast.svg by build.py.
+         It inherits the CSS colour, so one file serves both themes. -->
+    <a class="mark" href="#/" aria-label="Mate Coast — home"><svg class="logo-svg mark-svg" role="img" aria-label="Mate Coast"><use href="#i-logo"/></svg></a>
     <div class="bar-end">
       <button type="button">Search</button>
       <button type="button" class="cart-btn" id="cartOpen" aria-haspopup="dialog">
@@ -526,10 +520,9 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
     <p class="shot"><b>Hero clip</b> — ronda on the sand, golden hour, hands passing the mate.
       6–8 s, no cuts, muted loop. The wordmark sits over it, so keep the centre uncluttered.</p>
     <div class="hero-in"><div class="wrap">
-      <!-- LOGO SLOT — replace the text with the real mark:
-         <img src="logo.svg" alt="Mate Coast" class="wordmark-img">
-         Keep the class so the sizing rules still apply. See docs/LOGO.md -->
-    <p class="wordmark hero-mark">Mate Coast</p>
+      <!-- The real vector, injected from assets/logo/matecoast.svg by build.py.
+         It inherits the CSS colour, so one file serves both themes. -->
+    <svg class="logo-svg hero-mark" role="img" aria-label="Mate Coast"><use href="#i-logo"/></svg>
       <div class="hero-foot">
         <div>
           <p class="eyebrow"><span class="live"></span>Filmed on the Gold Coast — not stock</p>
@@ -895,10 +888,9 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <button type="button" id="shotToggle" aria-pressed="false">Shot notes: off</button>
     </div>
   </div>
-  <!-- LOGO SLOT — replace the text with the real mark:
-         <img src="logo.svg" alt="Mate Coast" class="wordmark-img">
-         Keep the class so the sizing rules still apply. See docs/LOGO.md -->
-    <p class="wordmark f-mark">Mate Coast</p>
+  <!-- The real vector, injected from assets/logo/matecoast.svg by build.py.
+         It inherits the CSS colour, so one file serves both themes. -->
+    <svg class="logo-svg f-mark" role="img" aria-label="Mate Coast"><use href="#i-logo"/></svg>
 </footer>
 
 <div class="scrim" id="scrim" hidden></div>
