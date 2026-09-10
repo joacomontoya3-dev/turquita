@@ -3,6 +3,9 @@
 El video propio es el activo diferencial de la marca. Este documento es el brief de
 producción y las reglas técnicas para que no rompa el sitio.
 
+> El material real está relevado en `DRIVE-INVENTARIO.md`: 78 videos y 54 fotos, con
+> el mapeo de qué archivo va en cada hueco de este documento.
+
 Los clips que trae el prototipo son **placeholders generados**: sirven para ver el
 ritmo y la legibilidad, nada más. Cada uno tiene su brief encima — el botón
 **"Shot notes"** del header los muestra y los oculta. Con las notas apagadas ves el
