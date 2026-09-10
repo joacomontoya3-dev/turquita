@@ -16,6 +16,7 @@ sitio a desplegar.
 | `assets/logo/*.svg` | El logotipo vectorial, en tres versiones |
 | `build.py` | Mete los clips dentro de `index.html`. Corrélo después de tocar el template o los videos. |
 | `docs/REFERENCIAS.md` | Qué tomé de AKILA, AGOLDE y Acne Studios, y qué decidí no copiar |
+| `docs/ARQUITECTURA.md` | La arquitectura de información y las decisiones de negocio, desacopladas del diseño |
 | `docs/AUDITORIA.md` | Los 9 problemas del sitio actual, ordenados por impacto sobre la venta |
 | `docs/DRIVE-INVENTARIO.md` | Índice del Drive de contenido: 78 videos, 54 fotos, duplicados y mapeo a cada hueco del diseño |
 | `docs/LOGO.md` | El vector de marca: qué llegó, cómo quedó normalizado y dónde va |
