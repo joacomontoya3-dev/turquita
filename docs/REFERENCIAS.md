@@ -156,3 +156,72 @@ lleva puesta la confianza de todo el resto de la página. Cuando tu amigo pase l
 —año de fundación real, gente en el grupo de WhatsApp, pedidos— se arma en diez minutos.
 El número del grupo de WhatsApp es el más valioso de los tres: prueba comunidad, no
 volumen, y es lo que esta marca tiene y la competencia no.
+
+
+---
+
+# Pasada sustractiva: sacar el "olor a IA"
+
+Feedback: *"todavía no está quedando como las referencias, se nota mucho el paso de la
+IA. No me gusta el fondo verde."*
+
+Ambas cosas eran ciertas. Lo que las delataba, concretamente:
+
+## 1. El monoespaciado — el delator número uno
+
+Yo lo había metido como idea de "ficha técnica" y terminó tapizando todo: navegación,
+botones, etiquetas de sección, precios, filtros, specs, la barra de anuncios.
+
+**Ninguna de las seis referencias usa monoespaciado. Ni una.** AKILA, AGOLDE, Acne,
+A.P.C. y a.v. vattev usan una grotesca neutra para absolutamente todo. El mono con
+tracking amplio como cromo universal es una de las firmas más reconocibles del diseño
+generado por IA.
+
+DM Mono se eliminó del proyecto.
+
+## 2. Una sola tipografía, no dos
+
+Las referencias usan **una familia**. Acne: una. A.P.C.: una. AGOLDE: una.
+
+Yo tenía tres (Archivo + Instrument Sans + DM Mono). Ahora es **solo Archivo**, en pesos
+400/500/600/700. Eso también simplifica el traspaso a Wix: una sola fuente para subir.
+
+## 3. El fondo verdoso
+
+Yo había defendido el `#E9EAE6` como "un neutro elegido, no heredado". En la práctica
+leía como paleta salvia de IA. Y las referencias son todas neutras:
+
+| | Fondo |
+|---|---|
+| AKILA | `#EFEFEF` gris neutro |
+| AGOLDE | blanco |
+| Acne | blanco |
+| A.P.C. | blanco |
+
+Ahora: fondo **blanco**, tiles de producto `#F1F1F0`, tinta `#111110`, filetes
+`#E3E3E1`. Todo neutro. **El verde de la marca sobrevive únicamente en el logotipo**,
+que es donde corresponde.
+
+## 4. Menos cromo
+
+- El puntito verde que latía: **afuera**. Animación decorativa pura, otro tic de IA.
+- Los badges de duración (`0:06 · loop`): **afuera**.
+- Los eyebrows en cada sección: **afuera**.
+- La flecha `→` en cada link: reemplazada por el `>` de Acne, que además solo aparece
+  en links de sección.
+- Las etiquetas de esquina pasaron de frase a **una palabra**: "Gold Coast", "Curing".
+- La barra de anuncios negra pasó a una línea gris fina.
+- El tracking de las mayúsculas bajó de `.18em` a `.08em`. Menos gritado.
+
+## 5. Copy más plano
+
+Las referencias no hacen chistes en los títulos: dicen "New Arrivals", "Best Sellers",
+"Visit Us". Sustantivos.
+
+- "Straight from the group chat / Filmed by us, on the coast" → **"Reels"**
+- "The ritual, in six clips / Three minutes" → **"How to mate"**
+- "Everything you need, nothing you don't." → **"Start with a kit."**
+
+Se mantienen dos momentos de voz, porque una marca joven sin ninguna voz también está
+mal: el titular del hero ("Share a mate with your mates") y el bloque de WhatsApp. El
+problema nunca fue tener voz — era la **densidad**: un chiste por sección.

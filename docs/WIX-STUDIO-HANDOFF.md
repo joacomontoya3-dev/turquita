@@ -30,19 +30,19 @@ variaciones cada uno. Cargá estos en los slots principales:
 
 | Slot | Hex | Para qué |
 |---|---|---|
-| Color 1 | `#E7E9E4` | Fondo de toda la página |
-| Color 2 | `#F2F3F0` | Superficie elevada (tarjetas, avisos) |
-| Color 3 | `#16190F` | Tinta / texto principal |
-| Color 4 | `#2E3A24` | Banda oscura y botones primarios |
+| Color 1 | `#FFFFFF` | Fondo de toda la página |
+| Color 2 | `#F1F1F0` | Tile de producto |
+| Color 3 | `#111110` | Tinta / texto principal |
+| Color 4 | `#111110` | Banda oscura y botones primarios |
 | Color 5 | `#556643` | Verde de marca (el del logo) |
 
 Y estos como colores adicionales:
 
 | Hex | Para qué |
 |---|---|
-| `#DCE0D8` | Panel de foto de producto |
-| `#C6CBC0` | Filetes de 1px |
-| `#5A6152` | Texto secundario |
+| `#E3E3E1` | Filetes de 1px |
+| `#6B6B68` | Texto secundario |
+
 | `#B7D14A` | Acento yerba |
 
 **La única regla importante:** `#B7D14A` es el único color saturado del sitio y
@@ -56,12 +56,12 @@ a aparecer en botones y títulos, el diseño se cae.
 
 | Rol | Fuente | Dónde conseguirla |
 |---|---|---|
-| Display | **Archivo** (variable, ejes wdth + wght) | fonts.google.com/specimen/Archivo → descargar → subir el `.woff2` |
-| Texto | **Instrument Sans** | Ya está en la lista nativa de Wix |
-| Datos | **DM Mono** | fonts.google.com/specimen/DM+Mono → subir 300 y 400 |
+| Todo el sitio | **Archivo** (variable) | fonts.google.com/specimen/Archivo → descargar → subir el `.woff2`. Es la única fuente del proyecto |
 
-Si Wix te rechaza el variable de Archivo, subí las estáticas en 600 y 700 y listo — el
-eje de ancho es un plus, no una necesidad.
+Si Wix te rechaza el variable, subí las estáticas en 400, 500, 600 y 700.
+
+**Es la única fuente del sitio.** Las referencias usan una sola familia y por eso se ven
+ordenadas; no agregues una segunda.
 
 ## 3. Temas de texto
 
