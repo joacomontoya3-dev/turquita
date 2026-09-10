@@ -4,14 +4,17 @@ Prototipo navegable del rediseño de [matecoast.com](https://www.matecoast.com),
 pensado como **especificación para reconstruirlo en Wix Studio** (plan Core), no como
 sitio a desplegar.
 
-**Ver online:** https://claude.ai/code/artifact/bdb0b5cb-0d4e-4221-b6a9-7ff7b91387a4
+**La tienda:** https://claude.ai/code/artifact/bdb0b5cb-0d4e-4221-b6a9-7ff7b91387a4
+**El estudio de movimiento:** https://claude.ai/code/artifact/ee12acdd-4715-4a8b-b2ca-db1283c5e846
 
 ## Qué hay acá
 
 | Archivo | Qué es |
 |---|---|
 | `index.html` | El prototipo completo, autocontenido (clips incluidos). Se abre con doble clic. **Generado — no lo edites a mano.** |
-| `src/index.template.html` | La fuente real. Acá se edita. |
+| `src/index.template.html` | La fuente real de la tienda. Acá se edita. |
+| `motion.html` | **Estudio de movimiento**: las cuatro coreografías de scroll para construir en Framer. Generado |
+| `src/motion.template.html` | Su fuente |
 | `assets/video/*.webm` | Clips de placeholder |
 | `assets/logo/*.svg` | El logotipo vectorial, en tres versiones |
 | `build.py` | Mete los clips dentro de `index.html`. Corrélo después de tocar el template o los videos. |

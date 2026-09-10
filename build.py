@@ -32,6 +32,12 @@ out = out.replace("__LOGO_PATHS__", inner)
 
 (root / "index.html").write_text(out, encoding="utf-8")
 
+# the motion study shares the same clips and logo
+motion = (root / "src/motion.template.html").read_text(encoding="utf-8")
+motion = motion.replace(token, json.dumps(clips)).replace("__LOGO_PATHS__", inner)
+(root / "motion.html").write_text(motion, encoding="utf-8")
+
 total = sum(v.stat().st_size for v in vids)
 print("clips inlined: %s" % ", ".join(sorted(clips)))
-print("video %.2f MB -> index.html %.2f MB" % (total/1e6, len(out.encode())/1e6))
+print("video %.2f MB -> index.html %.2f MB, motion.html %.2f MB"
+      % (total/1e6, len(out.encode())/1e6, len(motion.encode())/1e6))
