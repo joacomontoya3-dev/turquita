@@ -270,26 +270,31 @@ vos pediste colapsarlas en SHOP dos vueltas atrás, y con seis categorías el pa
 ordenado. Lo dejo como está — si querés probar la versión expuesta, es un cambio de
 quince minutos.
 
-## Y una más, probada después: la lista con comas (ref. 155)
+## La lista con comas (ref. 155): probada y descartada
 
-`Shop, How to mate, About` como una sola línea, con el activo subrayado. Es la más
-distintiva de las quince y la que mejor va con la dirección editorial.
+`Shop, How to mate, About` como una sola línea, con el activo subrayado. Se construyó,
+se miró y se volvió atrás. **Buena idea, no va con el estilo de Mate Coast.**
 
-Mi objeción inicial —que en celular los targets separados se tocan mejor que una línea
-corrida— **estaba mal**: en celular el nav no aparece, colapsa en el hamburguesa. La
-lista con comas solo existe arriba de 760 px, donde se usa con mouse.
+Vale registrar lo que se aprendió, porque es lo interesante del experimento:
 
-Lo que el cambio arrastró: para que una lista con comas lea como una frase, la tipografía
-tiene que ir en **caja normal**. La 155 dice "Work, Info, News, Aeon", no en mayúsculas —
-con mayúsculas y comas queda raro. Y si el nav va en caja normal, el lado derecho también,
-así que "SEARCH · BAG 00" pasó a "Search · Bag 00".
+**Una lista con comas obliga a la caja normal.** La 155 dice "Work, Info, News, Aeon", no
+en mayúsculas — con mayúsculas y comas parece un error de tipeo. Y si el nav va en caja
+normal, el lado derecho tiene que seguirlo, así que "SEARCH · BAG 00" pasaba a
+"Search · Bag 00".
 
-O sea: cambiar tres palabras de lugar terminó cambiando el registro tipográfico de todo
-el header. De mayúsculas espaciadas (que es cromo de interfaz) a caja normal (que es
-texto). El header quedó bastante más callado, y eso va en la dirección correcta.
+O sea que mover tres palabras de lugar terminaba cambiando **el registro tipográfico de
+todo el header**: de mayúsculas espaciadas, que es cromo de interfaz, a caja normal, que
+es texto corrido. Eso es lo que no encajó. Mate Coast es una tienda, y las mayúsculas
+chiquitas con espaciado leen como interfaz de tienda — que es lo que hace AKILA, AGOLDE
+y Acne, las referencias que sí definieron la dirección.
 
-Las comas son texto real entre los links, con `aria-hidden`, así que el lector de
-pantalla no las lee y el subrayado del activo no las abarca.
+También quedó claro que mi objeción original era equivocada: dije que en celular los
+targets separados se tocan mejor que una línea corrida, pero **en celular el nav no
+existe** — colapsa en el hamburguesa arriba de 760 px.
 
-**Para volver a la versión anterior** en mayúsculas: `git revert` del commit que introdujo
-esto, o mirá el commit `6d8204a`, que es el último con el header en mayúsculas.
+Lo único que sobrevivió de esa pasada: los links del header ahora tienen padding
+vertical, así que el área de click pasó de 22 a 28 px. Veintidós estaba por debajo del
+mínimo de 24 px que recomienda la WCAG.
+
+El estado actual del nav es el de siempre: `SHOP · HOW TO MATE · ABOUT` en mayúsculas
+espaciadas, con el ítem abierto o actual subrayado.
