@@ -15,10 +15,10 @@
   --band:#111110;        /* video ground and footer */
   --band-fg:#F5F5F4;
   --ink:#111110; --ink-2:#6B6B68; --line:#E3E3E1; --line-2:#C7C7C4;
-  --olive:#556643; --yerba:#B7D14A; --clay:#C08A4E;
+  --olive:#546742; --yerba:#B7D14A; --clay:#C08A4E;
   --veil-bar:rgba(255,255,255,.82);   /* sticky bar, content blurs under it */
   --veil-panel:rgba(255,255,255,.96); /* menu panel — a hint of the hero, text still safe */
-  --btn-bg:#111110; --btn-fg:#FFFFFF; --focus:#556643;
+  --btn-bg:#111110; --btn-fg:#FFFFFF; --focus:#546742;
 
   /* one grotesque for the whole site, as in every reference */
   --f-display:'Archivo','Helvetica Neue',Arial,sans-serif;
@@ -75,7 +75,7 @@ p{margin:0}
 .wordmark{font-family:var(--f-display);font-weight:800;text-transform:uppercase;letter-spacing:.06em;line-height:.9}
 /* the real logo drops into any wordmark slot as an <img> and takes its height */
 /* one vector for every slot — it inherits the CSS colour, so no per-theme file */
-.logo-svg{display:block;fill:currentColor;aspect-ratio:117/76}
+.logo-svg{display:block;fill:currentColor;aspect-ratio:__LOGO_RATIO__}
 .mark-svg{height:30px;width:auto;margin-inline:auto}
 
 /* words distributed edge to edge across an image */
@@ -195,7 +195,7 @@ nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
 .vhero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-in{position:relative;z-index:3;align-self:end;width:100%;color:var(--band-fg);
   padding-bottom:clamp(1.5rem,3.5vw,2.75rem)}
-.hero-mark{width:min(42vw,440px);height:auto;color:var(--band-fg);
+.hero-mark{width:min(33vw,350px);height:auto;color:var(--band-fg);
   margin:0 auto clamp(1.25rem,3vw,2.25rem)}
 .hero-foot{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:flex-end;
   justify-content:space-between;border-top:1px solid rgba(233,234,230,.28);padding-top:1.1rem}
@@ -429,7 +429,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
   letter-spacing:.08em;color:rgba(233,234,230,.5)}
 .f-bottom button:hover,body.notes .f-bottom button{color:var(--yerba)}
 /* the logo as the last thing you see, edge to edge */
-.f-mark{width:min(44vw,520px);height:auto;color:var(--band-fg);
+.f-mark{width:min(34vw,400px);height:auto;color:var(--band-fg);
   margin:clamp(1.5rem,3vw,2.5rem) auto clamp(.5rem,1.5vw,1rem)}
 
 /* ============================================================ system view */
@@ -482,7 +482,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
      Product illustrations — every one is a photography or video slot.
      ============================================================ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-  <symbol id="i-logo" viewBox="0 0 117 76">__LOGO_PATHS__</symbol>
+  <symbol id="i-logo" viewBox="__LOGO_VIEWBOX__">__LOGO_PATHS__</symbol>
   <symbol id="i-gourd" viewBox="0 0 200 240">
     <rect class="s1" x="124" y="14" width="9" height="74" rx="4.5" transform="rotate(14 128 51)"/>
     <rect class="s1" x="117" y="4" width="24" height="10" rx="5" transform="rotate(14 129 9)"/>
@@ -931,7 +931,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <div class="tok"><div class="chipc" style="background:#16190F"></div><b>Ink</b><code>#16190F</code></div>
       <div class="tok"><div class="chipc" style="background:#5A6152"></div><b>Ink muted</b><code>#5A6152</code></div>
       <div class="tok"><div class="chipc" style="background:#141810"></div><b>Video ground</b><code>#141810</code></div>
-      <div class="tok"><div class="chipc" style="background:#556643"></div><b>Brand olive</b><code>#556643</code></div>
+      <div class="tok"><div class="chipc" style="background:#546742"></div><b>Brand olive</b><code>#546742</code></div>
       <div class="tok"><div class="chipc" style="background:#B7D14A"></div><b>Yerba accent</b><code>#B7D14A</code></div>
       <div class="tok"><div class="chipc" style="background:#C08A4E"></div><b>Calabaza</b><code>#C08A4E</code></div>
     </div>

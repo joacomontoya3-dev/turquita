@@ -34,7 +34,7 @@ variaciones cada uno. Cargá estos en los slots principales:
 | Color 2 | `#F1F1F0` | Tile de producto |
 | Color 3 | `#111110` | Tinta / texto principal |
 | Color 4 | `#111110` | Banda oscura y botones primarios |
-| Color 5 | `#556643` | Verde de marca (el del logo) |
+| Color 5 | `#546742` | Verde de marca (el del logo) |
 
 Y estos como colores adicionales:
 

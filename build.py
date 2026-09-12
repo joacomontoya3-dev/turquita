@@ -6,7 +6,7 @@ Run after changing src/index.template.html or assets/video/*.webm:
 
     python3 build.py
 """
-import base64, json, pathlib, sys
+import base64, json, pathlib, re, sys
 
 root = pathlib.Path(__file__).parent
 tpl  = (root / "src/index.template.html").read_text(encoding="utf-8")
@@ -26,15 +26,25 @@ out = tpl.replace(token, json.dumps(clips))
 
 logo = (root / "assets/logo/matecoast.svg").read_text(encoding="utf-8")
 inner = logo[logo.index(">", logo.index("<svg")) + 1 : logo.rindex("</svg>")].strip()
+vb = re.search(r'viewBox="([^"]+)"', logo).group(1)
+w, h = vb.split()[2:4]
 if "__LOGO_PATHS__" not in out:
     sys.exit("template is missing the __LOGO_PATHS__ token")
-out = out.replace("__LOGO_PATHS__", inner)
+
+
+def place_logo(doc):
+    return (doc.replace("__LOGO_PATHS__", inner)
+               .replace("__LOGO_VIEWBOX__", vb)
+               .replace("__LOGO_RATIO__", "%s/%s" % (w, h)))
+
+
+out = place_logo(out)
 
 (root / "index.html").write_text(out, encoding="utf-8")
 
 # the motion study shares the same clips and logo
 motion = (root / "src/motion.template.html").read_text(encoding="utf-8")
-motion = motion.replace(token, json.dumps(clips)).replace("__LOGO_PATHS__", inner)
+motion = place_logo(motion.replace(token, json.dumps(clips)))
 (root / "motion.html").write_text(motion, encoding="utf-8")
 
 total = sum(v.stat().st_size for v in vids)
