@@ -41,9 +41,21 @@ El panel de **Shop** tiene tres columnas:
 La segunda columna es la que trabaja: el que entra por el menú sin saber qué comprar se
 lleva el kit puesto. Y los dos locales aparecen hasta en el menú, que es el cuarto lugar.
 
-**Comportamiento:** el hover (o el foco con teclado) abre el panel; el click navega al
-listado completo. En celular no hay hover, así que el primer toque va directo a `/shop`,
-que ya tiene los filtros — no hace falta un acordeón aparte.
+**Comportamiento en escritorio:** el hover (o el foco con teclado) abre el panel; el click
+navega al listado completo.
+
+**En celular la barra cambia de forma.** Tres columnas con el logo centrado no caben en
+390 px: el nav se corta y se mete abajo del logo. Debajo de 760 px va
+**"Menu" a la izquierda · logo centrado · Search y Bag a la derecha**, y el panel pasa a
+ser el menú completo: las seis categorías, How to mate, About, el Starter Kit y los dos
+locales. El hover se desactiva por `@media (hover: hover)` — en una pantalla táctil el
+`mouseenter` se dispara con el toque y pelea con el link.
+
+**Búsqueda.** Sobre 16 productos no hace falta un motor, pero sí que ordene bien: la
+coincidencia en el nombre va antes que la coincidencia en la categoría, y esa antes que
+la mención en las especificaciones. Sin eso, buscar "termo" devuelve primero el kit que
+lo incluye en vez del termo. Wix Stores trae buscador nativo; verificá que priorice el
+nombre.
 
 Seis categorías: **mates (5) · bombillas (3) · termos (1) · yerba (3) ·
 yerberas y canastos (2) · kits (2)**. Dieciséis productos.
@@ -58,7 +70,7 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 |---|---|---|
 | 1 | **Hero** | Que en tres segundos se entienda qué se vende y dónde estás parado. El logo en grande sobre metraje propio, una línea de bajada y dos acciones: comprar el kit / aprender |
 | 2 | **Confianza** | Las cuatro razones para creerle a la tienda: retiro en local, mercado los domingos, Apple/Google Pay, envíos a toda Australia |
-| 3 | **Reels** | Contenido vertical propio, **cada clip enlazado a un producto**. Es la sección más distintiva y la que ya tiene material filmado |
+| 3 | **Reels** | Contenido vertical propio, **cada clip enlazado a un producto**. Es la sección más distintiva y la que ya tiene material filmado. En celular se desliza de costado, no en grilla: una grilla de 2 columnas de 9:16 queda despareja y esconde la mitad |
 | 4 | **Más vendidos** | Ocho productos. Entrada rápida al catálogo sin pasar por la grilla |
 | 5 | **El kit** | El bloque de conversión más importante. Qué trae, cuánto ahorrás, por qué esas tres piezas van juntas |
 | 6 | **How to mate** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
