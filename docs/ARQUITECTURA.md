@@ -14,9 +14,36 @@ discusión.
 /shop/:categoria      mates · bombillas · termos · yerba · accesorios · kits
 /producto/:id         Ficha
 /how-to-mate          Guía de cebado + etiqueta + curado
-/visit                Locales (o como bloque en la home)
+/about                Quiénes somos + dónde encontrarnos
 carrito               Panel lateral, no página
 ```
+
+## La navegación son tres ítems
+
+```
+SHOP          → abre un panel; el click va al listado completo
+HOW TO MATE   → la guía
+ABOUT         → quiénes somos
+```
+
+Y nada más. AKILA tiene tres ítems, AGOLDE dos, Acne cuatro — todos con panel
+desplegable. Exponer las seis categorías en la barra es de tienda chica y no escala:
+cuando sumen productos, la barra se llena.
+
+El panel de **Shop** tiene tres columnas:
+
+| Columna | Contenido |
+|---|---|
+| Shop | Las seis categorías **con el contador de productos** al lado, más "All products" |
+| New to mate | El Starter Kit con su precio, y el link a la guía |
+| Visit | Los dos puntos físicos |
+
+La segunda columna es la que trabaja: el que entra por el menú sin saber qué comprar se
+lleva el kit puesto. Y los dos locales aparecen hasta en el menú, que es el cuarto lugar.
+
+**Comportamiento:** el hover (o el foco con teclado) abre el panel; el click navega al
+listado completo. En celular no hay hover, así que el primer toque va directo a `/shop`,
+que ya tiene los filtros — no hace falta un acordeón aparte.
 
 Seis categorías: **mates (5) · bombillas (3) · termos (1) · yerba (3) ·
 yerberas y canastos (2) · kits (2)**. Dieciséis productos.
@@ -36,10 +63,30 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 | 5 | **El kit** | El bloque de conversión más importante. Qué trae, cuánto ahorrás, por qué esas tres piezas van juntas |
 | 6 | **How to mate** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
 | 7 | **Comunidad** | El grupo de WhatsApp. Prueba social que la competencia no tiene |
-| 8 | **Visit us** | Los dos puntos físicos, con dirección y horario |
+| 8 | **Visit us** | Los dos puntos físicos, con dirección y horario. Es el resumen; la versión completa vive en `/about` |
 
 **El orden importa**: vender (1–5) antes de educar (6), y educar antes de pedir
 pertenencia (7). Un primerizo entra por 1, duda en 2, se engancha en 3 y compra en 5.
+
+---
+
+## About
+
+Es la página donde el diferencial se vuelve creíble. Dos locales físicos, gente real y
+un grupo de WhatsApp es exactamente lo que un dropshipper no puede mostrar — pero solo
+sirve si está escrito.
+
+| Bloque | Qué tiene que lograr |
+|---|---|
+| **Apertura** | Video del puesto o del local, con una línea. La que uso: *"We stock it because we drink it."* |
+| **How it started** | El origen. Quién, cuándo y por qué. Es el bloque que más pesa y el único que no puedo escribir yo |
+| **De dónde viene** | Si traen de Argentina, de qué provincias, si trabajan con artesanos, cómo eligen la yerba. Esto justifica el precio |
+| **Productos** | Cuatro productos, para que la página venda y no solo cuente |
+| **La comunidad** | El grupo de WhatsApp |
+| **Find us** | Los dos locales con dirección y horario, más el envío |
+
+También es un activo de SEO: "mate Gold Coast", "yerba mate Broadbeach" y "donde comprar
+mate en Australia" se responden desde acá, no desde una ficha de producto.
 
 ---
 

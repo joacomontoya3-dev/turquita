@@ -134,6 +134,18 @@ nav.main a[aria-current]{color:var(--ink)}
 .mark{font-family:var(--f-display);font-weight:800;font-size:.875rem;line-height:.85;color:var(--olive);text-transform:uppercase;
   letter-spacing:.02em;text-align:center}
 .bar-end{display:flex;gap:1.2rem;align-items:center;justify-content:flex-end}
+nav.main button{font-size:var(--t-micro);font-weight:500;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--ink-2);white-space:nowrap;padding:0}
+nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
+/* the shop panel: a full-width drop, as at AKILA */
+.menu{position:absolute;left:0;right:0;top:100%;background:var(--ground);
+  border-bottom:1px solid var(--line);z-index:39}
+.menu-in{display:grid;gap:1.5rem 3rem;padding-block:clamp(1.5rem,3vw,2.5rem)}
+@media(min-width:760px){.menu-in{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.menu-col{display:grid;gap:.45rem;align-content:start}
+.menu-col a{font-size:.9375rem;width:fit-content}
+.menu-col a:hover{color:var(--ink-2)}
+.menu-col a span{color:var(--line-2);margin-left:.4rem}
 .bar-end .cart-btn{color:var(--ink)}
 
 /* ============================================================ hero */
@@ -392,6 +404,8 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
 .tag-n{font-family:var(--f-body);font-size:var(--t-micro);white-space:nowrap;color:var(--ink-2)}
 .tag-n.warn{color:var(--olive)}
 .scroll-x{overflow-x:auto}
+/* anything only the owner can answer — visibly unfinished on purpose */
+.tofill{color:var(--olive);border-bottom:1px dashed var(--line-2)}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
@@ -488,9 +502,9 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
 <header class="site">
   <div class="bar">
     <nav class="main" id="nav" aria-label="Main">
-      <a href="#/shop">Shop</a><a href="#/shop/mates">Mates</a>
-      <a href="#/shop/bombillas">Bombillas</a><a href="#/shop/yerba">Yerba</a>
+      <a href="#/shop" id="shopLink" aria-expanded="false" aria-controls="shopMenu">Shop</a>
       <a href="#/ritual">How to mate</a>
+      <a href="#/about">About</a>
     </nav>
     <!-- The real vector, injected from assets/logo/matecoast.svg by build.py.
          It inherits the CSS colour, so one file serves both themes. -->
@@ -499,6 +513,21 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <button type="button">Search</button>
       <button type="button" class="cart-btn" id="cartOpen" aria-haspopup="dialog">
         Bag&nbsp;<span id="cartN">00</span></button>
+    </div>
+  </div>
+  <div class="menu" id="shopMenu" hidden>
+    <div class="wrap menu-in">
+      <div class="menu-col" id="menuCats"></div>
+      <div class="menu-col">
+        <span class="lbl">New to mate</span>
+        <a href="#/product/starter-kit">The Starter Kit — $69.00</a>
+        <a href="#/ritual">How to mate, in six clips</a>
+      </div>
+      <div class="menu-col">
+        <span class="lbl">Visit</span>
+        <a href="#/about">Broadbeach store</a>
+        <a href="#/about">Surfers Paradise Markets, Sundays</a>
+      </div>
     </div>
   </div>
 </header>
@@ -749,6 +778,73 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
   </div>
 </section>
 
+
+<!-- ============================================================ ABOUT -->
+<section class="view" id="v-about" hidden>
+  <div class="vhero on-vid" style="height:min(56vh,520px);min-height:340px">
+    <video data-clip="band" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <div class="veil"></div>
+    <span class="otag">About</span>
+    <p class="shot"><b>About opener</b> — the two of them at the market stall, or the
+      Broadbeach shopfront with the roller door up. 8 s.</p>
+    <div class="hero-in"><div class="wrap">
+      <h1 class="h1" style="color:var(--band-fg);max-width:22ch">We stock it because we
+        drink it.</h1>
+    </div></div>
+  </div>
+
+  <div class="wrap sec">
+    <div class="editorial">
+      <span class="lbl">How it started</span>
+      <div>
+        <p style="font-size:clamp(1.0625rem,1.6vw,1.3125rem);line-height:1.45;max-width:46ch">
+          Mate Coast started on the Gold Coast in <span class="tofill">[año]</span>, when
+          <span class="tofill">[quién, y qué los llevó a empezar]</span>.</p>
+        <p class="prose" style="margin-top:1.1rem">Today we're a shop in Broadbeach and a
+          stall at the Surfers Paradise Beachfront Markets on Sundays, and we ship
+          Australia-wide. Everything we sell is in stock here — nothing is drop-shipped from
+          somewhere else and nothing takes six weeks to arrive.</p>
+        <p class="prose" style="margin-top:.85rem">
+          <span class="tofill">[Un párrafo sobre de dónde vienen los productos: si los traen
+          de Argentina, de qué provincias, si trabajan con artesanos, cómo eligen la yerba.]</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip strip-4" id="aboutGrid"></div>
+
+  <div class="wrap sec">
+    <div class="editorial">
+      <span class="lbl">The community</span>
+      <div>
+        <p style="font-size:clamp(1.0625rem,1.6vw,1.3125rem);line-height:1.45;max-width:46ch">
+          There's a WhatsApp group, and you're invited.</p>
+        <p class="prose" style="margin-top:1.1rem">Argentines, Uruguayans, Brazilians and a
+          growing number of Australians who got curious. Rondas on the beach, yerba group
+          buys, and people who will happily tell you your bombilla is on backwards.</p>
+        <p style="margin-top:1.1rem"><a class="arw" href="#/">Join the group</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="visit">
+      <span class="lbl">Find us</span>
+      <div class="visit-cols">
+        <div><span class="lbl">Broadbeach — store</span><b>Mate Coast</b>
+          <p class="tofill">[dirección exacta]</p><p>Broadbeach QLD 4218</p>
+          <p class="tofill">[horarios]</p></div>
+        <div><span class="lbl">Surfers Paradise — markets</span><b>Beachfront Markets</b>
+          <p>The Esplanade</p><p>Surfers Paradise QLD 4217</p>
+          <p class="tofill">[días y horarios]</p></div>
+        <div><span class="lbl">Anywhere else</span><b>Ships Australia-wide</b>
+          <p>Free over $99, flat $9.95 under</p><p>Click &amp; Collect ready in 2 hours</p>
+          <p style="margin-top:.35rem"><a class="arw" href="#/shop">Shop</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================================================ DESIGN SYSTEM -->
 <section class="view" id="v-system" hidden>
   <div class="wrap sec">
@@ -866,7 +962,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
         <a href="#/shop/termos">Termos</a><a href="#/shop/yerba">Yerba</a>
         <a href="#/shop/accesorios">Yerberas &amp; canastos</a><a href="#/shop/kits">Kits</a></div>
       <div class="f-col"><span class="lbl">Help</span>
-        <a href="#/ritual">How to mate</a><a href="#/ritual">Curing a new gourd</a>
+        <a href="#/about">About us</a><a href="#/ritual">How to mate</a><a href="#/ritual">Curing a new gourd</a>
         <a href="#/">Shipping &amp; returns</a><a href="#/">Contact</a>
         <a href="#/">Join the WhatsApp group</a></div>
       <div class="f-col"><span class="lbl">Visit</span>
@@ -1079,6 +1175,25 @@ function mountVideos(root){
   });
 }
 
+/* ── shop panel ─────────────────────────────────────────── */
+(function(){
+  var link=$('#shopLink'), menu=$('#shopMenu'), header=link.closest('header');
+  var t=null;
+  function open(){ clearTimeout(t); menu.hidden=false; link.setAttribute('aria-expanded','true'); }
+  function close(){ clearTimeout(t); menu.hidden=true; link.setAttribute('aria-expanded','false'); }
+  function later(){ t=setTimeout(close,200); }        /* grace period on the way down */
+  link.addEventListener('mouseenter',open);
+  link.addEventListener('focus',open);
+  menu.addEventListener('mouseenter',function(){ clearTimeout(t); });
+  menu.addEventListener('focusin',function(){ clearTimeout(t); });
+  header.addEventListener('mouseleave',later);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&!menu.hidden){ close(); link.focus(); }
+  });
+  /* a tap navigates to the full listing; the hash change closes the panel */
+  window.addEventListener('hashchange',close);
+})();
+
 /* shot notes double as the production brief — off gives the clean client view */
 var shotOn=false;
 $('#shotToggle').addEventListener('click',function(){
@@ -1159,6 +1274,15 @@ $('#reelStrip').innerHTML=REELS.map(function(r){
     '<div class="reel-txt"><b>'+r.t+'</b><span>'+p.n+' · '+money(p.price)+'</span></div></a>';
 }).join('');
 
+$('#menuCats').innerHTML='<span class="lbl">Shop</span><a href="#/shop">All products<span>'+
+  P.length+'</span></a>'+CATS.map(function(c){
+    var n=P.filter(function(p){return p.cat===c.id;}).length;
+    return '<a href="#/shop/'+c.id+'">'+c.name+'<span>'+n+'</span></a>';
+  }).join('');
+
+$('#aboutGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','canasto']
+  .map(function(id){ return card(byId(id)); }).join('');
+
 $('#bestGrid').innerHTML=['starter-kit','mate-san-juan','termo-1l','verde-flor',
   'mate-entre-rios','canasto','bombilla-alpaca','steel-mate-cup']
   .map(function(id){ return card(byId(id)); }).join('');
@@ -1227,7 +1351,7 @@ $('#apay').addEventListener('click',function(){ addToCart(current,qty,variant); 
 $('#gpay').addEventListener('click',function(){ addToCart(current,qty,variant); });
 
 /* ============================================================ router */
-var VIEWS=['home','shop','product','ritual','system'];
+var VIEWS=['home','shop','product','ritual','about','system'];
 function show(v){ VIEWS.forEach(function(x){ $('#v-'+x).hidden=(x!==v); }); }
 function renderPLP(cat){
   var list=cat?P.filter(function(p){return p.cat===cat;}):P;
@@ -1245,6 +1369,7 @@ function route(){
   if(seg[0]==='shop'){ renderPLP(seg[1]||null); show('shop'); }
   else if(seg[0]==='product'){ current=seg[1]||'starter-kit'; renderPDP(current); show('product'); }
   else if(seg[0]==='ritual'){ show('ritual'); }
+  else if(seg[0]==='about'){ mountVideos(document.getElementById('v-about')); show('about'); }
   else if(seg[0]==='system'){ show('system'); }
   else { show('home'); }
   Array.prototype.forEach.call($('#nav').children,function(a){

@@ -125,3 +125,28 @@ Brazilians and a growing number of Australians who got curious. Rondas on the be
 yerba group buys, and people who will happily tell you your bombilla is on backwards.
 
 El resto está en el prototipo. Todo el copy es original y está listo para usar.
+
+
+---
+
+## Lo que hay que preguntarle a tu amigo para la página About
+
+En el prototipo estos huecos están marcados en verde con subrayado punteado, así que se
+ven a simple vista. No los llené porque inventar un origen de marca es lo peor que se
+puede hacer en la página que existe justamente para generar confianza.
+
+1. **¿En qué año arrancó Mate Coast?** Yo puse 2019 como relleno en varios lugares.
+2. **¿Quién está detrás?** Nombres, o al menos "dos hermanos", "una pareja", "yo y un
+   amigo". Las referencias que elegiste no muestran caras, pero sí dicen quién son.
+3. **¿Por qué arrancaron?** La respuesta honesta, aunque suene chica: no encontraba yerba
+   decente acá, traía mates para amigos y se hizo negocio, lo que sea. **Esto es el
+   bloque más importante de la página** y es el único que no puedo escribir yo.
+4. **¿De dónde traen los productos?** Si es de Argentina, de qué provincias. Si trabajan
+   con artesanos o compran a mayoristas. Cómo eligen la yerba. Esto es lo que justifica
+   cobrar $55 por un mate.
+5. **¿Cuánta gente hay en el grupo de WhatsApp?** Si son más de 100, el número va escrito.
+   Es prueba de comunidad, no de volumen — vale más que cualquier estadística inventada.
+6. **Dirección exacta y horarios** del local de Broadbeach, y los días y horarios reales
+   del puesto en Surfers.
+
+Con las respuestas a 1, 3 y 4 la página queda escrita. Las otras son datos sueltos.
