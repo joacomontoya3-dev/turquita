@@ -270,8 +270,26 @@ vos pediste colapsarlas en SHOP dos vueltas atrás, y con seis categorías el pa
 ordenado. Lo dejo como está — si querés probar la versión expuesta, es un cambio de
 quince minutos.
 
-**La lista separada por comas de la 155** (`Work, Info, News, Aeon`). Es la más
-distintiva de todas y va con nuestra dirección editorial. No la tomé porque en una tienda
-los targets separados se tocan mejor que una línea de texto corrida, sobre todo en
-celular. Pero si te copa, la pruebo: sería `Shop, How to mate, About` como una sola línea
-con el activo subrayado.
+## Y una más, probada después: la lista con comas (ref. 155)
+
+`Shop, How to mate, About` como una sola línea, con el activo subrayado. Es la más
+distintiva de las quince y la que mejor va con la dirección editorial.
+
+Mi objeción inicial —que en celular los targets separados se tocan mejor que una línea
+corrida— **estaba mal**: en celular el nav no aparece, colapsa en el hamburguesa. La
+lista con comas solo existe arriba de 760 px, donde se usa con mouse.
+
+Lo que el cambio arrastró: para que una lista con comas lea como una frase, la tipografía
+tiene que ir en **caja normal**. La 155 dice "Work, Info, News, Aeon", no en mayúsculas —
+con mayúsculas y comas queda raro. Y si el nav va en caja normal, el lado derecho también,
+así que "SEARCH · BAG 00" pasó a "Search · Bag 00".
+
+O sea: cambiar tres palabras de lugar terminó cambiando el registro tipográfico de todo
+el header. De mayúsculas espaciadas (que es cromo de interfaz) a caja normal (que es
+texto). El header quedó bastante más callado, y eso va en la dirección correcta.
+
+Las comas son texto real entre los links, con `aria-hidden`, así que el lector de
+pantalla no las lee y el subrayado del activo no las abarca.
+
+**Para volver a la versión anterior** en mayúsculas: `git revert` del commit que introdujo
+esto, o mirá el commit `6d8204a`, que es el último con el header en mayúsculas.
