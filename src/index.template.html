@@ -16,6 +16,8 @@
   --band-fg:#F5F5F4;
   --ink:#111110; --ink-2:#6B6B68; --line:#E3E3E1; --line-2:#C7C7C4;
   --olive:#556643; --yerba:#B7D14A; --clay:#C08A4E;
+  --veil-bar:rgba(255,255,255,.82);   /* sticky bar, content blurs under it */
+  --veil-panel:rgba(255,255,255,.96); /* menu panel — a hint of the hero, text still safe */
   --btn-bg:#111110; --btn-fg:#FFFFFF; --focus:#556643;
 
   /* one grotesque for the whole site, as in every reference */
@@ -35,12 +37,14 @@
   :root:not([data-theme="light"]){
     --ground:#101010; --tile:#1A1A19; --paper:#1A1A19; --band:#000000;
     --ink:#F0F0EE; --ink-2:#9A9A96; --line:#292928; --line-2:#3A3A38;
+    --veil-bar:rgba(16,16,16,.78); --veil-panel:rgba(16,16,16,.94);
     --olive:#8CA06E; --btn-bg:#F0F0EE; --btn-fg:#101010; --focus:#8CA06E;
   }
 }
 :root[data-theme="dark"]{
   --ground:#101010; --tile:#1A1A19; --paper:#1A1A19; --band:#000000;
   --ink:#F0F0EE; --ink-2:#9A9A96; --line:#292928; --line-2:#3A3A38;
+  --veil-bar:rgba(16,16,16,.78); --veil-panel:rgba(16,16,16,.94);
   --olive:#8CA06E; --btn-bg:#F0F0EE; --btn-fg:#101010; --focus:#8CA06E;
 }
 
@@ -122,7 +126,8 @@ body.notes .shot{display:block}
 /* ============================================================ header */
 .ann{text-align:center;padding:.6rem var(--gut);border-bottom:1px solid var(--line);
   font-size:var(--t-micro);color:var(--ink-2)}
-header.site{position:sticky;top:0;z-index:40;background:var(--ground);
+header.site{position:sticky;top:0;z-index:40;background:var(--veil-bar);
+  -webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
   border-bottom:1px solid var(--line)}
 .bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;
   padding-block:.85rem;max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
@@ -137,7 +142,8 @@ nav.main{display:flex;gap:1.3rem}
 nav.main a,.bar-end button,.bar-end a{font-family:var(--f-body);font-size:var(--t-micro);
   text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2);white-space:nowrap}
 nav.main a:hover,.bar-end button:hover{color:var(--ink)}
-nav.main a[aria-current]{color:var(--ink)}
+nav.main a[aria-current],nav.main a[aria-expanded="true"]{color:var(--ink);
+  box-shadow:0 1px 0 var(--ink)}
 .mark{font-family:var(--f-display);font-weight:800;font-size:.875rem;line-height:.85;color:var(--olive);text-transform:uppercase;
   letter-spacing:.02em;text-align:center}
 .bar-end{display:flex;gap:1.2rem;align-items:center;justify-content:flex-end}
@@ -145,7 +151,8 @@ nav.main button{font-size:var(--t-micro);font-weight:500;text-transform:uppercas
   letter-spacing:.08em;color:var(--ink-2);white-space:nowrap;padding:0}
 nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
 /* the shop panel: a full-width drop, as at AKILA */
-.menu{position:absolute;left:0;right:0;top:100%;background:var(--ground);
+.menu{position:absolute;left:0;right:0;top:100%;background:var(--veil-panel);
+  -webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4);
   border-bottom:1px solid var(--line);z-index:39}
 .menu-in{display:grid;gap:1.5rem 3rem;padding-block:clamp(1.5rem,3vw,2.5rem)}
 @media(min-width:760px){.menu-in{grid-template-columns:repeat(3,minmax(0,1fr))}}

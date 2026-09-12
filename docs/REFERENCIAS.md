@@ -225,3 +225,53 @@ Las referencias no hacen chistes en los títulos: dicen "New Arrivals", "Best Se
 Se mantienen dos momentos de voz, porque una marca joven sin ninguna voz también está
 mal: el titular del hero ("Share a mate with your mates") y el bloque de WhatsApp. El
 problema nunca fue tener voz — era la **densidad**: un chiste por sección.
+
+
+---
+
+# Tanda de navs: 15 referencias
+
+Apple, Nike, Dollar Shave Club, Klarna, AKILA, Givingli, Serus, Granola, Illoca, Aside
+y cinco más. Otra vez el set está mezclado en registro, así que lo separo.
+
+## Lo que apliqué
+
+**Barra translúcida con desenfoque (Apple).** El header sticky pasó de fondo opaco a
+`rgba(255,255,255,.82)` con `backdrop-filter: blur(16px) saturate(1.6)`. El contenido se
+desenfoca al pasar por debajo. Es un upgrade real y **no rompe nada del sistema**: no
+suma radio, ni sombra, ni color. Sobre el video del hero la barra se tiñe con el metraje.
+
+**El panel deja ver el hero detrás (AKILA).** Mismo recurso en el desplegable de Shop,
+con el velo más alto (`.96`) porque abajo hay video oscuro: si bajaba la opacidad, el
+texto negro se volvía ilegible. Esa es la diferencia con AKILA, que lo hace sobre una
+foto clara.
+
+**Subrayado en el ítem activo (AKILA, y las referencias 150 y 155).** El ítem abierto o
+la página actual llevan una línea de 1px debajo. Antes solo cambiaba de color, que es
+demasiado sutil.
+
+## Lo que no apliqué, y por qué
+
+**Las barras flotantes con sombra** (Illoca, Granola, Aside, la 154). Son lo más lindo
+del set: una tarjeta con borde, separada del borde de la pantalla. Pero introducen radio
+grande y sombra, que es exactamente lo que saqué cuando dijiste que se notaba la IA. Es
+un lenguaje de SaaS, no de tienda editorial.
+
+**Los botones píldora** (Klarna, Serus, Givingli, Granola). Mismo motivo.
+
+**El toggle segmentado** Personal/Business de Givingli. No tenemos dos audiencias que
+necesiten cambiar de modo.
+
+**El SALE en rojo de Nike.** Justamente el mecanismo que sacamos en la auditoría.
+
+**Volver a exponer las seis categorías en la barra** (Apple, Nike, Dollar Shave Club).
+Esas tres lo hacen y para descubrimiento es mejor: ves qué se vende sin tocar nada. Pero
+vos pediste colapsarlas en SHOP dos vueltas atrás, y con seis categorías el panel es más
+ordenado. Lo dejo como está — si querés probar la versión expuesta, es un cambio de
+quince minutos.
+
+**La lista separada por comas de la 155** (`Work, Info, News, Aeon`). Es la más
+distintiva de todas y va con nuestra dirección editorial. No la tomé porque en una tienda
+los targets separados se tocan mejor que una línea de texto corrida, sobre todo en
+celular. Pero si te copa, la pruebo: sería `Shop, How to mate, About` como una sola línea
+con el activo subrayado.
