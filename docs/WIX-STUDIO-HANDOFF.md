@@ -153,9 +153,10 @@ encima, se oscurece el clip entero y se pierde el metraje.
 tipografía; sólo cambia la variante de color. En Wix: hacé uno, duplicalo y cambiale
 el fill — no los armes por separado o van a divergir en el primer retoque.
 
-> **Ojo con el radio.** El resto del sitio es radio 0 (ver §4). El hero pide
-> pastilla. Hoy conviven, y hay que resolverlo: o los botones son pastilla en todo
-> el sitio, o el hero va cuadrado. Mezclado no.
+**El botón del hero es EL botón del sitio.** No hay una variante de hero: hay un
+componente con variantes de color. Pastilla, padding 30 / 15, Inter Medium 15,
+caja de oración (no mayúsculas). Lo mismo vale para el "Add to cart", los de pago
+express y el de Checkout del carrito.
 
 ## 4. Custom CSS
 
@@ -167,8 +168,10 @@ el fill — no los armes por separado o van a divergir en el primer retoque.
   --ink:#111110; --ink-2:#6B6B68; --line:#E3E3E1;
   --olive:#546742;
 }
-/* Cero esquinas redondeadas y cero sombras: el look es de filete, no de tarjeta */
-[data-testid="container"], .product-card, button, img{ border-radius:0 !important; box-shadow:none !important; }
+/* Los botones y los controles con caja son pastilla; las superficies son rectas.
+   La distinción importa: lo que se toca se redondea, lo que contiene no. */
+button, [role="button"], input[type="submit"]{ border-radius:999px !important; }
+[data-testid="container"], .product-card, img{ border-radius:0 !important; box-shadow:none !important; }
 
 /* Grilla de producto: filete en vez de sombra */
 .product-item{ border:0; }
@@ -182,8 +185,16 @@ header .header-grid{ display:grid; grid-template-columns:1fr auto 1fr; align-ite
 ```
 
 Los selectores exactos cambian según los elementos que uses, así que inspeccioná con
-el navegador antes de escribirlos. La idea es la que importa: **radio 0, cero sombras,
-filetes de 1px, números tabulares, logo centrado por grilla.**
+el navegador antes de escribirlos. La idea es la que importa: **botones pastilla,
+superficies rectas, cero sombras, filetes de 1px, números tabulares, logo centrado
+por grilla.**
+
+**Por qué la mezcla no es incoherencia.** Las referencias que elegiste (AKILA, AGOLDE,
+Acne, A.P.C.) son de radio 0 en todo, botones incluidos. Acá el botón se separa a
+propósito: la marca es costera y clara, no de cuero oscuro, y la pastilla es lo que
+más rápido lo dice. La regla para no perderse: **se redondea lo que se toca**
+—botones, el stepper de cantidad, las muestras de color, la barra de envío— y **queda
+recto lo que contiene** —tiles de producto, fotos, video, tablas, filetes.
 
 ---
 
