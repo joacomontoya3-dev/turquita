@@ -11,7 +11,7 @@ discusión.
 ```
 /                     Home
 /shop                 Grilla completa
-/shop/:categoria      mates · bombillas · termos · yerba · accesorios · kits
+/shop/:categoria      mates · bombillas · termos · yerba · accesorios
 /producto/:id         Ficha
 /ritual               "What is Mate?" — cebado, etiqueta y curado
 /about                Quiénes somos + dónde encontrarnos
@@ -35,11 +35,12 @@ El panel de **Shop** tiene tres columnas:
 | Columna | Contenido |
 |---|---|
 | Shop | Las seis categorías **con el contador de productos** al lado, más "All products" |
-| New to mate | El Starter Kit con su precio, y el link a "What is Mate?" |
+| New to mate | "Arma tu mate" al shop, y el link a "What is Mate?" |
 | Visit | Los dos puntos físicos |
 
 La segunda columna es la que trabaja: el que entra por el menú sin saber qué comprar se
-lleva el kit puesto. Y los dos locales aparecen hasta en el menú, que es el cuarto lugar.
+entra por el menú sin saber qué comprar se lleva el recorrido puesto. Y los dos locales
+aparecen hasta en el menú, que es el cuarto lugar.
 
 **Comportamiento en escritorio:** el hover (o el foco con teclado) abre el panel; el click
 navega al listado completo.
@@ -54,19 +55,19 @@ corre unos píxeles cada vez que cambia un texto — y se nota.
 390 px: el nav se corta y se mete abajo del logo. Debajo de 760 px va
 **"Menu" a la izquierda · logo centrado · Search y Cart a la derecha, solo los íconos**,
 y el panel pasa a ser el menú completo: las seis categorías, What is Mate?, About, el
-Starter Kit y los dos locales. Las palabras "Search" y "Cart" se esconden visualmente
+"Arma tu mate" y los dos locales. Las palabras "Search" y "Cart" se esconden visualmente
 pero siguen en el HTML: con el texto puesto, el bloque derecho mide 155 px, desborda su
 columna y corre el logo 28 px del centro. El hover se desactiva por `@media (hover: hover)` — en una pantalla táctil el
 `mouseenter` se dispara con el toque y pelea con el link.
 
 **Búsqueda.** Sobre 16 productos no hace falta un motor, pero sí que ordene bien: la
 coincidencia en el nombre va antes que la coincidencia en la categoría, y esa antes que
-la mención en las especificaciones. Sin eso, buscar "termo" devuelve primero el kit que
-lo incluye en vez del termo. Wix Stores trae buscador nativo; verificá que priorice el
+la mención en las especificaciones. Sin eso, buscar "termo" devuelve primero cualquier
+producto que lo nombre en las specs en vez del termo. Wix Stores trae buscador nativo; verificá que priorice el
 nombre.
 
 Seis categorías: **mates (5) · bombillas (3) · termos (1) · yerba (3) ·
-yerberas y canastos (2) · kits (2)**. Dieciséis productos.
+yerberas y canastos (2)**. Catorce productos.
 
 ---
 
@@ -76,11 +77,11 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 
 | # | Sección | Qué tiene que lograr |
 |---|---|---|
-| 1 | **Hero** | Que en tres segundos se entienda qué se vende y dónde estás parado. El logo en grande sobre metraje propio, una línea de bajada y dos acciones: comprar el kit / aprender |
+| 1 | **Hero** | Que en tres segundos se entienda qué se vende y dónde estás parado. El logo en grande sobre metraje propio, una línea de bajada y dos acciones: "Arma tu mate" al shop / aprender |
 | 2 | **Confianza** | Las cuatro razones para creerle a la tienda: retiro en local, mercado los domingos, Apple/Google Pay, envíos a toda Australia |
 | 3 | **Reels** | Contenido vertical propio, **cada clip enlazado a un producto**. Es la sección más distintiva y la que ya tiene material filmado. En celular se desliza de costado, no en grilla: una grilla de 2 columnas de 9:16 queda despareja y esconde la mitad |
 | 4 | **Más vendidos** | Ocho productos. Entrada rápida al catálogo sin pasar por la grilla |
-| 5 | **El kit** | El bloque de conversión más importante. Qué trae, cuánto ahorrás, por qué esas tres piezas van juntas |
+| 5 | **Arma tu mate** | El bloque de conversión más importante. Las tres decisiones en orden —el mate, la bombilla, la yerba— cada una linkeada a su categoría y con el precio desde el que arranca. No es un producto: es el recorrido |
 | 6 | **What is Mate?** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
 | 7 | **Comunidad** | El grupo de WhatsApp. Prueba social que la competencia no tiene |
 | 8 | **Visit us** | Los dos puntos físicos, con dirección y horario. Es el resumen; la versión completa vive en `/about` |
@@ -136,18 +137,20 @@ Esto es lo que sobrevive a cualquier rediseño. No son decisiones estéticas.
 
 **1. Sin descuento permanente.** Hoy todo el catálogo está tachado al doble. No se lo
 cree nadie, entrena a no pagar precio lleno, y en Australia puede caer en publicidad
-engañosa. El mecanismo de valor pasa a ser el **kit**, con un ahorro real y calculado.
+engañosa. Sin kits no hay un ahorro real que mostrar, y uno inventado es peor que
+ninguno: el valor pasa a ser el consejo y el local, no el descuento.
 
-**2. Los kits son productos, no cupones.** Con stock y foto propia, para que aparezcan
-en la grilla y se puedan promocionar.
+**2. Nada de productos que la marca no tiene.** El prototipo vende exactamente lo que
+vende Mate Coast. Un kit armado sería buena idea, pero es una decisión de ellos.
 
 **3. Un termo, cuatro colores.** Hoy son cuatro productos que diluyen la grilla y
 reparten reseñas y SEO. Un producto con opción de color, y las muestras visibles en la
 ficha de la grilla.
 
 **4. Camino para el primerizo.** Alguien que nunca tomó mate necesita tres productos que
-funcionen juntos y no tiene cómo saberlo. El kit como producto héroe y la guía como
-página real, enlazada desde el hero y desde cada ficha.
+funcionen juntos y no tiene cómo saberlo. El recorrido **"Arma tu mate"** —el que ya
+usan— hecho explícito en el hero y en un bloque propio, y la guía como página real,
+enlazada desde el hero y desde cada ficha.
 
 **5. Los locales, arriba.** Mercado en Surfers y local en Broadbeach es lo más valioso
 que tiene y hoy está enterrado en el footer. Va tres veces: barra superior, fila de

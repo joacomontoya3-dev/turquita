@@ -26,8 +26,10 @@ yerberos, yerba, canastos materos, agua para el mate).
 
 ### Propuestas mías — confirmar antes de publicar
 
-- **The Starter Kit — $69** y **The Gold Coast Set — $159**. Los ahorros ($8 y $21)
-  están calculados contra la suma real de las piezas. Si cambian los precios, recalculá.
+- ~~The Starter Kit y The Gold Coast Set~~ — **sacados**. Mate Coast no vende kits, y
+  el prototipo no puede inventar productos que la marca no tiene. En su lugar va el
+  recorrido **"Arma tu mate"**, que es el que ellos ya usan: del hero al shop, con las
+  tres decisiones en orden. Si algún día arman un kit de verdad, entra ahí.
 - **Bombillas**: Alpaca $29, Spring $19, Pico de Loro $35. Sé que vende bombillas
   (está en el menú) pero no vi precios.
 - **Yerba**: Tradicional Con Palo $17 y Despalada Suave $17, como extensión de línea.
@@ -81,7 +83,8 @@ Ese contraste entre foto limpia y foto de vida es exactamente el recurso de AGOL
 - Una ronda de mate en la playa, al atardecer, varias manos.
 - El local de Broadbeach desde afuera, con la persiana levantada.
 - El puesto del mercado en Surfers un domingo, con gente.
-- Una toma cenital de todo lo del kit desplegado.
+- Una toma cenital de un mate, una bombilla y un paquete de yerba desplegados —
+  el "arma tu mate" en una sola imagen.
 
 Esas cuatro son las que hacen que el sitio parezca un negocio real y no un dropshipper.
 
@@ -110,12 +113,17 @@ como decisión separada. No mezclar los dos idiomas en la misma página como est
 **Hero:** Share a mate with your mates.
 
 **Bajada:** Argentine mate gear, stocked in Broadbeach and shipped Australia-wide.
-Never used one? Start with a kit — the gourd, the bombilla, the yerba and everything
-you need to know, in one box.
+Never used one? We'll help you put your first one together.
 
-**Kit:** Everything you need, nothing you don't. / Buying your first mate means buying
-three things that have to work together. This is the combination we hand people at the
-markets every Sunday.
+**Botón del hero:** Arma tu mate → al shop.
+
+**Arma tu mate:** Three decisions, in this order: the gourd, the bombilla, the yerba.
+Pick one of each and you're set — and if you tell us how you drink it, we'll tell you
+which ones go together.
+
+El nombre va en castellano a propósito: es la frase que ya usa la marca y en una tienda
+de mate argentino en Australia el castellano es un activo, no una barrera. Si lo querés
+en inglés, el cambio es "Build your mate".
 
 **Guía:** Mate is not tea. You don't brew it once and drink it — you refill the same
 gourd ten or fifteen times, and you pass it around.

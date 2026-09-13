@@ -29,9 +29,11 @@ $77/$110, $110/$220. Eso hace tres cosas malas al mismo tiempo:
 Además, en Australia el descuento permanente contra un precio que nunca se cobró
 puede caer en publicidad engañosa bajo la Australian Consumer Law.
 
-**Fix:** precio limpio, y el mecanismo de valor pasa a ser el **kit**. En el prototipo
-el único tachado que existe es el de los kits, y es real: $69 contra $77 de comprar
-las tres piezas por separado.
+**Fix:** precio limpio, sin tachados. Mate Coast no vende kits ni bundles, así que no
+hay un ahorro real que mostrar — y un ahorro inventado es exactamente el problema que
+estamos resolviendo. El mecanismo de valor no es el descuento: es el consejo (te
+decimos qué mate va con qué bombilla) y el local físico. Eso no lo tiene el que vende
+más barato por Instagram.
 
 ## 3. No hay camino para el que nunca tomó mate
 
@@ -40,8 +42,14 @@ Instagram necesita tres productos que tienen que funcionar juntos —mate, bombi
 yerba— y no tiene forma de saberlo. Hoy "What is Mate?" es el cuarto ítem del menú y
 no hay ningún kit.
 
-**Fix:** kit de entrada como producto héroe, y la guía de cebado como página real
-(`How to mate`), enlazada desde el hero, desde cada ficha y desde el footer.
+**Fix:** el recorrido **"Arma tu mate"** que la marca ya usa, hecho explícito: del hero
+al shop, con las tres decisiones en orden (el mate, la bombilla, la yerba) y el precio
+desde el que arranca cada una. Más la guía de cebado como página real (`What is Mate?`),
+enlazada desde el hero, desde cada ficha y desde el footer.
+
+Un kit armado sería un buen producto —resuelve el mismo problema en un solo click— pero
+eso es una decisión de la marca, no algo que el prototipo pueda dar por hecho. Si en
+algún momento lo arman, el bloque de "Arma tu mate" es el lugar donde entra.
 
 ## 4. Idioma mezclado sin criterio
 

@@ -167,9 +167,14 @@ Tres cambios de estructura antes de cargar nada:
 Forest, White y Pink. Manejás stock por variante. Recuperás tres lugares de grilla y
 concentrás las reseñas y el SEO en una sola ficha.
 
-**b) Los kits son productos, no descuentos.** Creá "The Starter Kit" y "The Gold Coast
-Set" como productos normales, con su propio stock. No uses un cupón: querés que
-aparezcan en la grilla, que tengan foto propia y que se puedan promocionar.
+**b) Nada de kits inventados.** El catálogo son las cinco categorías reales: mates,
+bombillas, termos, yerba, yerberas y canastos. El recorrido para el primerizo no es un
+producto: es el bloque **"Arma tu mate"**, tres links a categoría con el precio mínimo
+de cada una. En Wix se arma con un container y tres links comunes — no toca Stores.
+
+Si más adelante deciden vender un kit de verdad, ahí sí va como producto normal con su
+propio stock, nunca como cupón: querés que aparezca en la grilla y que se pueda
+promocionar.
 
 **c) Info Sections consistentes.** `Products → [producto] → Additional Info`. Definí
 las mismas filas para todo el catálogo y llenalas siempre: Material, Capacidad,

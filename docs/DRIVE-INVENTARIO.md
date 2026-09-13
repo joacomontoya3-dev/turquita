@@ -81,7 +81,7 @@ pude ver el contenido, así que confirmalo mirando.
 | Hueco | Candidatos | Por qué |
 |---|---|---|
 | **Hero** (16:9, 6–8 s) | `CINEMATIC MARKET` / `CINEMATIC S3`, `cinematic semana 2 V1-`, `horizontal log-` | Es el plano que sostiene el logotipo encima. Necesita centro despejado y movimiento lento |
-| **Banda del kit** (16:9, 8–10 s) | `cinematic semana 2 largo`, `Sequence 14`, `HORIZONTAL-` | Va detrás del bloque del Starter Kit |
+| **Banda "Arma tu mate"** (16:9, 8–10 s) | `cinematic semana 2 largo`, `Sequence 14`, `HORIZONTAL-` | Va detrás del bloque "Arma tu mate" |
 | **Banda de curado** (16:9) | `cineamtic 1.2 version corregido`, `Sequence 04` | Cierra la guía |
 | **Carrusel de reels** (9:16, ×5) | `vertical-_1` a `_7` (SEMANA 5) y `VER1/2/4/5/6/8` (SEMANA 6) | Ya son verticales y ya están terminados. Es lo más listo para usar de todo el Drive |
 | **Reel "domingo en el mercado"** | `Market.mp4` | Por nombre, es exactamente esa toma |

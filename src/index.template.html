@@ -295,19 +295,17 @@ nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
 .otag{position:absolute;top:1rem;left:var(--gut);z-index:4;font-family:var(--f-body);
   font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.08em;
   color:rgba(233,234,230,.88)}
-.kit-list{list-style:none;margin:1.1rem 0 0;padding:0;display:grid}
-.kit-list li{display:grid;grid-template-columns:auto 1fr auto;gap:.9rem;align-items:baseline;
-  padding-block:.65rem;border-top:1px solid rgba(233,234,230,.22)}
-.kit-list li:last-child{border-bottom:1px solid rgba(233,234,230,.22)}
-.kit-list .n{font-family:var(--f-body);font-size:var(--t-micro);color:rgba(233,234,230,.55)}
-.kit-list .v{font-family:var(--f-body);font-size:var(--t-sm);color:rgba(233,234,230,.7);
+.numlist{list-style:none;margin:1.1rem 0 0;padding:0;display:grid}
+.numlist li{border-top:1px solid rgba(233,234,230,.22)}
+.numlist li:last-child{border-bottom:1px solid rgba(233,234,230,.22)}
+.numlist li>*{display:grid;grid-template-columns:auto 1fr auto;gap:.9rem;align-items:baseline;
+  padding-block:.65rem}
+.numlist li{display:grid}
+.numlist a:hover .v{color:var(--band-fg)}
+.numlist a:hover{opacity:.85}
+.numlist .n{font-family:var(--f-body);font-size:var(--t-micro);color:rgba(233,234,230,.55)}
+.numlist .v{font-family:var(--f-body);font-size:var(--t-sm);color:rgba(233,234,230,.7);
   font-variant-numeric:tabular-nums}
-.kit-price{display:flex;align-items:baseline;gap:.7rem;margin-top:1.1rem}
-.kit-price b{font-family:var(--f-body);font-weight:500;font-size:1.5rem;
-  font-variant-numeric:tabular-nums}
-.kit-price s{color:rgba(233,234,230,.5);font-family:var(--f-body);font-size:.9375rem}
-.kit-price .save{font-family:var(--f-body);font-size:var(--t-micro);text-transform:uppercase;
-  letter-spacing:.08em;color:var(--yerba)}
 
 /* ============================================================ sections */
 .sec{padding-block:clamp(2rem,4vw,3.25rem)}
@@ -573,14 +571,6 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
     <path class="s1" d="M70 92V76a30 30 0 0 1 60 0v16h-16V76a14 14 0 0 0-28 0v16Z"/>
     <path class="s2" d="M34 92h132l-14 132H48z"/><path class="s3" d="M34 92h132l-4 38H38z"/>
   </symbol>
-  <symbol id="i-kit" viewBox="0 0 200 240">
-    <path class="s2" d="M56 122c22 0 36 16 36 41 0 27-16 47-36 47s-36-20-36-47c0-25 14-41 36-41Z"/>
-    <rect class="s1" x="20" y="114" width="72" height="14" rx="7"/>
-    <rect class="s1" x="70" y="72" width="7" height="48" rx="3.5" transform="rotate(14 73 96)"/>
-    <path class="s2" d="M112 92h64v118h-64z"/><path class="s1" d="M112 92l11-17h42l11 17z"/>
-    <rect class="s1" x="150" y="34" width="11" height="52" rx="5.5"/>
-    <path class="s2" d="M148 84h15l5 32a8 8 0 0 1-8 9h-9a8 8 0 0 1-8-9Z"/>
-  </symbol>
 </defs></svg>
 
 <div class="ann">Free shipping over $99. Click &amp; Collect at the Broadbeach store.</div>
@@ -613,7 +603,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
   <div class="menu search-panel" id="searchPanel" hidden>
     <div class="wrap">
       <label class="sr" for="searchInput">Search products</label>
-      <input id="searchInput" type="search" placeholder="Search 16 products"
+      <input id="searchInput" type="search" placeholder="Search products" data-count-ph
              autocomplete="off" spellcheck="false">
       <div id="searchOut" class="search-out" aria-live="polite"></div>
     </div>
@@ -628,7 +618,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       </div>
       <div class="menu-col">
         <span class="lbl">New to mate</span>
-        <a href="#/product/starter-kit">The Starter Kit — $69.00</a>
+        <a href="#/shop">Arma tu mate — the three decisions</a>
         <a href="#/ritual">How to mate, in six clips</a>
       </div>
       <div class="menu-col">
@@ -657,10 +647,10 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <div class="hero-foot">
         <div>
           <p class="lede">Argentine mate gear, stocked in Broadbeach and shipped
-            Australia-wide. Never used one? Start with a kit.</p>
+            Australia-wide. Never used one? We'll help you put your first one together.</p>
         </div>
         <div class="hero-cta">
-          <a class="btn" href="#/product/starter-kit">Shop the starter kit</a>
+          <a class="btn" href="#/shop">Arma tu mate</a>
           <a class="btn btn-out" href="#/ritual">Watch how it works</a>
         </div>
       </div>
@@ -677,34 +667,33 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
 
   <div class="wrap" style="padding-top:clamp(2rem,4vw,3.25rem)">
     <div class="shead"><span class="t">Best sellers</span>
-      <a class="arw" href="#/shop">All 16</a></div>
+      <a class="arw" href="#/shop" data-count-all>All</a></div>
   </div>
   <div class="strip strip-4" id="bestGrid"></div>
 
-  <!-- kit feature -->
+  <!-- "Arma tu mate": las tres decisiones, cada una a su categoría.
+       No es un producto, es el recorrido que la marca ya usa. -->
   <div class="vband on-vid" style="margin-top:clamp(2rem,4vw,3.25rem)">
     <video data-clip="band" muted loop playsinline preload="none" aria-hidden="true"></video>
     <div class="veil"></div>
-    <span class="otag">The Starter Kit</span>
-    <p class="shot"><b>Kit clip</b> — unboxing the starter kit on a table, top-down, hands only.
-      Cut to the first pour. 8 s.</p>
+    <span class="otag">Arma tu mate</span>
+    <p class="shot"><b>Build clip</b> — hands laying out a gourd, a bombilla and a pack of yerba
+      on a table, one at a time, then the first pour. 8 s.</p>
     <div class="vband-in"><div class="wrap"><div class="vband-grid">
       <div>
-        <h2 class="h1">Start with a kit.</h2>
-        <p class="lede" style="margin-top:.85rem">Buying your first mate means buying three
-          things that have to work together. This is the combination we hand people at the
-          markets every Sunday.</p>
-        <div class="kit-price"><b>$69.00</b><s>$77.00</s><span class="save">Save $8</span></div>
-        <div class="hero-cta" style="margin-top:1.1rem">
-          <a class="btn" href="#/product/starter-kit">Add the starter kit</a>
+        <h2 class="h1">Arma tu mate.</h2>
+        <p class="lede" style="margin-top:.85rem">Three decisions, in this order: the gourd, the
+          bombilla, the yerba. Pick one of each and you're set — and if you tell us how you drink
+          it, we'll tell you which ones go together.</p>
+        <div class="hero-cta" style="margin-top:1.4rem">
+          <a class="btn" href="#/shop">Arma tu mate</a>
           <a class="btn btn-out" href="#/ritual">How it works</a>
         </div>
       </div>
-      <ul class="kit-list">
-        <li><span class="n">01</span><span>Mate Entre Ríos — resin, alpaca rim</span><span class="v">250 ml</span></li>
-        <li><span class="n">02</span><span>Bombilla Spring — stainless steel</span><span class="v">18 cm</span></li>
-        <li><span class="n">03</span><span>Verde Flor Hierbas Serranas</span><span class="v">1 kg</span></li>
-        <li><span class="n">04</span><span>Curing &amp; cebado card, in English</span><span class="v">Free</span></li>
+      <ul class="numlist">
+        <li><a href="#/shop/mates"><span class="n">01</span><span>The mate — calabaza, wood or steel</span><span class="v" data-from="mates"></span></a></li>
+        <li><a href="#/shop/bombillas"><span class="n">02</span><span>The bombilla — it does the filtering</span><span class="v" data-from="bombillas"></span></a></li>
+        <li><a href="#/shop/yerba"><span class="n">03</span><span>The yerba — con palo or despalada</span><span class="v" data-from="yerba"></span></a></li>
       </ul>
     </div></div></div>
   </div>
@@ -823,7 +812,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       </div>
     </div>
     <div class="sec">
-      <div class="sec-head"><h2 class="h2">Complete the set</h2><a href="#/shop">Shop all</a></div>
+      <div class="sec-head"><h2 class="h2">Goes with it</h2><a href="#/shop">Shop all</a></div>
       <div class="grid-p" id="crossGrid"></div>
     </div>
   </div>
@@ -877,7 +866,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
           to come out before you drink from them, or your mate will taste like wet cardboard for
           a month. It takes 24 hours and a teaspoon.</p>
         <div class="hero-cta"><a class="btn" href="#/shop/mates">Shop calabaza mates</a></div></div>
-      <ul class="kit-list">
+      <ul class="numlist">
         <li><span class="n">01</span><span>Fill with used yerba, top up with 70–80 °C water</span><span class="v">24 h</span></li>
         <li><span class="n">02</span><span>Scrape the soft pulp out with a teaspoon</span><span class="v">5 min</span></li>
         <li><span class="n">03</span><span>Rinse, dry mouth-down out of the sun</span><span class="v">2 days</span></li>
@@ -1029,7 +1018,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <div><span class="h3">Made on the Gold Coast</span><code>H3 · Inter 600 · 28/36</code></div>
       <div><span class="h4">Mate San Juan</span><code>H4 · Inter 600 · 22/30</code></div>
       <div><span class="lede">Argentine mate gear, stocked in Broadbeach.</span><code>Body L · Inter 400 · 18/28</code></div>
-      <div><span>Shipped Australia-wide, never used one? Start with a kit.</span><code>Body · Inter 400 · 16/24</code></div>
+      <div><span>Shipped Australia-wide, never used one? Arma tu mate.</span><code>Body · Inter 400 · 16/24</code></div>
       <div><span style="font-size:var(--t-nav);line-height:var(--lh-nav);font-weight:var(--fw-medium);letter-spacing:var(--ls-nav)">Shop · What is Mate? · About</span><code>Nav · Inter 500 · 15/22 · +.3px</code></div>
       <div><span class="nums">$55.00 · 220 ml · 70–80 °C</span><code>Inter 400 · tabular-nums</code></div>
       <div><span class="lbl lbl-ink">Click &amp; collect</span><code>Micro · Inter 500 · 12px · .08em</code></div>
@@ -1071,7 +1060,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <div class="f-col"><span class="lbl">Shop</span>
         <a href="#/shop/mates">Mates</a><a href="#/shop/bombillas">Bombillas</a>
         <a href="#/shop/termos">Termos</a><a href="#/shop/yerba">Yerba</a>
-        <a href="#/shop/accesorios">Yerberas &amp; canastos</a><a href="#/shop/kits">Kits</a></div>
+        <a href="#/shop/accesorios">Yerberas &amp; canastos</a></div>
       <div class="f-col"><span class="lbl">Help</span>
         <a href="#/about">About us</a><a href="#/ritual">What is Mate?</a><a href="#/ritual">Curing a new gourd</a>
         <a href="#/">Shipping &amp; returns</a><a href="#/">Contact</a>
@@ -1124,18 +1113,9 @@ var CATS=[
   {id:'bombillas',name:'Bombillas',sub:'The straw does the filtering'},
   {id:'termos',name:'Termos',sub:'Holds 70–80 °C all day'},
   {id:'yerba',name:'Yerba',sub:'Con palo & despalada'},
-  {id:'accesorios',name:'Yerberas & canastos',sub:'Carry the whole round'},
-  {id:'kits',name:'Kits',sub:'Start here'}];
+  {id:'accesorios',name:'Yerberas & canastos',sub:'Carry the whole round'}];
 
 var P=[
- {id:'starter-kit',n:'The Starter Kit',cat:'kits',price:69,was:77,ill:'i-kit',clip:'reel-4',flag:'Save $8',
-  blurb:'The three things you actually need, in the combination we hand people at the markets every Sunday. Comes with a curing and cebado card written in plain English.',
-  shot:'Top-down unbox on a table, hands only, cut to the first pour. 4 s.',
-  spec:[['Mate','Entre Ríos — 250 ml'],['Bombilla','Spring — 18 cm'],['Yerba','Verde Flor — 1 kg'],['Curing needed','No'],['Best for','First mate']]},
- {id:'goldcoast-set',n:'The Gold Coast Set',cat:'kits',price:159,was:180,ill:'i-termo',clip:'reel-1',flag:'Save $21',
-  blurb:'Everything for a ronda on the sand: a leather-wrapped calabaza, an alpaca bombilla, a one-litre termo and a kilo of yerba.',
-  shot:'Whole set laid out on a towel, slow pan left to right. 4 s.',
-  spec:[['Mate','San Juan — 220 ml'],['Bombilla','Alpaca — 19 cm'],['Termo','1 L, 12 h hot'],['Yerba','Verde Flor — 1 kg'],['Curing needed','Yes — 24 h']]},
  {id:'mate-san-juan',n:'Mate San Juan',cat:'mates',price:55,ill:'i-gourd',clip:'reel-3',
   blurb:'Natural calabaza gourd in hand-stitched leather with an alpaca rim. The classic — it gets better the more you drink from it.',
   shot:'Rotate on a turntable, raking side light on the stitching. 3 s.',
@@ -1161,7 +1141,7 @@ var P=[
   shot:'Hands unscrew it into two pieces. 3 s.',
   spec:[['Material','Alpaca'],['Length','19 cm'],['Filter','Coiled spring'],['Takes apart','Yes'],['Best with','Yerba con palo']]},
  {id:'bombilla-spring',n:'Bombilla Spring',cat:'bombillas',price:19,ill:'i-bombilla',clip:'reel-3',
-  blurb:'Stainless steel with a removable spring. The workhorse — this is the one in the starter kit.',
+  blurb:'Stainless steel with a removable spring. The workhorse — the one we hand people buying their first mate.',
   shot:'Slides into the gourd, filter down. 3 s.',
   spec:[['Material','304 stainless'],['Length','18 cm'],['Filter','Removable spring'],['Takes apart','Yes'],['Dishwasher','Yes']]},
  {id:'bombilla-pico',n:'Bombilla Pico de Loro',cat:'bombillas',price:35,ill:'i-bombilla',clip:'reel-4',
@@ -1197,7 +1177,7 @@ var P=[
 var REELS=[
  {clip:'reel-1',t:'Sunday at the markets',s:'Surfers Paradise',pid:'termo-1l',
   shot:'Handheld walk through the stall, people talking. 5 s.'},
- {clip:'reel-2',t:'Her first mate',s:'Broadbeach store',pid:'starter-kit',
+ {clip:'reel-2',t:'Her first mate',s:'Broadbeach store',pid:'mate-entre-rios',
   shot:'Someone tries it for the first time. Reaction, not product. 5 s.'},
  {clip:'reel-3',t:'Cebando on the sand',s:'Golden hour',pid:'mate-san-juan',
   shot:'Low angle, sun behind, steam visible. 5 s.'},
@@ -1348,7 +1328,7 @@ function mountVideos(root){
     }
     if(!hits.length){
       out.innerHTML='<p class="search-empty">Nothing matches “'+esc(q)+'”. '+
-        'Try “mate”, “bombilla”, “yerba” or “kit”.</p>';
+        'Try “mate”, “bombilla”, “yerba” or “termo”.</p>';
       return;
     }
     out.innerHTML=hits.slice(0,8).map(function(p){
@@ -1409,7 +1389,7 @@ function renderCart(){
   var body=$('#drawerBody');
   if(!cart.length){
     body.innerHTML='<div class="empty"><p>Your cart is empty.</p>'+
-      '<a class="btn btn-ghost" href="#/product/starter-kit">Shop the starter kit</a></div>';
+      '<a class="btn btn-ghost" href="#/shop">Arma tu mate</a></div>';
     return;
   }
   var h='';
@@ -1462,9 +1442,18 @@ $('#menuCats').innerHTML='<span class="lbl">Shop</span><a href="#/shop">All prod
 $('#aboutGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','canasto']
   .map(function(id){ return card(byId(id)); }).join('');
 
-$('#bestGrid').innerHTML=['starter-kit','mate-san-juan','termo-1l','verde-flor',
+$('#bestGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','bombilla-spring',
   'mate-entre-rios','canasto','bombilla-alpaca','steel-mate-cup']
   .map(function(id){ return card(byId(id)); }).join('');
+/* el catálogo manda: si entra o sale un producto, los rótulos siguen bien */
+$('#searchInput').placeholder='Search '+P.length+' products';
+$('[data-count-all]').textContent='All '+P.length;
+/* el "desde" de cada decisión sale del catálogo, no escrito a mano */
+Array.prototype.forEach.call(document.querySelectorAll('[data-from]'),function(el){
+  var c=el.getAttribute('data-from'), min=null;
+  for(var i=0;i<P.length;i++){ if(P[i].cat===c && (min===null||P[i].price<min)) min=P[i].price; }
+  el.textContent = min===null ? '' : 'From '+money(min);
+});
 $('#stepsPreview').innerHTML=STEPS.slice(0,3).map(stepHTML).join('');
 $('#stepsFull').innerHTML=STEPS.map(stepHTML).join('');
 
@@ -1479,7 +1468,7 @@ $('#filters').addEventListener('click',function(e){
 });
 
 /* ============================================================ PDP */
-var qty=1, variant='', current='starter-kit';
+var qty=1, variant='', current='mate-san-juan';
 function renderPDP(id){
   var p=byId(id);
   qty=1; variant=p.variants?p.variants[0].n:'';
@@ -1546,7 +1535,7 @@ function route(){
   var h=(location.hash||'#/').replace(/^#\/?/,'');
   var seg=h.split('/').filter(Boolean);
   if(seg[0]==='shop'){ renderPLP(seg[1]||null); show('shop'); }
-  else if(seg[0]==='product'){ current=seg[1]||'starter-kit'; renderPDP(current); show('product'); }
+  else if(seg[0]==='product'){ current=seg[1]||'mate-san-juan'; renderPDP(current); show('product'); }
   else if(seg[0]==='ritual'){ show('ritual'); }
   else if(seg[0]==='about'){ mountVideos(document.getElementById('v-about')); show('about'); }
   else if(seg[0]==='system'){ show('system'); }
