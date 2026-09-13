@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navbar — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root { --font-inter: "Inter"; }
+/* ============================================================================
+   MateCoast — design tokens
+   Fuente única de verdad para tipografía, spacing y color.
+   No hardcodear valores por sección: consumir siempre estas variables.
+   ========================================================================== */
+
+:root {
+  /* ---- Tipografía ------------------------------------------------------- */
+  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Escala del sitio — tamaño / interlineado */
+  --fs-h1: 60px;      --lh-h1: 66px;
+  --fs-h2: 40px;      --lh-h2: 48px;
+  --fs-h3: 28px;      --lh-h3: 36px;
+  --fs-h4: 22px;      --lh-h4: 30px;
+  --fs-body-lg: 18px; --lh-body-lg: 28px;
+  --fs-body: 16px;    --lh-body: 24px;
+  --fs-small: 14px;   --lh-small: 20px;
+  --fs-nav: 15px;     --lh-nav: 22px;
+  --fs-button: 15px;  --lh-button: normal;
+
+  --ls-nav: 0.3px;    /* rango de la spec: +0.2 a +0.4px */
+
+  /* ---- Spacing ---------------------------------------------------------- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 20px;
+  --space-4: 24px;
+  --space-6: 48px;
+
+  --page-margin: 64px;    /* margen lateral de todas las secciones */
+  --section-gap: 96px;    /* separación entre secciones grandes (rango 80–120) */
+  --container-max: 1280px;
+
+  /* ---- Navbar ----------------------------------------------------------- */
+  --nav-py: var(--space-3);        /* 20px */
+  --nav-px: var(--page-margin);    /* 64px */
+  --nav-gap-links: 40px;           /* rango de la spec: 36–40 */
+  --nav-gap-actions: var(--space-3);
+  --nav-gap-icon: var(--space-1);
+  --nav-link-py: var(--space-1);
+  --nav-icon-size: 20px;           /* rango de la spec: 18–20 */
+  --nav-icon-stroke: 1.5;
+  --nav-logo-height: 42px;         /* rango de la spec: 40–44 */
+
+  /* ---- Color — costero y claro, no cuero oscuro ------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f1f1f0;
+  --color-ink: #111110;
+  --color-ink-muted: #6b6b68;
+  --color-line: #e3e3e1;
+  --color-brand: #546742;   /* verde del logotipo */
+}
+
+/* ---- Reset mínimo ------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+svg { display: block; }
+
+/* Un solo lugar define el grosor de trazo de todos los íconos */
+svg[data-icon] { stroke-width: var(--nav-icon-stroke); }
+
+:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 3px; }
+
+/* ---- Utilidades de escala ---------------------------------------------- */
+.h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); font-weight: var(--fw-bold); }
+.h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); font-weight: var(--fw-semibold); }
+.h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: var(--fw-semibold); }
+.h4 { font-size: var(--fs-h4); line-height: var(--lh-h4); font-weight: var(--fw-medium); }
+.bodyLg { font-size: var(--fs-body-lg); line-height: var(--lh-body-lg); }
+.small { font-size: var(--fs-small); line-height: var(--lh-small); }
+
+.container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--page-margin);
+}
+
+.srOnly {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ============================================================================
+   Navbar — desktop. Todos los valores salen de los tokens de globals.css
+   ========================================================================== */
+
+.header {
+  width: 100%;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Tres bloques. Los tracks laterales son 1fr iguales, así que el centro cae
+   en el centro del CONTENEDOR y no en el centro del espacio libre — que es
+   lo que pasaría con flex + space-between, porque los bloques miden distinto. */
+.nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--nav-py) var(--nav-px);
+}
+
+/* ---- Bloque izquierdo --------------------------------------------------- */
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--nav-gap-links);
+  justify-self: start;
+  min-width: 0;
+}
+
+.link {
+  display: inline-block;
+  width: max-content;              /* hug content */
+  padding: var(--nav-link-py) 0;   /* 8px vertical / 0 horizontal */
+  font-size: var(--fs-nav);
+  line-height: var(--lh-nav);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-nav);
+  color: var(--color-ink);
+  white-space: nowrap;
+  transition: color 120ms ease;
+}
+
+.link:hover { color: var(--color-ink-muted); }
+
+.link[aria-current="page"] {
+  box-shadow: 0 1px 0 currentColor;   /* subrayado sin reservar alto */
+}
+
+/* ---- Centro ------------------------------------------------------------- */
+.logo {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo svg {
+  height: var(--nav-logo-height);
+  width: auto;
+  color: var(--color-brand);
+}
+
+/* ---- Bloque derecho ----------------------------------------------------- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--nav-gap-actions);
+  justify-self: end;
+}
+
+/* Texto + ícono en línea. No es un botón: sin fondo, sin borde, sin radio. */
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nav-gap-icon);
+  padding: var(--nav-link-py) 0;
+  font-size: var(--fs-nav);
+  line-height: var(--lh-nav);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-nav);
+  color: var(--color-ink);
+  white-space: nowrap;
+  transition: color 120ms ease;
+}
+
+.action:hover { color: var(--color-ink-muted); }
+
+.action svg {
+  width: var(--nav-icon-size);
+  height: var(--nav-icon-size);
+  flex: none;
+}
+
+.count { font-variant-numeric: tabular-nums; }
+
+body { background: var(--color-bg); }
+.ruler { height: 320px; background:
+  linear-gradient(to right, color-mix(in srgb, var(--color-brand) 8%, transparent) 0 1px, transparent 1px) 0 0 / 8px 100%; }
+</style></head>
+<body>
+<header class="header">
+  <nav class="nav" aria-label="Principal">
+    <div class="links">
+      <a class="link" href="/collections/all">Shop</a>
+      <a class="link" href="/what-is-mate">What is Mate?</a>
+      <a class="link" href="/about" aria-current="page">About</a>
+    </div>
+    <a class="logo" href="/" aria-label="Mate Coast — inicio">
+      <svg viewBox="133.04 371.46 813.92 697.07" fill="currentColor" role="img" aria-label="Mate Coast">
+      <path d="M346.09,534.79c-2.63-1.75-7.49,8.42-8.68,10.53-12.67,22.51-30.62,73.36-49.02,87.74-7.96,6.22-16.52,8.12-26.41,5.93-28.45-6.28-30.38-47.25-44.93-67.06h-2.61c-3.73,2.37-7.01,33.35-7.66,39.36-3.84,35.34-2.7,71.12-6,105.97-1.76,18.6-10.37,38.14-32.68,35.26-23.49-3.04-24-26.9-23.76-45.54.64-49.71,7.82-109.65,16.55-158.67,4.34-24.38,11.76-80.51,44.65-81.07,33.38-.57,53.05,60.78,63.27,85.44,3.01,4.41,5.37-.43,7.04-3.1,15.52-24.85,28.68-51.21,44.6-75.92,14.23-22.09,46.61-79.16,79.25-58.7,20.98,13.15,13.71,51.58,11.25,72.27-4.93,41.43-12.07,82.7-16.87,124.17-3.5,30.23-4.21,63.26-8.89,92.83-2.88,18.23-13.7,30.57-33.46,27.94-25.98-3.45-21.44-39.07-20.15-57.62,2.9-41.89,11.12-83.99,14.52-125.66.18-2.19,1.09-13.36,0-14.1Z"/>
+      <path d="M505.72,375.16c24.58-3.88,35.35,20.17,42.74,38.9,19.71,49.95,35.72,112.36,48.87,164.81,4.6,18.34,12.78,45.83,13.77,64.01,1.98,36.03-39.64,40.98-51.97,10.09-8.35-20.93-10.49-46.43-18.6-67.73-.66-.92-1.86-1.85-2.93-2.19-4.38-1.39-25.48,4.07-31.18,5.66-7.65,2.13-17.81,3.5-20.81,11.67-8.52,23.13-6.45,65.96-18.31,85.97-12.42,20.95-44.73,15.36-47.6-9.32-1.99-17.06,4.17-48.47,6.89-66.44,7.98-52.8,18.79-108.46,33.44-159.74,6.28-21.99,19.14-71.49,45.69-75.68ZM509.8,465.56c-1.46.35-3.16,9.12-3.59,10.95-4.96,20.76-7.14,42.18-11.31,63.1-.19,2.76,1.92,5.22,4.67,5.4,2.37.15,22.54-4.38,25.18-5.51,3.99-1.71,4.49-4.33,4.07-8.32-1.05-9.92-12.66-54.93-16.83-63.54-.45-.93-.8-2.41-2.18-2.07Z"/>
+      <path d="M560.44,704.25c19.79-2.87,30.33,11.98,36.14,28.38,6.88,19.41,11.79,42.36,17,62.5,8.08,31.28,15.77,62.82,22.73,94.37,3.71,16.83,15.09,58.89,13.02,73.72-2.86,20.49-30.12,29.28-44.69,14.36-11.67-11.96-11.94-42.88-17.9-59.03-.99-2.68-2.24-5.12-5.33-5.79-4.31-.94-21.7,3.7-26.92,5.2-7.73,2.21-15.09,3.29-18.02,11.89-6.31,26.02-10.8,52.5-17.25,78.48-4.1,16.47-7.32,39.75-28.32,41.76-17.51,1.68-28.38-11.87-28.53-28.53-.16-18.61,10.64-56.66,14.95-76.51,12.49-57.47,25.65-118.11,41.71-174.54,5.89-20.71,16.12-62.59,41.43-66.26ZM574.94,866.19c.9-.89,1.89-3.83,1.89-5.2-.02-5.44-3.29-16.88-4.48-22.93-1.88-9.55-4.33-25.71-7.65-34.23-.59-1.51-1.02-3.53-3.18-3.22l-13.54,68.67c.64,1.87,3.61,2.34,5.36,2.3,2.87-.07,20.02-3.82,21.61-5.4Z"/>
+      <path d="M258.74,747.87c21.66-1.58,70.99,1.61,60.62,35.83-7.29,24.08-34.57,14.65-52.31,16.07-42.85,3.42-69.5,42.64-73.84,82.58-4.61,42.42,15.12,124.82,72.72,113.75,20.64-3.97,42.9-32.77,62.67-7.46,22.81,29.21-23.15,56.58-47.09,62.36-109.72,26.46-162.94-102.78-143.55-192.27,12.77-58.93,58.87-106.34,120.78-110.85Z"/>
+      <path d="M698.92,714.52c16.36-1.73,39.49,1.08,44.59,19.9,3.37,12.45-4.73,24.95-16.87,28.33-9.71,2.71-20.03-.96-26.55,10.21-5.62,9.63-.65,20.94,4.31,29.62,22.23,38.86,50.89,59.9,60.81,108.43,18.23,89.24-62.05,181.52-154.6,150.32-19.83-6.69-34.13-27.96-17.87-46.14,11.88-13.28,25.05-7.1,39.28-6.04,32.08,2.4,60.61-10.61,73.22-41.29,31.8-77.36-68.68-122.63-62.54-196.73,2.49-30.08,26.41-53.46,56.21-56.62Z"/>
+      <path d="M839.97,458.97c19.39-1.07,52.25,6.64,43.32,33.06-7.6,22.47-38.56,15.44-56.86,19.21-22.15,4.57-27.72,15.01-29.05,36.76-.45,7.33-1.75,29.08,6.24,32.3,9.74,3.92,31.46-5.79,42.18-6.95,28.58-3.09,33.59,34.36,4.79,41.53-20.84,5.19-51.96,3.13-53.16,32.33-1.01,24.51,11.82,41.45,37.57,33.28,20.34-6.46,48.75-42.66,69.73-20.94,23.11,23.92-17.51,52.12-36.91,60.6-46.1,20.14-103.15,22.11-119.54-34.92-10.64-37.03-8.93-124.4.15-162.25,10.5-43.81,49.19-61.66,91.56-64Z"/>
+      <path d="M406.62,746.17c12.38-.97,26.05,3.14,36,10.5,54.32,40.19,30.91,173.03-14.44,213.63-25.2,22.55-62.07,24.33-85.51-1.7-48.16-53.48-19.14-215.9,63.96-222.43ZM381.44,929.39c7.3,7.37,14.6-.48,18.86-6.63,16.33-23.53,26.79-87.19,17.41-113.84-6.53-18.55-19.39-8.92-26.67,2.87-15.71,25.45-22.62,76.24-15.3,104.91.92,3.62,3.1,10.06,5.69,12.68Z"/>
+      <path d="M769.89,372.64c15.03-1.18,32.78,3.13,32.64,21.54-.27,36.53-70.65,24.22-83.51,49.82-4.92,9.8-6.06,32.59-7.08,44.21-4.09,46.69-4.5,93.47-7.71,140.16-.89,13-1.19,35.51-8.69,46.01-11.45,16.04-37.75,12.03-44.32-6.65-5.19-14.74-1.69-50.51-.82-67.55,1.94-37.74,7.03-76.15,8.57-113.66.34-8.27,2.24-27.18-8.35-29.33-9.85-1.99-23.35,2.33-34.02,1.54-34.26-2.52-36.72-42.49-4.49-54.12,23.15-8.36,59.33-14.2,84.26-19.17,22.76-4.54,50.75-11.03,73.52-12.81Z"/>
+      <path d="M921.18,741.88c23.62-1.3,32.76,24.72,16.74,40.69-12.3,12.26-32.14,11.08-45.38,18.73-9.63,5.56-9.41,15.51-10.51,25.39-5.21,46.8-6.89,94.3-15.8,140.62-4.34,22.59-10.26,56.99-40.98,52.9-23.6-3.14-22.62-28.53-19.89-46.24,6.33-41,18.37-81.52,20.24-123.36.6-13.56.68-31.11-16.03-33.53-19.02-2.75-59.78,8.21-63.36-21.26-4.33-35.58,37.9-30.12,60.16-31.97,21.9-1.81,43.97-5.07,65.41-9.81,14.56-3.22,35.54-11.39,49.4-12.16Z"/>
+      </svg>
+    </a>
+    <div class="actions">
+      <a class="action" href="/search"><span>Search</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+             stroke-linejoin="round" data-icon aria-hidden="true" focusable="false">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+      <a class="action" href="/cart"><span>Cart <span class="count">(2)</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+             stroke-linejoin="round" data-icon aria-hidden="true" focusable="false">
+          <path d="M5 8h14l-1.2 11.1A2 2 0 0 1 15.8 21H8.2a2 2 0 0 1-2-1.9L5 8Z"/>
+          <path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></a>
+    </div>
+  </nav>
+</header>
+<div class="ruler"></div>
+</body></html>
