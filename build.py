@@ -24,6 +24,21 @@ if token not in tpl:
 
 out = tpl.replace(token, json.dumps(clips))
 
+# Fotos de producto recortadas. El nombre del archivo es el id del producto:
+# assets/products/mate-san-juan.png. Las que no estén caen en la ilustración
+# vectorial, así el prototipo nunca queda con un hueco.
+pngs = {}
+pdir = root / "assets/products"
+if pdir.is_dir():
+    for f in sorted(pdir.iterdir()):
+        if f.suffix.lower() in (".png", ".webp"):
+            mime = "image/webp" if f.suffix.lower() == ".webp" else "image/png"
+            pngs[f.stem] = ("data:%s;base64," % mime) + base64.b64encode(f.read_bytes()).decode()
+ptoken = "/*__PNGS__*/ {}"
+if ptoken not in out:
+    sys.exit("template is missing the %s token" % ptoken)
+out = out.replace(ptoken, json.dumps(pngs))
+
 logo = (root / "assets/logo/matecoast.svg").read_text(encoding="utf-8")
 inner = logo[logo.index(">", logo.index("<svg")) + 1 : logo.rindex("</svg>")].strip()
 vb = re.search(r'viewBox="([^"]+)"', logo).group(1)
@@ -49,5 +64,7 @@ motion = place_logo(motion.replace(token, json.dumps(clips)))
 
 total = sum(v.stat().st_size for v in vids)
 print("clips inlined: %s" % ", ".join(sorted(clips)))
+print("product cut-outs: %s" % (", ".join(sorted(pngs)) if pngs
+      else "none yet — the carousel is using the vector stand-ins"))
 print("video %.2f MB -> index.html %.2f MB, motion.html %.2f MB"
       % (total/1e6, len(out.encode())/1e6, len(motion.encode())/1e6))

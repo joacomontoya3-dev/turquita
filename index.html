@@ -280,6 +280,61 @@ nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
 .card-sw i{width:9px;height:9px;border-radius:50%;border:1px solid var(--line-2);display:block}
 .tag{position:absolute;top:.6rem;left:.6rem;z-index:4;font-family:var(--f-body);
   font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.07em;color:var(--ink)}
+
+/* ============================================================ sweep
+   Un carrusel que no arranca ni frena: deriva siempre, en loop sin costura.
+   La continuidad es el punto — tiene que leerse como un plano de video que
+   no corta, no como una galería con flechas. Se puede agarrar y empujar.
+   ============================================================ */
+.sweep{position:relative;overflow:hidden;background:var(--ground);
+  /* el dedo puede arrastrar en horizontal sin trabar el scroll vertical */
+  touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.sweep.dragging{cursor:grabbing}
+.sweep-track{display:flex;width:max-content;will-change:transform}
+/* los bordes se desvanecen: sin corte duro, la fila sigue más allá del cuadro */
+.sweep::before,.sweep::after{content:"";position:absolute;top:0;bottom:0;width:var(--gut);
+  z-index:5;pointer-events:none}
+.sweep::before{left:0;background:linear-gradient(to right,var(--ground),transparent)}
+.sweep::after{right:0;background:linear-gradient(to left,var(--ground),transparent)}
+
+/* el tile: la pieza flotando sobre el degradado, los datos arriba a la izquierda */
+.ptile{position:relative;flex:none;width:clamp(208px,21vw,292px);aspect-ratio:3/4;
+  overflow:hidden;color:var(--band-fg);display:block;
+  background:
+    /* el pozo de luz va detrás del producto, no arriba de todo: es lo que lo
+       despega del fondo y lo hace leer como una foto y no como un recorte */
+    radial-gradient(72% 48% at 50% 46%,rgba(255,255,255,.44),rgba(255,255,255,0) 72%),
+    radial-gradient(120% 70% at 50% 118%,rgba(0,0,0,.28),rgba(0,0,0,0) 62%),
+    linear-gradient(165deg,var(--g1) 0%,var(--g2) 96%);
+  box-shadow:inset -1px 0 0 rgba(255,255,255,.14)}
+.ptile-art{position:absolute;inset:0;display:grid;place-items:center;padding:34% 26% 20%}
+/* la sombra es lo que hace que flote: va sobre el PNG recortado, no sobre una caja */
+.ptile-art img,.ptile-art svg{width:100%;height:100%;object-fit:contain;
+  filter:drop-shadow(0 16px 22px rgba(20,16,10,.34));
+  transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ptile:hover .ptile-art img,.ptile:hover .ptile-art svg{transform:translateY(-6px) scale(1.03)}
+.ptile-meta{position:absolute;top:0;left:0;z-index:3;padding:var(--sp-2);display:grid;gap:1px;
+  /* el badge vive arriba a la derecha: los datos no pueden llegar hasta ahí.
+     Misma medida en todos los tiles, con badge o sin él, para que los nombres
+     corten con el mismo ancho y la fila no quede despareja. */
+  max-width:62%}
+.ptile-n{font-size:var(--t-sm);line-height:1.25;font-weight:var(--fw-semibold);
+  letter-spacing:-.01em;text-wrap:balance}
+.ptile-s{font-size:var(--t-micro);color:rgba(245,245,244,.62);line-height:1.35}
+.ptile-p{font-size:var(--t-micro);color:rgba(245,245,244,.88);margin-top:.3rem;
+  font-variant-numeric:tabular-nums}
+.ptile-badge{position:absolute;top:var(--sp-2);right:var(--sp-2);z-index:4;
+  font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+  color:rgba(245,245,244,.9);border:1px solid rgba(245,245,244,.4);
+  padding:2px 6px;border-radius:99px;white-space:nowrap}
+@media(max-width:759px){
+  .ptile{width:62vw}
+  .ptile-badge{display:none}
+}
+/* sin movimiento no hay deriva, pero el carrusel sigue siendo arrastrable */
+@media(prefers-reduced-motion:reduce){
+  .ptile-art img,.ptile-art svg{transition:none}
+}
 .s1{fill:var(--band)}.s2{fill:var(--clay)}.s3{fill:var(--band);opacity:.3}
 
 /* ============================================================ full-bleed video band */
@@ -681,7 +736,11 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
     <div class="shead"><span class="t">Best sellers</span>
       <a class="arw" href="#/shop" data-count-all>All</a></div>
   </div>
-  <div class="strip strip-4" id="bestGrid"></div>
+  <!-- Deriva sola y no corta. Arrastrable. Los clones del final están
+       aria-hidden: para un lector de pantalla la lista se lee una sola vez. -->
+  <div class="sweep" id="bestSweep" role="region" aria-label="Best sellers" tabindex="0">
+    <div class="sweep-track" id="bestTrack"></div>
+  </div>
 
   <!-- "Arma tu mate": las tres decisiones, cada una a su categoría.
        No es un producto, es el recorrido que la marca ya usa. -->
@@ -1213,6 +1272,36 @@ function byId(id){for(var i=0;i<P.length;i++){if(P[i].id===id)return P[i];}retur
 function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i].name;}return '';}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
 
+/* Degradados del carrusel. Tonos de costa y de tierra, nada de cuero oscuro.
+   Se alternan cálido / frío para que dos tiles vecinos nunca se confundan. */
+var PNGS={};
+
+var TINT={
+  sand :['#C9A87C','#8A6A45'],
+  olive:['#8A9B6E','#45542F'],
+  sea  :['#9BBCC4','#4A6871'],
+  clay :['#C89765','#7E5732'],
+  stone:['#BFBDB3','#6E6C63'],
+  deep :['#7E97A4','#38494F']};
+var TINT_BY_CAT={mates:'sand',bombillas:'stone',termos:'deep',yerba:'olive',accesorios:'clay'};
+/* Foto del producto: PNG transparente si existe en assets/products/<id>.png,
+   y si todavía no está, la ilustración vectorial hace de reemplazo. */
+function art(p){
+  return PNGS[p.id]
+    ? '<img src="'+PNGS[p.id]+'" alt="" loading="lazy" decoding="async">'
+    : '<svg aria-hidden="true" viewBox="0 0 200 240"><use href="#'+p.ill+'"/></svg>';
+}
+function ptile(p,i,clone){
+  var t=TINT[p.tint||TINT_BY_CAT[p.cat]||'stone'];
+  return '<a class="ptile" href="#/product/'+p.id+'"'+
+    (clone?' aria-hidden="true" tabindex="-1"':'')+
+    ' style="--g1:'+t[0]+';--g2:'+t[1]+'">'+
+    '<div class="ptile-meta"><span class="ptile-n">'+p.n+'</span>'+
+    '<span class="ptile-s">'+esc(p.spec[0][1])+'</span>'+
+    '<span class="ptile-p">'+money(p.price)+'</span></div>'+
+    (p.flag?'<span class="ptile-badge">'+p.flag+'</span>':'')+
+    '<div class="ptile-art">'+art(p)+'</div></a>';
+}
 function card(p){
   return '<a class="card" href="#/product/'+p.id+'">'+
     '<div class="vframe">'+
@@ -1454,9 +1543,120 @@ $('#menuCats').innerHTML='<span class="lbl">Shop</span><a href="#/shop">All prod
 $('#aboutGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','canasto']
   .map(function(id){ return card(byId(id)); }).join('');
 
-$('#bestGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','bombilla-spring',
-  'mate-entre-rios','canasto','bombilla-alpaca','steel-mate-cup']
-  .map(function(id){ return card(byId(id)); }).join('');
+/* ── el sweep ───────────────────────────────────────────────
+   La idea es la continuidad: la fila deriva sola y el loop no tiene costura,
+   así que nunca se ve un principio ni un final. Para eso el set va dos veces
+   y la posición se envuelve con módulo sobre el ancho de un set — al pasar
+   el punto de corte, el tile que entra es idéntico al que salió y el ojo no
+   registra el salto. Se puede agarrar y empujar; al soltar, la inercia se
+   funde con la deriva de base en vez de frenar de golpe.
+   ────────────────────────────────────────────────────────── */
+(function(){
+  var BEST=['mate-san-juan','termo-1l','verde-flor','bombilla-spring',
+            'mate-entre-rios','canasto','bombilla-alpaca','steel-mate-cup'];
+  var box=$('#bestSweep'), track=$('#bestTrack');
+  if(!box||!track) return;
+  var items=BEST.map(byId);
+  /* dos pasadas: la segunda es decorativa y no la ve un lector de pantalla */
+  track.innerHTML = items.map(function(p,i){return ptile(p,i,false);}).join('')
+                  + items.map(function(p,i){return ptile(p,i,true);}).join('');
+
+  var SPEED=14;                 /* px/s — lento, tiene que sentirse vivo, no apurado */
+  var still=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var pos=0, half=0, vel=0, drag=false, cap=false, px=0, last=0, moved=0, raf=null, gain=still?0:1;
+
+  function measure(){
+    /* el ancho de UN set: el punto exacto donde el loop se repite */
+    half = track.scrollWidth/2;
+  }
+  function wrap(v){
+    if(!half) return v;
+    v %= half;                  /* el módulo es lo que hace el loop invisible */
+    if(v>0) v-=half;
+    return v;
+  }
+  function frame(t){
+    var dt=Math.min((t-(last||t))/1000,.05); last=t;
+    if(!drag){
+      pos -= (SPEED*gain + vel)*dt;
+      vel *= Math.pow(.0016,dt);      /* la inercia se apaga y queda la deriva */
+      if(Math.abs(vel)<.4) vel=0;
+    }
+    pos=wrap(pos);
+    track.style.transform='translate3d('+pos.toFixed(2)+'px,0,0)';
+    raf=requestAnimationFrame(frame);
+  }
+  function run(){ if(raf===null){ last=0; raf=requestAnimationFrame(frame); } }
+  function halt(){ if(raf!==null){ cancelAnimationFrame(raf); raf=null; } }
+
+  /* al pasar el mouse la deriva se apaga con una rampa, no de un frenazo:
+     un corte seco rompería justamente la continuidad que buscamos */
+  var ramp=null;
+  function ease(to){
+    clearInterval(ramp);
+    ramp=setInterval(function(){
+      gain += (to-gain)*.12;
+      if(Math.abs(to-gain)<.01){ gain=to; clearInterval(ramp); }
+    },16);
+  }
+  if(!still && window.matchMedia && window.matchMedia('(hover: hover)').matches){
+    box.addEventListener('mouseenter',function(){ ease(0); });
+    box.addEventListener('mouseleave',function(){ ease(1); });
+  }
+
+  box.addEventListener('pointerdown',function(e){
+    if(e.button) return;
+    drag=true; moved=0; px=e.clientX; vel=0; cap=false;
+    box.classList.add('dragging');
+    /* Ojo: capturar acá rompe el click. Con pointer capture activa, el click
+       se despacha sobre el elemento que captura y nunca llega al <a>. Se
+       captura recién cuando la mano se movió de verdad (ver pointermove). */
+  });
+  box.addEventListener('pointermove',function(e){
+    if(!drag) return;
+    var dx=e.clientX-px; px=e.clientX; moved+=Math.abs(dx);
+    if(!cap && moved>6){ cap=true; box.setPointerCapture(e.pointerId); }
+    pos=wrap(pos+dx);
+    vel=dx*14;                  /* lo que se lleva puesto al soltar */
+    track.style.transform='translate3d('+pos.toFixed(2)+'px,0,0)';
+  });
+  function release(e){
+    if(!drag) return;
+    drag=false; box.classList.remove('dragging');
+    if(cap && e&&e.pointerId!=null&&box.hasPointerCapture(e.pointerId)) box.releasePointerCapture(e.pointerId);
+    cap=false;
+  }
+  box.addEventListener('pointerup',release);
+  box.addEventListener('pointercancel',release);
+  /* un arrastre no es un click: si la mano se movió, el link no navega */
+  box.addEventListener('click',function(e){
+    if(moved>6){ e.preventDefault(); e.stopPropagation(); }
+  },true);
+
+  /* el teclado empuja el carrusel un tile por vez */
+  box.addEventListener('keydown',function(e){
+    var w=box.querySelector('.ptile');
+    if(!w) return;
+    if(e.key==='ArrowRight'){ pos=wrap(pos-w.offsetWidth); e.preventDefault(); }
+    if(e.key==='ArrowLeft'){ pos=wrap(pos+w.offsetWidth); e.preventDefault(); }
+    track.style.transform='translate3d('+pos.toFixed(2)+'px,0,0)';
+  });
+
+  /* fuera de pantalla o con la pestaña de fondo no tiene sentido gastar frames */
+  document.addEventListener('visibilitychange',function(){ document.hidden?halt():run(); });
+  if(window.IntersectionObserver){
+    new IntersectionObserver(function(es){
+      es[0].isIntersecting ? run() : halt();
+    },{rootMargin:'120px'}).observe(box);
+  } else { run(); }
+
+  window.addEventListener('resize',measure);
+  measure(); run();
+  /* las imágenes cambian el ancho del track al cargar; hay que volver a medir */
+  Array.prototype.forEach.call(track.querySelectorAll('img'),function(im){
+    if(!im.complete) im.addEventListener('load',measure,{once:true});
+  });
+})();
 /* el catálogo manda: si entra o sale un producto, los rótulos siguen bien */
 $('#searchInput').placeholder='Search '+P.length+' products';
 $('[data-count-all]').textContent='All '+P.length;

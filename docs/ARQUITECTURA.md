@@ -80,7 +80,7 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 | 1 | **Hero** | Que en tres segundos se entienda qué se vende y dónde estás parado. El logo en grande sobre metraje propio, una línea de bajada y dos acciones: "Arma tu mate" al shop / aprender |
 | 2 | **Confianza** | Las cuatro razones para creerle a la tienda: retiro en local, mercado los domingos, Apple/Google Pay, envíos a toda Australia |
 | 3 | **Reels** | Contenido vertical propio, **cada clip enlazado a un producto**. Es la sección más distintiva y la que ya tiene material filmado. En celular se desliza de costado, no en grilla: una grilla de 2 columnas de 9:16 queda despareja y esconde la mitad |
-| 4 | **Más vendidos** | Ocho productos. Entrada rápida al catálogo sin pasar por la grilla |
+| 4 | **Más vendidos** | Ocho productos en un carrusel que deriva solo, en loop sin costura. Entrada rápida al catálogo sin pasar por la grilla. Cada pieza va recortada en PNG transparente sobre un degradado — ver abajo |
 | 5 | **Arma tu mate** | El bloque de conversión más importante. Las tres decisiones en orden —el mate, la bombilla, la yerba— cada una linkeada a su categoría y con el precio desde el que arranca. No es un producto: es el recorrido |
 | 6 | **What is Mate?** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
 | 7 | **Comunidad** | El grupo de WhatsApp. Prueba social que la competencia no tiene |
@@ -88,6 +88,40 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 
 **El orden importa**: vender (1–5) antes de educar (6), y educar antes de pedir
 pertenencia (7). Un primerizo entra por 1, duda en 2, se engancha en 3 y compra en 5.
+
+### El carrusel de más vendidos
+
+No es una galería con flechas: es una fila que **deriva sola y no corta nunca**.
+La diferencia importa. Una galería tiene principio y final, y cada vez que llegás
+a un extremo el movimiento se frena y te avisa que se terminó. Esta no: el set de
+tiles va dos veces y la posición se envuelve con módulo sobre el ancho de un set,
+así que en el punto de corte el tile que entra es idéntico al que salió y el ojo
+no registra el salto. Se lee como un plano de video que sigue más allá del cuadro,
+que es exactamente la sensación que da el contenido de la marca.
+
+Tres detalles que sostienen esa lectura y que **no son decorativos**:
+
+- **Los bordes se desvanecen** contra el fondo de la página. Un corte duro en el
+  borde delata que hay un contenedor; el degradado dice que la fila sigue.
+- **Al pasar el mouse la deriva se apaga con una rampa**, no de un frenazo. Un
+  corte seco rompe la continuidad justo cuando querés que la persona lea el tile.
+- **Se puede agarrar y empujar**, y al soltar la inercia se funde con la deriva de
+  base en vez de detenerse. Nunca hay un estado "quieto".
+
+Con `prefers-reduced-motion` la deriva no arranca, pero el carrusel sigue siendo
+arrastrable con el dedo y con las flechas del teclado.
+
+**El tile**: degradado de dos tonos según la categoría, la pieza recortada flotando
+al centro con una sombra que la despega, y arriba a la izquierda el nombre, una
+línea corta de especificación y el precio. La medida del texto es la misma en todos
+(62 % del ancho) para que los nombres corten parejo y quede lugar al badge.
+
+**Las fotos** van en `assets/products/<id-del-producto>.png`, recortadas con alfa.
+La especificación completa —lienzo, escala relativa entre productos, luz— está en
+`assets/products/README.md`. Lo que más importa: **todas al mismo lienzo y a escala
+real entre sí**. Si cada producto llena su cuadro, la bombilla termina del tamaño
+del termo y el carrusel deja de ser creíble. Mientras no estén, el prototipo usa
+las ilustraciones vectoriales.
 
 ---
 
