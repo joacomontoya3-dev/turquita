@@ -78,16 +78,39 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 | # | Sección | Qué tiene que lograr |
 |---|---|---|
 | 1 | **Hero** | Que en tres segundos se entienda qué se vende y dónde estás parado. El logo en grande sobre metraje propio, una línea de bajada y dos acciones: "Arma tu mate" al shop / aprender |
-| 2 | **Confianza** | Las cuatro razones para creerle a la tienda: retiro en local, mercado los domingos, Apple/Google Pay, envíos a toda Australia |
-| 3 | **Reels** | Contenido vertical propio, **cada clip enlazado a un producto**. Es la sección más distintiva y la que ya tiene material filmado. En celular se desliza de costado, no en grilla: una grilla de 2 columnas de 9:16 queda despareja y esconde la mitad |
-| 4 | **Más vendidos** | Ocho productos en un carrusel que deriva solo, en loop sin costura. Entrada rápida al catálogo sin pasar por la grilla. Cada pieza va recortada en PNG transparente sobre un degradado — ver abajo |
-| 5 | **Arma tu mate** | El bloque de conversión más importante. Las tres decisiones en orden —el mate, la bombilla, la yerba— cada una linkeada a su categoría y con el precio desde el que arranca. No es un producto: es el recorrido |
-| 6 | **What is Mate?** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
-| 7 | **Comunidad** | El grupo de WhatsApp. Prueba social que la competencia no tiene |
-| 8 | **Visit us** | Los dos puntos físicos, con dirección y horario. Es el resumen; la versión completa vive en `/about` |
+| 2 | **Más vendidos** | Ocho productos en un carrusel que deriva solo, en loop sin costura. Entrada rápida al catálogo sin pasar por la grilla. Cada pieza va recortada en PNG transparente sobre un degradado — ver abajo |
+| 3 | **Arma tu mate** | El bloque de conversión más importante. Las tres decisiones en orden —el mate, la bombilla, la yerba— cada una linkeada a su categoría y con el precio desde el que arranca. No es un producto: es el recorrido |
+| 4 | **What is Mate?** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
+| 5 | **Comunidad** | El grupo de WhatsApp, y debajo cinco verticales propios como prueba. Es lo que la competencia no tiene: gente de verdad |
+| 6 | **Visit us** | Los dos puntos físicos, con dirección y horario. Es el resumen; la versión completa vive en `/about` |
 
-**El orden importa**: vender (1–5) antes de educar (6), y educar antes de pedir
-pertenencia (7). Un primerizo entra por 1, duda en 2, se engancha en 3 y compra en 5.
+**El orden importa**: vender (1–3) antes de educar (4), y educar antes de pedir
+pertenencia (5). Un primerizo entra por 1, se orienta en 2 y compra en 3.
+
+### Los verticales van con la comunidad, no arriba
+
+Estuvieron arriba, como tercera sección, con **cada clip enlazado a un producto**.
+Esa idea tiene un problema que no se ve hasta que mirás el metraje: para que el
+link funcione, en la toma tiene que reconocerse la pieza. Si el vertical es un
+plano de la playa al atardecer, colgarle "Mate San Juan" es arbitrario y el que
+clickea llega a una ficha que no tiene que ver con lo que estaba mirando. Eso
+convierte la sección en una deuda: alguien tiene que mirar los ~24 verticales del
+Drive y etiquetar producto por producto, y hasta que eso pase la fila es una
+promesa.
+
+Abajo, al lado de la invitación al grupo, el trabajo es otro y no hay nada que
+etiquetar: **mostrar que esto se vive acá**. `conversaciones`, `SEC GAMES` y
+`VIDEO FUTBOL QUICK_3` son gente pasándose un mate, y como prueba social valen
+mucho más que como vidriera. Los tiles dejaron de ser links.
+
+Hubo además una razón de diseño para moverlos. Al volver "Más vendidos" un
+carrusel que se desplaza, quedaban **dos filas horizontales en movimiento una
+arriba de la otra**, compitiendo. Separadas, cada movimiento significa una cosa:
+arriba el que deriva es producto, abajo la grilla quieta es contenido.
+
+Si más adelante mirás los verticales y en seis se ve un mate clarito, siempre se
+pueden subir y enlazar. Pero eso es una mejora sobre algo que ya funciona, no un
+requisito para publicar.
 
 ### El carrusel de más vendidos
 

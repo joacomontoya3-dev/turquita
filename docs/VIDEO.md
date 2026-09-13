@@ -33,7 +33,7 @@ Si el titular tiene que subir en el cuadro, sube el degradado con él.
 | Slot | Relación | Duración | Export |
 |---|---|---|---|
 | Hero | 16:9 (el navegador recorta) | 6–8 s, loop sin corte | MP4 H.264, 1920×1080, ≤ 4 MB |
-| Reel | 9:16 | 4–6 s | MP4 H.264, 1080×1920, ≤ 1.5 MB c/u |
+| Vertical de comunidad | 9:16 | 4–6 s | MP4 H.264, 1080×1920, ≤ 1.5 MB c/u |
 | Ficha de producto | 4:5 | 3–4 s | MP4 H.264, 1080×1350, ≤ 1 MB c/u |
 | Paso de la guía | 16:10 | 5–8 s, una acción por clip | MP4 H.264, 1600×1000, ≤ 2 MB |
 | Banda ancha | 16:9 | 8–10 s | MP4 H.264, 1920×1080, ≤ 4 MB |
@@ -59,15 +59,22 @@ sólo para los clips que el visitante toca.
 4. **El local de Broadbeach** desde afuera, persiana levantada, alguien entrando.
 5. **El puesto del mercado** un domingo, con gente alrededor.
 
-### Prioridad 2 — el carrusel de reels
+### Prioridad 2 — los verticales de comunidad
 
-Verticales, tono de celular, de la vida real. No producidos.
+Verticales, tono de celular, de la vida real. No producidos. Van abajo, con el
+bloque del grupo de WhatsApp, y **no llevan a un producto**: el criterio para
+elegirlos es que se vea gente, no una pieza.
 
 - Domingo en el mercado, cámara en mano, gente hablando
-- El primer mate de alguien: la reacción, no el producto
-- Cebando en la arena, contrapicado, sol atrás
-- "No muevas la bombilla": la forma incorrecta y la correcta, corte seco
-- Se abre el kilo de yerba, close del molido — éste con sonido
+- Una ronda en la arena, el mate pasando de mano en mano
+- Conversaciones que se estiran, con el mate en cuadro pero sin ser el tema
+- El termo esperando al costado de la cancha mientras se juega
+- La vuelta completa: todos toman, nadie se saltea
+
+**Esto probablemente ya está filmado.** Antes de salir a grabar, mirá
+`vertical-_1` a `_7` (SEMANA 5), `VER1/2/4/5/6/8` (SEMANA 6), `conversaciones`
+1–4 (SEMANA 3), `Market.mp4` y `SEC GAMES` (fix). Son ~24 verticales terminados
+y sólo hacen falta cinco. Ver `DRIVE-INVENTARIO.md`.
 
 ### Prioridad 3 — un clip por producto
 
@@ -88,9 +95,9 @@ Ahí está la diferencia entre una grilla que se ve cara y una que se ve improvi
 **Video Box** es el elemento. Para un hero, poné el Video Box de fondo de sección con
 Loop + Mute + Play automático.
 
-**Carrusel de reels:** un Repeater en layout horizontal con un Video Box por celda. Si
+**Verticales de comunidad:** un Repeater en layout horizontal con un Video Box por celda. Si
 los clips ya están en Instagram, el elemento **Instagram Feed** te ahorra el trabajo —
-pero pesa más y depende de una cuenta externa, así que para los reels fijos de la home
+pero pesa más y depende de una cuenta externa, así que para los verticales fijos de la home
 conviene subirlos.
 
 **Producto:** Wix Stores acepta video en la galería de medios del producto. Subilo como

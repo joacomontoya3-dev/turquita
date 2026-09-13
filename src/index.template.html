@@ -253,13 +253,13 @@ nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
 @media(min-width:1100px){.strip-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
 
 /* reels: butted 9:16 tiles, no chrome */
-.reel{position:relative;aspect-ratio:9/16;min-width:0;background:var(--band);overflow:hidden}
+.reel{position:relative;aspect-ratio:9/16;min-width:0;background:var(--band);overflow:hidden;margin:0}
 .reel video{width:100%;height:100%;object-fit:cover}
 .reel-txt{position:absolute;inset:auto .75rem .85rem .75rem;z-index:3;color:var(--band-fg)}
 .reel-txt b{display:block;font-size:.9375rem;font-weight:600;line-height:1.25}
 .reel-txt span{display:block;margin-top:.3rem;font-size:var(--t-micro);font-weight:500;
   text-transform:uppercase;letter-spacing:.06em;color:rgba(245,245,244,.72)}
-.reel:hover .reel-txt span{color:var(--band-fg)}
+
 
 /* product tile: centred, tile lighter than the ground, meta centred below */
 .card{display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--line);
@@ -713,14 +713,6 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
   </div>
 
   <div class="wrap" style="padding-top:clamp(2rem,4vw,3.25rem)">
-    <div class="shead">
-      <span class="t">Reels</span>
-      <a class="arw" href="#/shop">Shop</a>
-    </div>
-  </div>
-  <div class="strip strip-5" id="reelStrip"></div>
-
-  <div class="wrap" style="padding-top:clamp(2rem,4vw,3.25rem)">
     <div class="shead"><span class="t">Best sellers</span>
       <a class="arw" href="#/shop" data-count-all>All</a></div>
   </div>
@@ -763,12 +755,20 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
   </div>
   <div class="steps" id="stepsPreview"></div>
 
-  <div class="wrap sec">
+  <!-- Los verticales bajaron hasta acá a propósito. Arriba tenían que vender
+       —cada clip enlazado a un producto— y eso obligaba a que en cada toma se
+       reconociera la pieza, cosa que el metraje no garantiza. Acá el trabajo es
+       otro: mostrar que esto se vive, al lado de la invitación al grupo. Sin
+       link a producto, no hay nada que etiquetar. -->
+  <div class="wrap sec" style="padding-bottom:clamp(1rem,2vw,1.5rem)">
     <div class="editorial">
       <span class="lbl">The community</span>
       <div>
         <p style="font-size:clamp(1.0625rem,1.6vw,1.375rem);line-height:1.45;max-width:46ch">
           There's a WhatsApp group, and you're invited.</p>
+        <p class="prose" style="margin-top:.85rem">Argentines, Uruguayans, Brazilians and a
+          growing number of Australians who got curious. Rondas on the beach, yerba group
+          buys, and people who will happily tell you your bombilla is on backwards.</p>
         <p style="margin-top:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem">
           <a class="arw" href="#/">Join the group</a>
           <a class="arw" href="#/about">About Mate Coast</a>
@@ -776,6 +776,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       </div>
     </div>
   </div>
+  <div class="strip strip-5" id="reelStrip"></div>
 
   <div class="wrap">
     <div class="visit">
@@ -1233,17 +1234,27 @@ var P=[
   shot:'Packed and picked up, walking out of frame toward the beach. 4 s.',
   spec:[['Material','Waxed canvas & leather'],['Holds','1 L termo + mate + yerbera'],['Base','Reinforced'],['Handle','Leather'],['Water','Resistant']]}];
 
+/* Los verticales de la comunidad. Ya no llevan a un producto: el trabajo de
+   esta fila es mostrar gente, no vender una pieza. Por eso cada entrada trae
+   `src` con el archivo candidato del Drive en vez de un id de producto —
+   confirmalo mirando el material, los nombres no alcanzan. Ver
+   docs/DRIVE-INVENTARIO.md. */
 var REELS=[
- {clip:'reel-1',t:'Sunday at the markets',s:'Surfers Paradise',pid:'termo-1l',
+ {clip:'reel-1',t:'Sundays at the markets',s:'Surfers Paradise',
+  src:'Market.mp4 — carpeta fix',
   shot:'Handheld walk through the stall, people talking. 5 s.'},
- {clip:'reel-2',t:'Her first mate',s:'Broadbeach store',pid:'mate-entre-rios',
-  shot:'Someone tries it for the first time. Reaction, not product. 5 s.'},
- {clip:'reel-3',t:'Cebando on the sand',s:'Golden hour',pid:'mate-san-juan',
-  shot:'Low angle, sun behind, steam visible. 5 s.'},
- {clip:'reel-4',t:'Don’t move the bombilla',s:'The one rule',pid:'bombilla-pico',
-  shot:'Wrong way then right way, hard cut between. 6 s.'},
- {clip:'reel-2',t:'A kilo, opened',s:'Verde Flor',pid:'verde-flor',
-  shot:'Cart opens, close on the grind. Sound on for this one. 4 s.'}];
+ {clip:'reel-3',t:'Rondas on the sand',s:'Broadbeach',
+  src:'vertical-_1 a _7 — SEMANA 5',
+  shot:'Low angle, sun behind, the gourd going from hand to hand. 5 s.'},
+ {clip:'reel-2',t:'Conversations that run long',s:'The group',
+  src:'conversaciones 1–4 — SEMANA 3',
+  shot:'People talking, mate in frame but not the subject. 6 s.'},
+ {clip:'reel-4',t:'The football and the termo',s:'Any given Sunday',
+  src:'VIDEO FUTBOL QUICK_3 — SEMANA 4 · SEC GAMES — fix',
+  shot:'The termo waiting on the sideline while the game runs. 5 s.'},
+ {clip:'reel-2',t:'Everyone gets a turn',s:'How it works',
+  src:'VER1/2/4/5/6/8 — SEMANA 6',
+  shot:'The round going past, one hand to the next, no cuts. 6 s.'}];
 
 var STEPS=[
  {n:'01',t:'Fill it two-thirds',clip:'reel-3',p:'Pour dry yerba until the gourd is about two-thirds full. Less than you think — it swells.',note:'Two-thirds. Not to the brim.',shot:'Yerba pouring in, gourd held steady. 5 s.'},
@@ -1513,13 +1524,14 @@ $('#scrim').addEventListener('click',closeCart);
 document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!$('#drawer').hidden) closeCart(); });
 
 /* ============================================================ static renders */
+/* Figuras, no links: acá no se compra nada. La nota de producción nombra el
+   archivo del Drive que va en cada hueco. */
 $('#reelStrip').innerHTML=REELS.map(function(r){
-  var p=byId(r.pid);
-  return '<a class="reel" href="#/product/'+p.id+'">'+
+  return '<figure class="reel">'+
     '<video data-clip="'+r.clip+'" muted loop playsinline preload="none" aria-hidden="true"></video>'+
     '<div class="veil"></div>'+
-    '<p class="shot"><b>'+r.t+'</b> — '+esc(r.shot)+'</p>'+
-    '<div class="reel-txt"><b>'+r.t+'</b><span>'+p.n+' · '+money(p.price)+'</span></div></a>';
+    '<p class="shot"><b>'+r.t+'</b> — '+esc(r.shot)+' <b>Drive:</b> '+esc(r.src)+'</p>'+
+    '<figcaption class="reel-txt"><b>'+r.t+'</b><span>'+r.s+'</span></figcaption></figure>';
 }).join('');
 
 $('#menuCats').innerHTML='<span class="lbl">Shop</span><a href="#/shop">All products<span>'+

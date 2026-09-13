@@ -201,7 +201,7 @@ algunas fichas la tienen y otras no, la grilla se ve descuidada.
 | Página "What is Mate?" | Página normal con un Video Box por paso. **No la pongas en un embed** — es tu mejor contenido para Google |
 | Hero a sangre | Sección con fondo de video, o Video Box del tamaño de la sección. Loop + Mute + Play automático |
 | Degradado sobre el video | Color Overlay sobre el Video Box con el degradado — **no** el slider de opacidad del video |
-| Carrusel de reels | Repeater horizontal con un Video Box por celda |
+| Verticales de comunidad | Repeater horizontal con un Video Box por celda. No son links a producto |
 | Video en la ficha | Wix Stores acepta video en la galería de medios del producto |
 | Video al pasar el mouse en la grilla | **No se puede.** El Product Gallery sólo cambia a una segunda imagen. Usá un fotograma fijo ahí |
 

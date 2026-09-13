@@ -83,14 +83,19 @@ pude ver el contenido, así que confirmalo mirando.
 | **Hero** (16:9, 6–8 s) | `CINEMATIC MARKET` / `CINEMATIC S3`, `cinematic semana 2 V1-`, `horizontal log-` | Es el plano que sostiene el logotipo encima. Necesita centro despejado y movimiento lento |
 | **Banda "Arma tu mate"** (16:9, 8–10 s) | `cinematic semana 2 largo`, `Sequence 14`, `HORIZONTAL-` | Va detrás del bloque "Arma tu mate" |
 | **Banda de curado** (16:9) | `cineamtic 1.2 version corregido`, `Sequence 04` | Cierra la guía |
-| **Carrusel de reels** (9:16, ×5) | `vertical-_1` a `_7` (SEMANA 5) y `VER1/2/4/5/6/8` (SEMANA 6) | Ya son verticales y ya están terminados. Es lo más listo para usar de todo el Drive |
-| **Reel "domingo en el mercado"** | `Market.mp4` | Por nombre, es exactamente esa toma |
-| **Reel de comunidad** | `conversaciones` 1–4, `SEC GAMES`, `VIDEO FUTBOL QUICK_3` | Gente real. Perfecto para el bloque del grupo de WhatsApp |
+| **Verticales de comunidad** (9:16, ×5) | `Market.mp4` (fix), `vertical-_1` a `_7` (SEMANA 5), `conversaciones` 1–4 (SEMANA 3), `VIDEO FUTBOL QUICK_3` (SEMANA 4) + `SEC GAMES` (fix), `VER1/2/4/5/6/8` (SEMANA 6) | Ya son verticales y ya están terminados: lo más listo para usar de todo el Drive. Van abajo, con el bloque de comunidad, y **no llevan a un producto** — el criterio es que se vea gente, no una pieza. Por eso no hay que etiquetar nada |
 | **Fichas de producto** (4:5, 3–4 s) | `VID CARRUSEL 1–8` | Por el nombre y por pesar todos casi igual, son la serie de producto |
 
 **Lo más importante de esta tabla:** los verticales de SEMANA 5 y 6 son el material más
-aprovechable que tienen. Ya están en 9:16, ya están editados, y el carrusel de reels es
-la sección más distintiva del diseño. Ahí no hay que filmar nada nuevo.
+aprovechable que tienen. Ya están en 9:16, ya están editados, y el bloque de comunidad
+es la sección más distintiva del diseño. Ahí no hay que filmar nada nuevo.
+
+**Lo único que hay que hacer antes es mirarlos.** Los nombres de archivo no dicen qué se
+ve: `vertical-_3` puede ser una ronda con seis personas o un plano de la arena. Para los
+cinco huecos de comunidad alcanza con elegir **cinco donde se vea gente**, que es un
+criterio que se resuelve mirando en diagonal. Lo que sí sería un trabajo largo es
+etiquetar qué producto aparece en cada uno — y justamente por eso la sección dejó de
+pedirlo (ver `ARQUITECTURA.md`).
 
 ---
 
