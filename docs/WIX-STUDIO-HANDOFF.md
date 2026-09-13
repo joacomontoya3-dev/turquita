@@ -158,6 +158,38 @@ componente con variantes de color. Pastilla, padding 30 / 15, Inter Medium 15,
 caja de oración (no mayúsculas). Lo mismo vale para el "Add to cart", los de pago
 express y el de Checkout del carrito.
 
+## 3e. La fila de más vendidos
+
+| Qué | Valor |
+|---|---|
+| Padding vertical de la sección | 96 px arriba y abajo |
+| Margen lateral | El mismo que el nav y el hero |
+| Header | Flex, space-between. Izquierda "Bestselling Products" H3 28/36 Semibold; derecha "More products" 14 px en gris con flecha a 5 px |
+| Gap header → fila | 36 px |
+| Gap entre cards | 24 px |
+| Ancho de card | 302 px a 1440 |
+| Chevrons | Círculos de 42 px, relleno blanco, sombra suave, **sin borde**. Pegados a los bordes de la fila y centrados sobre la altura de la **imagen**, no de la card |
+| Imagen | Cuadrada, radio 14, degradado neutro suave |
+| Badge | Pastilla blanca al 80 %, 11 px, padding 5 / 11, a 14 px del borde |
+| Muestras | Círculos de 13 px, gap 7, a 14 px de la imagen |
+| Título | 15 / 21, gris medio, máximo dos líneas, a 8 px de las muestras |
+| Precio ↔ "+ Cart" | Fila al 100 % con space-between, a 10 px del título. Precio 17 Semibold oscuro; botón pastilla verde `#546742`, texto blanco 13, "+" antes del texto, padding 9 / 17 |
+
+**Los chevrons van centrados sobre la imagen, no sobre la card.** Es el detalle que
+más se nota si se hace mal: centrados sobre la card entera quedan unos 40 px más
+abajo y parecen descolgados, porque el ojo los lee contra el bloque de la foto.
+
+**En Wix esta fila es un Repeater horizontal**, no una galería de producto. La
+galería nativa de Stores no deja poner un botón por celda ni controlar el degradado
+por categoría. El "+ Cart" por celda sí es nativo (`Add to Cart` dentro del
+Repeater, atado al producto de esa celda).
+
+**El movimiento no lo hace Wix.** La deriva continua necesita código: un Custom
+Element con un `requestAnimationFrame` que corra la fila y envuelva la posición con
+módulo. Si eso no se va a mantener, la alternativa honesta es un Repeater con
+scroll horizontal y los chevrons, sin deriva — pero entonces se pierde la
+continuidad, que es la razón de ser de la sección.
+
 ## 4. Custom CSS
 
 `Dev Mode → Custom CSS`. Acá va lo que Wix no te deja controlar desde el panel:

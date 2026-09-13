@@ -45,6 +45,7 @@
   /* Margen lateral de página: 64 en desktop */
   --gut:clamp(20px,4.45vw,64px);
   --r:999px; --max:1280px;   /* pastilla en todo el sitio */
+  --pc-w:clamp(232px,20.9vw,302px); --pc-gap:var(--sp-4);
 
   /* Navbar */
   --nav-py:var(--sp-3); --nav-gap-links:40px; --nav-gap-actions:var(--sp-3);
@@ -297,59 +298,75 @@ nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
 .tag{position:absolute;top:.6rem;left:.6rem;z-index:4;font-family:var(--f-body);
   font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.07em;color:var(--ink)}
 
-/* ============================================================ sweep
-   Un carrusel que no arranca ni frena: deriva siempre, en loop sin costura.
-   La continuidad es el punto — tiene que leerse como un plano de video que
-   no corta, no como una galería con flechas. Se puede agarrar y empujar.
+/* ============================================================ best sellers
+   El carrusel sigue derivando solo y en loop sin costura — eso no cambia.
+   Lo que cambia es la caja: ahora vive dentro del contenedor de la página,
+   con su header y sus chevrons, en vez de ir a sangre.
    ============================================================ */
-.sweep{position:relative;overflow:hidden;background:var(--ground);
+.bs{padding-block:var(--section-gap)}
+.bs-head{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3);
+  margin-bottom:36px}
+.bs-more{display:inline-flex;align-items:center;gap:5px;font-size:var(--t-sm);
+  line-height:var(--lh-sm);color:var(--ink-2);white-space:nowrap}
+.bs-more:hover{color:var(--olive)}
+.bs-more .ico{width:16px;height:16px;aspect-ratio:1;flex:none}
+.bs-row{position:relative}
+.sweep{position:relative;overflow:hidden;
   /* el dedo puede arrastrar en horizontal sin trabar el scroll vertical */
   touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
 .sweep.dragging{cursor:grabbing}
-.sweep-track{display:flex;width:max-content;will-change:transform}
-/* los bordes se desvanecen: sin corte duro, la fila sigue más allá del cuadro */
-.sweep::before,.sweep::after{content:"";position:absolute;top:0;bottom:0;width:var(--gut);
-  z-index:5;pointer-events:none}
-.sweep::before{left:0;background:linear-gradient(to right,var(--ground),transparent)}
-.sweep::after{right:0;background:linear-gradient(to left,var(--ground),transparent)}
+.sweep-track{display:flex;gap:var(--pc-gap);width:max-content;will-change:transform}
 
-/* el tile: la pieza flotando sobre el degradado, los datos arriba a la izquierda */
-.ptile{position:relative;flex:none;width:clamp(208px,21vw,292px);aspect-ratio:3/4;
-  overflow:hidden;color:var(--band-fg);display:block;
-  background:
-    /* el pozo de luz va detrás del producto, no arriba de todo: es lo que lo
-       despega del fondo y lo hace leer como una foto y no como un recorte */
-    radial-gradient(72% 48% at 50% 46%,rgba(255,255,255,.44),rgba(255,255,255,0) 72%),
-    radial-gradient(120% 70% at 50% 118%,rgba(0,0,0,.28),rgba(0,0,0,0) 62%),
-    linear-gradient(165deg,var(--g1) 0%,var(--g2) 96%);
-  box-shadow:inset -1px 0 0 rgba(255,255,255,.14)}
-.ptile-art{position:absolute;inset:0;display:grid;place-items:center;padding:34% 26% 20%}
-/* la sombra es lo que hace que flote: va sobre el PNG recortado, no sobre una caja */
-.ptile-art img,.ptile-art svg{width:100%;height:100%;object-fit:contain;
-  filter:drop-shadow(0 16px 22px rgba(20,16,10,.34));
+/* chevrons: centrados sobre la IMAGEN, no sobre la card entera */
+.chev{position:absolute;top:calc(var(--pc-w) / 2);transform:translateY(-50%);z-index:6;
+  width:42px;height:42px;border-radius:50%;background:#FFFFFF;border:0;
+  display:grid;place-items:center;color:var(--ink);
+  box-shadow:0 2px 10px rgba(17,17,16,.14),0 1px 2px rgba(17,17,16,.08);
+  transition:transform .18s ease}
+.chev:hover{transform:translateY(-50%) scale(1.06)}
+.chev svg{width:20px;height:20px;aspect-ratio:1;fill:none;stroke:currentColor;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.chev-l{left:0}
+.chev-r{right:0}
+.chev-r svg{transform:rotate(180deg)}
+
+/* la card */
+.pcard{flex:none;width:var(--pc-w);display:flex;flex-direction:column}
+.pcard-img{position:relative;display:block;aspect-ratio:1;border-radius:14px;
+  overflow:hidden;background:linear-gradient(160deg,var(--g1) 0%,var(--g2) 100%)}
+.pcard-art{position:absolute;inset:0;display:grid;place-items:center;padding:16% 18%}
+.pcard-art img,.pcard-art svg{width:100%;height:100%;object-fit:contain;
+  filter:drop-shadow(0 10px 16px rgba(20,16,10,.16));
   transition:transform .5s cubic-bezier(.2,.8,.2,1)}
-.ptile:hover .ptile-art img,.ptile:hover .ptile-art svg{transform:translateY(-6px) scale(1.03)}
-.ptile-meta{position:absolute;top:0;left:0;z-index:3;padding:var(--sp-2);display:grid;gap:1px;
-  /* el badge vive arriba a la derecha: los datos no pueden llegar hasta ahí.
-     Misma medida en todos los tiles, con badge o sin él, para que los nombres
-     corten con el mismo ancho y la fila no quede despareja. */
-  max-width:62%}
-.ptile-n{font-size:var(--t-sm);line-height:1.25;font-weight:var(--fw-semibold);
-  letter-spacing:-.01em;text-wrap:balance}
-.ptile-s{font-size:var(--t-micro);color:rgba(245,245,244,.62);line-height:1.35}
-.ptile-p{font-size:var(--t-micro);color:rgba(245,245,244,.88);margin-top:.3rem;
+.pcard:hover .pcard-art img,.pcard:hover .pcard-art svg{transform:scale(1.04)}
+.pcard-badge{position:absolute;top:14px;left:14px;z-index:2;
+  font-size:11px;line-height:1.4;font-weight:var(--fw-medium);color:var(--ink);
+  background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  padding:5px 11px;border-radius:var(--r);white-space:nowrap}
+.pcard-sw{display:flex;gap:7px;align-items:center;min-height:13px;margin-top:14px}
+.pcard-sw i{width:13px;height:13px;border-radius:50%;display:block;
+  border:1px solid rgba(17,17,16,.16)}
+.pcard-t{display:block;margin-top:var(--sp-1);font-size:15px;line-height:21px;
+  color:var(--ink-2);min-height:42px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pcard-t:hover{color:var(--ink)}
+.pcard-foot{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-2);
+  width:100%;margin-top:10px}
+.pcard-p{font-size:17px;font-weight:var(--fw-semibold);color:var(--ink);
   font-variant-numeric:tabular-nums}
-.ptile-badge{position:absolute;top:var(--sp-2);right:var(--sp-2);z-index:4;
-  font-size:10px;text-transform:uppercase;letter-spacing:.08em;
-  color:rgba(245,245,244,.9);border:1px solid rgba(245,245,244,.4);
-  padding:2px 6px;border-radius:99px;white-space:nowrap}
+.pcard-add{display:inline-flex;align-items:center;gap:6px;flex:none;
+  background:var(--olive);color:#FFFFFF;border-radius:var(--r);
+  padding:9px 17px;font-size:13px;line-height:18px;font-weight:var(--fw-medium)}
+.pcard-add:hover{opacity:.86}
+.pcard-add svg{width:14px;height:14px;aspect-ratio:1;fill:none;stroke:currentColor;
+  stroke-width:1.8;stroke-linecap:round}
 @media(max-width:759px){
-  .ptile{width:62vw}
-  .ptile-badge{display:none}
+  .chev{display:none}
+  .bs-head{margin-bottom:var(--sp-4)}
 }
 /* sin movimiento no hay deriva, pero el carrusel sigue siendo arrastrable */
 @media(prefers-reduced-motion:reduce){
-  .ptile-art img,.ptile-art svg{transition:none}
+  .pcard-art img,.pcard-art svg{transition:none}
 }
 .s1{fill:var(--band)}.s2{fill:var(--clay)}.s3{fill:var(--band);opacity:.3}
 
@@ -592,6 +609,9 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
   <symbol id="i-logo" viewBox="__LOGO_VIEWBOX__">__LOGO_PATHS__</symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
   <symbol id="i-cart" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.1A2 2 0 0 1 15.8 21H8.2a2 2 0 0 1-2-1.9L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-gourd" viewBox="0 0 200 240">
     <rect class="s1" x="124" y="14" width="9" height="74" rx="4.5" transform="rotate(14 128 51)"/>
     <rect class="s1" x="117" y="4" width="24" height="10" rx="5" transform="rotate(14 129 9)"/>
@@ -726,15 +746,26 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
     </div></div>
   </div>
 
-  <div class="wrap" style="padding-top:clamp(2rem,4vw,3.25rem)">
-    <div class="shead"><span class="t">Best sellers</span>
-      <a class="arw" href="#/shop" data-count-all>All</a></div>
-  </div>
-  <!-- Deriva sola y no corta. Arrastrable. Los clones del final están
-       aria-hidden: para un lector de pantalla la lista se lee una sola vez. -->
-  <div class="sweep" id="bestSweep" role="region" aria-label="Best sellers" tabindex="0">
-    <div class="sweep-track" id="bestTrack"></div>
-  </div>
+  <!-- Deriva sola y no corta. Arrastrable, y los chevrons empujan una card.
+       Los clones del final están aria-hidden: para un lector de pantalla la
+       lista se lee una sola vez. -->
+  <section class="bs wrap">
+    <div class="bs-head">
+      <h2 class="h3">Bestselling Products</h2>
+      <a class="bs-more" href="#/shop">More products
+        <svg class="ico" data-icon fill="none" stroke="currentColor" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="bs-row">
+      <div class="sweep" id="bestSweep" role="region" aria-label="Bestselling products" tabindex="0">
+        <div class="sweep-track" id="bestTrack"></div>
+      </div>
+      <button type="button" class="chev chev-l" id="bsPrev" aria-label="Previous products">
+        <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <button type="button" class="chev chev-r" id="bsNext" aria-label="Next products">
+        <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
+    </div>
+  </section>
 
   <!-- "Arma tu mate": las tres decisiones, cada una a su categoría.
        No es un producto, es el recorrido que la marca ya usa. -->
@@ -1285,17 +1316,18 @@ function byId(id){for(var i=0;i<P.length;i++){if(P[i].id===id)return P[i];}retur
 function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i].name;}return '';}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
 
-/* Degradados del carrusel. Tonos de costa y de tierra, nada de cuero oscuro.
-   Se alternan cálido / frío para que dos tiles vecinos nunca se confundan. */
 var PNGS=/*__PNGS__*/ {};
 
+/* Degradados de la imagen: neutros y suaves, no tonos saturados — el producto
+   tiene que ser lo que se ve. Se alternan cálido / frío para que dos cards
+   vecinas no se confundan. */
 var TINT={
-  sand :['#C9A87C','#8A6A45'],
-  olive:['#8A9B6E','#45542F'],
-  sea  :['#9BBCC4','#4A6871'],
-  clay :['#C89765','#7E5732'],
-  stone:['#BFBDB3','#6E6C63'],
-  deep :['#7E97A4','#38494F']};
+  sand :['#F2EDE4','#E3D9C9'],
+  olive:['#EDF0E7','#DBE1D1'],
+  sea  :['#E9F0F1','#D5E1E3'],
+  clay :['#F4EBE1','#E7D7C5'],
+  stone:['#F1F1EF','#E1E1DD'],
+  deep :['#EAEEF0','#D4DDE1']};
 var TINT_BY_CAT={mates:'sand',bombillas:'stone',termos:'deep',yerba:'olive',accesorios:'clay'};
 /* Foto del producto: PNG transparente si existe en assets/products/<id>.png,
    y si todavía no está, la ilustración vectorial hace de reemplazo. */
@@ -1304,16 +1336,21 @@ function art(p){
     ? '<img src="'+PNGS[p.id]+'" alt="" loading="lazy" decoding="async">'
     : '<svg aria-hidden="true" viewBox="0 0 200 240"><use href="#'+p.ill+'"/></svg>';
 }
-function ptile(p,i,clone){
-  var t=TINT[p.tint||TINT_BY_CAT[p.cat]||'stone'];
-  return '<a class="ptile" href="#/product/'+p.id+'"'+
-    (clone?' aria-hidden="true" tabindex="-1"':'')+
+function pcard(p,clone){
+  var t=TINT[p.tint||TINT_BY_CAT[p.cat]||'stone'], tab=clone?' tabindex="-1"':'';
+  return '<article class="pcard"'+(clone?' aria-hidden="true"':'')+
     ' style="--g1:'+t[0]+';--g2:'+t[1]+'">'+
-    '<div class="ptile-meta"><span class="ptile-n">'+p.n+'</span>'+
-    '<span class="ptile-s">'+esc(p.spec[0][1])+'</span>'+
-    '<span class="ptile-p">'+money(p.price)+'</span></div>'+
-    (p.flag?'<span class="ptile-badge">'+p.flag+'</span>':'')+
-    '<div class="ptile-art">'+art(p)+'</div></a>';
+    '<a class="pcard-img" href="#/product/'+p.id+'" aria-label="'+esc(p.n)+'"'+tab+'>'+
+      (p.flag?'<span class="pcard-badge">'+p.flag+'</span>':'')+
+      '<span class="pcard-art">'+art(p)+'</span></a>'+
+    '<div class="pcard-sw">'+(p.variants?p.variants.map(function(v){
+      return '<i style="background:'+v.c+'" title="'+esc(v.n)+'"></i>';}).join(''):'')+'</div>'+
+    '<a class="pcard-t" href="#/product/'+p.id+'"'+tab+'>'+p.n+'</a>'+
+    '<div class="pcard-foot"><span class="pcard-p">'+money(p.price)+'</span>'+
+      '<button type="button" class="pcard-add" data-add="'+p.id+'"'+tab+
+        ' aria-label="Add '+esc(p.n)+' to cart">'+
+        '<svg aria-hidden="true"><use href="#i-plus"/></svg>Cart</button></div>'+
+    '</article>';
 }
 function card(p){
   return '<a class="card" href="#/product/'+p.id+'">'+
@@ -1572,8 +1609,8 @@ $('#aboutGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','canasto']
   if(!box||!track) return;
   var items=BEST.map(byId);
   /* dos pasadas: la segunda es decorativa y no la ve un lector de pantalla */
-  track.innerHTML = items.map(function(p,i){return ptile(p,i,false);}).join('')
-                  + items.map(function(p,i){return ptile(p,i,true);}).join('');
+  track.innerHTML = items.map(function(p){return pcard(p,false);}).join('')
+                  + items.map(function(p){return pcard(p,true);}).join('');
 
   var SPEED=14;                 /* px/s — lento, tiene que sentirse vivo, no apurado */
   var still=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -1613,9 +1650,13 @@ $('#aboutGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','canasto']
       if(Math.abs(to-gain)<.01){ gain=to; clearInterval(ramp); }
     },16);
   }
+  /* La rampa escucha a TODA la fila, no sólo al riel: los chevrons viven
+     afuera del riel y si no, usarlos reanudaba la deriva justo cuando la
+     persona acaba de elegir dónde quiere estar parada. */
+  var hoverZone=box.closest('.bs-row')||box;
   if(!still && window.matchMedia && window.matchMedia('(hover: hover)').matches){
-    box.addEventListener('mouseenter',function(){ ease(0); });
-    box.addEventListener('mouseleave',function(){ ease(1); });
+    hoverZone.addEventListener('mouseenter',function(){ ease(0); });
+    hoverZone.addEventListener('mouseleave',function(){ ease(1); });
   }
 
   box.addEventListener('pointerdown',function(e){
@@ -1649,11 +1690,30 @@ $('#aboutGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','canasto']
 
   /* el teclado empuja el carrusel un tile por vez */
   box.addEventListener('keydown',function(e){
-    var w=box.querySelector('.ptile');
-    if(!w) return;
-    if(e.key==='ArrowRight'){ pos=wrap(pos-w.offsetWidth); e.preventDefault(); }
-    if(e.key==='ArrowLeft'){ pos=wrap(pos+w.offsetWidth); e.preventDefault(); }
+    if(e.key==='ArrowRight'){ step(-1); e.preventDefault(); }
+    if(e.key==='ArrowLeft'){ step(1); e.preventDefault(); }
+  });
+
+  /* Los chevrons empujan una card. No frenan la deriva: la empujan y la fila
+     sigue andando, que es lo que mantiene la continuidad. */
+  function step(dir){
+    var c=box.querySelector('.pcard');
+    if(!c) return;
+    var d=c.offsetWidth+parseFloat(getComputedStyle(track).columnGap||0);
+    pos=wrap(pos+dir*d);
     track.style.transform='translate3d('+pos.toFixed(2)+'px,0,0)';
+  }
+  var prev=$('#bsPrev'), next=$('#bsNext');
+  if(prev) prev.addEventListener('click',function(){ step(1); });
+  if(next) next.addEventListener('click',function(){ step(-1); });
+
+  /* "+ Cart" desde la card. El capture de arriba corta el evento si la mano
+     se movió, así que arrastrar nunca agrega nada al carrito. */
+  box.addEventListener('click',function(e){
+    var b=e.target.closest('[data-add]');
+    if(!b) return;
+    e.preventDefault();
+    addToCart(b.getAttribute('data-add'),1,'');
   });
 
   /* fuera de pantalla o con la pestaña de fondo no tiene sentido gastar frames */
@@ -1673,7 +1733,6 @@ $('#aboutGrid').innerHTML=['mate-san-juan','termo-1l','verde-flor','canasto']
 })();
 /* el catálogo manda: si entra o sale un producto, los rótulos siguen bien */
 $('#searchInput').placeholder='Search '+P.length+' products';
-$('[data-count-all]').textContent='All '+P.length;
 /* el "desde" de cada decisión sale del catálogo, no escrito a mano */
 Array.prototype.forEach.call(document.querySelectorAll('[data-from]'),function(el){
   var c=el.getAttribute('data-from'), min=null;

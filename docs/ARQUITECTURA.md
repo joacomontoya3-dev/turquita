@@ -78,7 +78,7 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 | # | Sección | Qué tiene que lograr |
 |---|---|---|
 | 1 | **Hero** | Que en tres segundos se entienda qué se vende y dónde estás parado. El logo en grande sobre metraje propio, una línea de bajada y dos acciones: "Arma tu mate" al shop / aprender |
-| 2 | **Más vendidos** | Ocho productos en un carrusel que deriva solo, en loop sin costura. Entrada rápida al catálogo sin pasar por la grilla. Cada pieza va recortada en PNG transparente sobre un degradado — ver abajo |
+| 2 | **Bestselling Products** | Ocho productos en un carrusel que deriva solo, en loop sin costura, con chevrons y "+ Cart" en cada card. Entrada rápida al catálogo sin pasar por la grilla. Cada pieza va recortada en PNG transparente sobre un degradado neutro — ver abajo |
 | 3 | **Arma tu mate** | El bloque de conversión más importante. Las tres decisiones en orden —el mate, la bombilla, la yerba— cada una linkeada a su categoría y con el precio desde el que arranca. No es un producto: es el recorrido |
 | 4 | **What is Mate?** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
 | 5 | **Comunidad** | El grupo de WhatsApp, y debajo cinco verticales propios como prueba. Es lo que la competencia no tiene: gente de verdad |
@@ -86,6 +86,84 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 
 **El orden importa**: vender (1–3) antes de educar (4), y educar antes de pedir
 pertenencia (5). Un primerizo entra por 1, se orienta en 2 y compra en 3.
+
+### Los verticales van con la comunidad, no arriba
+
+Estuvieron arriba, como tercera sección, con **cada clip enlazado a un producto**.
+Esa idea tiene un problema que no se ve hasta que mirás el metraje: para que el
+link funcione, en la toma tiene que reconocerse la pieza. Si el vertical es un
+plano de la playa al atardecer, colgarle "Mate San Juan" es arbitrario y el que
+clickea llega a una ficha que no tiene que ver con lo que estaba mirando. Eso
+convierte la sección en una deuda: alguien tiene que mirar los ~24 verticales del
+Drive y etiquetar producto por producto, y hasta que eso pase la fila es una
+promesa.
+
+Abajo, al lado de la invitación al grupo, el trabajo es otro y no hay nada que
+etiquetar: **mostrar que esto se vive acá**. `conversaciones`, `SEC GAMES` y
+`VIDEO FUTBOL QUICK_3` son gente pasándose un mate, y como prueba social valen
+mucho más que como vidriera. Los tiles dejaron de ser links.
+
+Hubo además una razón de diseño para moverlos. Al volver "Más vendidos" un
+carrusel que se desplaza, quedaban **dos filas horizontales en movimiento una
+arriba de la otra**, compitiendo. Separadas, cada movimiento significa una cosa:
+arriba el que deriva es producto, abajo la grilla quieta es contenido.
+
+Si más adelante mirás los verticales y en seis se ve un mate clarito, siempre se
+pueden subir y enlazar. Pero eso es una mejora sobre algo que ya funciona, no un
+requisito para publicar.
+
+### El carrusel de más vendidos
+
+No es una galería con flechas: es una fila que **deriva sola y no corta nunca**.
+La diferencia importa. Una galería tiene principio y final, y cada vez que llegás
+a un extremo el movimiento se frena y te avisa que se terminó. Esta no: el set de
+cards va dos veces y la posición se envuelve con módulo sobre el ancho de un set,
+así que en el punto de corte la card que entra es idéntica a la que salió y el ojo
+no registra el salto. Se lee como un plano de video que sigue más allá del cuadro,
+que es exactamente la sensación que da el contenido de la marca.
+
+Tres detalles que sostienen esa lectura y que **no son decorativos**:
+
+- **Al pasar el mouse la deriva se apaga con una rampa**, no de un frenazo. Un
+  corte seco rompe la continuidad justo cuando querés que la persona lea la card.
+  La zona sensible es **toda la fila, chevrons incluidos** — si fuera sólo el riel,
+  usar un chevron reanudaría la deriva justo cuando la persona acaba de elegir
+  dónde pararse.
+- **Se puede agarrar y empujar**, y al soltar la inercia se funde con la deriva de
+  base en vez de detenerse. Nunca hay un estado "quieto".
+- **Los chevrons empujan una card y la fila sigue andando.** No la frenan: la
+  corren 325 px (una card más el gap) y la deriva continúa desde ahí.
+
+Con `prefers-reduced-motion` la deriva no arranca, pero el carrusel sigue siendo
+arrastrable, con chevrons y con las flechas del teclado.
+
+**Por qué se ve una card cortada a la derecha.** La spec pedía cuatro cards
+completas en un contenedor de 1200–1280, lo que da cards de ~302 px. Pero también
+pedía que el margen lateral fuera el mismo que el del nav y el hero, y ahí las dos
+cosas no cierran: alineado al nav, el ancho útil a 1440 es 1152, y 4 × 302 + 3 × 24
+son 1280. Gana la alineación, que es lo que se ve. Quedan tres cards enteras y un
+67 % de la cuarta asomando.
+
+No es una concesión: **en un carrusel que deriva no existe el estado de "cuatro
+cards completas"**. Las cards están siempre cortadas en los dos bordes porque la
+fila nunca se detiene. El asomo es la única lectura honesta, y la spec lo da por
+válido explícitamente.
+
+**La card**: imagen cuadrada con radio 14 y un degradado neutro suave según la
+categoría — neutro a propósito, el color saturado le compite al producto. Badge
+pastilla blanco al 80 % arriba a la izquierda, muestras de color de 13 px, título
+a dos líneas como máximo en gris medio, y abajo el precio a la izquierda contra el
+botón "+ Cart" a la derecha, en el verde de marca.
+
+El "+ Cart" agrega sin salir de la home y abre el carrito lateral. El mismo umbral
+de 6 px que evita que un arrastre navegue evita que un arrastre agregue al carrito.
+
+**Las fotos** van en `assets/products/<id-del-producto>.png`, recortadas con alfa.
+La especificación completa —lienzo, escala relativa entre productos, luz— está en
+`assets/products/README.md`. Lo que más importa: **todas al mismo lienzo y a escala
+real entre sí**. Si cada producto llena su cuadro, la bombilla termina del tamaño
+del termo y el carrusel deja de ser creíble. Mientras no estén, el prototipo usa
+las ilustraciones vectoriales.
 
 ### Los verticales van con la comunidad, no arriba
 
