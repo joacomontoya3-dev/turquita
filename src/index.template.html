@@ -52,6 +52,12 @@
   --nav-logo-h:42px;
   /* one scrim for every text-over-video block on the site */
   --scrim:linear-gradient(to top,rgba(8,8,8,.88) 0%,rgba(8,8,8,.6) 32%,rgba(8,8,8,.1) 72%,rgba(8,8,8,0) 100%);
+  /* el hero lleva el suyo: más liviano abajo (66 %, no 88 %) porque el texto
+     es grande y no necesita tanto. Limpio arriba para no ensuciar el metraje. */
+  --scrim-hero:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,.18) 50%,rgba(0,0,0,.66) 100%);
+  --hero-h:clamp(520px,53vw,768px);
+  --hero-copy:620px;            /* el H1 rompe en tres líneas, no al ancho del frame */
+  --r-pill:999px;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -116,10 +122,17 @@ p{margin:0}
 .btn-out{background:transparent;color:var(--ink);border:1px solid var(--ink)}
 .btn-out:hover{background:var(--ink);color:var(--ground);opacity:1}
 .btn-block{width:100%}
+/* Pastilla. Primario y secundario comparten TODO menos el color: mismo padding,
+   misma altura, misma tipografía. Sólo cambia la variante. */
+.btn-pill{border-radius:var(--r-pill);padding:15px 30px;font-size:var(--t-button);
+  text-transform:none;letter-spacing:0;font-weight:var(--fw-medium);min-height:0}
 .btn-express{background:var(--ink);color:var(--ground);font-family:var(--f-body);
   font-size:.9375rem;letter-spacing:0;text-transform:none;font-weight:600}
 .btn-express.gpay{background:var(--tile);color:var(--ink);border:1px solid var(--line-2)}
 .on-vid .btn{background:var(--band-fg);color:#141810}
+.on-vid .btn-pill{background:#FFFFFF;color:var(--olive)}
+.on-vid .btn-pill.btn-out{background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,.9)}
+.on-vid .btn-pill.btn-out:hover{background:#FFFFFF;color:var(--olive)}
 .on-vid .btn-out{background:transparent;color:var(--band-fg);border-color:rgba(233,234,230,.5)}
 .on-vid .btn-out:hover{background:var(--band-fg);color:#141810}
 /* "SECTION > SHOP", as Acne writes it — no arrow on every link */
@@ -226,17 +239,23 @@ nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
 
 
 /* ============================================================ hero */
-.vhero{position:relative;height:min(84vh,820px);min-height:480px;overflow:hidden;
+.vhero{position:relative;height:var(--hero-h);overflow:hidden;
   background:var(--band);display:grid}
 .vhero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-in{position:relative;z-index:3;align-self:end;width:100%;color:var(--band-fg);
-  padding-bottom:clamp(1.5rem,3.5vw,2.75rem)}
-.hero-mark{width:min(33vw,350px);height:auto;color:var(--band-fg);
-  margin:0 auto clamp(1.25rem,3vw,2.25rem)}
-.hero-foot{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:flex-end;
-  justify-content:space-between;border-top:1px solid rgba(233,234,230,.28);padding-top:1.1rem}
-.hero-foot .lede{color:rgba(233,234,230,.86);max-width:40ch}
-.hero-cta{display:flex;flex-wrap:wrap;gap:.5rem}
+/* el velo del hero es a sangre del frame y va de arriba hacia abajo */
+.vhero>.veil{background:var(--scrim-hero)}
+/* El bloque de texto: columna, alineado al mismo margen lateral que el nav,
+   y apoyado en el tercio inferior. Los gaps los pone el flex, no márgenes
+   sueltos por elemento. */
+.hero-in{position:absolute;left:0;right:0;bottom:0;z-index:3;color:#FFFFFF;
+  padding-bottom:clamp(2rem,6.4vw,92px)}
+.hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:var(--sp-2)}
+.hero-copy h1{font-size:var(--t-h1);line-height:var(--lh-h1);font-weight:var(--fw-bold);
+  letter-spacing:-.02em;color:#FFFFFF;max-width:var(--hero-copy)}
+.hero-sub{font-size:clamp(1rem,1.2vw,17px);line-height:25px;max-width:46ch;
+  color:rgba(255,255,255,.78)}
+.hero-sub b{font-weight:var(--fw-semibold);color:#FFFFFF}
+.hero-cta{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:14px}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
 /* ============================================================ edge-to-edge strips */
@@ -694,19 +713,15 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
     <div class="veil"></div>
     <span class="otag">Gold Coast</span>
     <p class="shot"><b>Hero clip</b> — ronda on the sand, golden hour, hands passing the mate.
-      6–8 s, no cuts, muted loop. The wordmark sits over it, so keep the centre uncluttered.</p>
+      6–8 s, no cuts, muted loop. El texto va abajo a la izquierda: dejá ese tercio
+      tranquilo y sin caras.</p>
     <div class="hero-in"><div class="wrap">
-      <!-- The real vector, injected from assets/logo/matecoast.svg by build.py.
-         It inherits the CSS colour, so one file serves both themes. -->
-    <svg class="logo-svg hero-mark" role="img" aria-label="Mate Coast"><use href="#i-logo"/></svg>
-      <div class="hero-foot">
-        <div>
-          <p class="lede">Argentine mate gear, stocked in Broadbeach and shipped
-            Australia-wide. Never used one? We'll help you put your first one together.</p>
-        </div>
+      <div class="hero-copy">
+        <h1>Todo lo que necesitás para cebar como corresponde.</h1>
+        <p class="hero-sub">El mate está listo. Faltás vos. <b>¿QUIÉN CEBA?</b></p>
         <div class="hero-cta">
-          <a class="btn" href="#/shop">Arma tu mate</a>
-          <a class="btn btn-out" href="#/ritual">Watch how it works</a>
+          <a class="btn btn-pill" href="#/shop">Armá tu mate</a>
+          <a class="btn btn-pill btn-out" href="#/ritual">What is Mate?</a>
         </div>
       </div>
     </div></div>

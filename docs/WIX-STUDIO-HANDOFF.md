@@ -128,6 +128,35 @@ Abajo de 760 px: hamburguesa a la izquierda, logo al centro, **solo los íconos*
 derecha. Las palabras "Search" y "Cart" no entran en 390 px sin correr el logo del
 centro; se esconden visualmente pero siguen en el HTML para los lectores de pantalla.
 
+## 3d. El hero, medida por medida
+
+Desktop (1440). Alto 700–800 px, video a `object-fit: cover`, clip activado.
+
+| Qué | Valor |
+|---|---|
+| Alto | 763 px a 1440 (`clamp(520px, 53vw, 768px)`) |
+| Scrim | Rectángulo a sangre, degradado lineal de arriba abajo: 0 % transparente → 50 % negro 18 % → 100 % negro 66 % |
+| Bloque de texto | Abajo a la izquierda, alineado al margen del nav, centrado en el tercio inferior |
+| H1 | 60 / 66, Bold, blanco 100 %, `max-width` 620 px para que rompa en tres líneas |
+| Subtítulo | 17 / 25, blanco 78 %; "¿QUIÉN CEBA?" en Semibold blanco 100 % |
+| Gap H1 → subtítulo | 16 px |
+| Gap subtítulo → botones | 30 px |
+| Gap entre botones | 16 px |
+| Botones | Pastilla, padding 30 / 15. Primario: relleno blanco, texto verde `#546742`. Secundario: filete blanco 1 px, fondo transparente |
+
+**El scrim no es decoración.** Va a sangre y de arriba hacia abajo justamente para
+que el texto se lea sin importar qué fotograma del video esté pasando. Si se hace
+con el slider de opacidad del Video Box en vez de con un rectángulo con degradado
+encima, se oscurece el clip entero y se pierde el metraje.
+
+**Los dos botones son el mismo componente.** Mismo padding, misma altura, misma
+tipografía; sólo cambia la variante de color. En Wix: hacé uno, duplicalo y cambiale
+el fill — no los armes por separado o van a divergir en el primer retoque.
+
+> **Ojo con el radio.** El resto del sitio es radio 0 (ver §4). El hero pide
+> pastilla. Hoy conviven, y hay que resolverlo: o los botones son pastilla en todo
+> el sitio, o el hero va cuadrado. Mezclado no.
+
 ## 4. Custom CSS
 
 `Dev Mode → Custom CSS`. Acá va lo que Wix no te deja controlar desde el panel:
