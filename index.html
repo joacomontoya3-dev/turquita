@@ -2,7 +2,7 @@
 <title>Mate Coast</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
 /* ============================================================
    MATE COAST — video-led storefront
@@ -20,16 +20,36 @@
   --veil-panel:rgba(255,255,255,.96); /* menu panel — a hint of the hero, text still safe */
   --btn-bg:#111110; --btn-fg:#FFFFFF; --focus:#546742;
 
-  /* one grotesque for the whole site, as in every reference */
-  --f-display:'Archivo','Helvetica Neue',Arial,sans-serif;
-  --f-body:'Archivo','Helvetica Neue',Arial,sans-serif;
+  /* Inter, una sola familia en todo el sitio */
+  --f-display:'Inter','Helvetica Neue',Arial,sans-serif;
+  --f-body:'Inter','Helvetica Neue',Arial,sans-serif;
+  --fw-medium:500; --fw-semibold:600; --fw-bold:700;
 
-  --t-h1:clamp(1.6rem,3vw,2.6rem);
-  --t-h2:clamp(1.25rem,2vw,1.75rem);
-  --t-body:1rem; --t-sm:.8125rem; --t-micro:.75rem;
+  /* Escala del sitio. Los px de la spec son el techo; abajo baja con clamp
+     para que no reviente en celular, que la spec no cubría. */
+  --t-h1:clamp(2rem,4.2vw,60px);      --lh-h1:1.1;
+  --t-h2:clamp(1.6rem,2.8vw,40px);    --lh-h2:1.2;
+  --t-h3:clamp(1.375rem,2vw,28px);    --lh-h3:1.285;
+  --t-h4:clamp(1.1875rem,1.6vw,22px); --lh-h4:1.364;
+  --t-body-lg:clamp(1rem,1.25vw,18px);--lh-body-lg:1.556;
+  --t-body:16px;  --lh-body:1.5;
+  --t-sm:14px;    --lh-sm:1.43;
+  --t-nav:15px;   --lh-nav:22px;  --ls-nav:.3px;
+  --t-micro:12px;
+  --t-button:15px;
 
-  --gut:clamp(16px,3vw,40px);
-  --r:0px; --max:1680px;
+  /* Escala de spacing 8 / 16 / 20 / 24 / 48 */
+  --sp-1:8px; --sp-2:16px; --sp-3:20px; --sp-4:24px; --sp-6:48px;
+  --section-gap:clamp(48px,7vw,96px);   /* rango de la spec: 80–120 */
+
+  /* Margen lateral de página: 64 en desktop */
+  --gut:clamp(20px,4.45vw,64px);
+  --r:0px; --max:1280px;
+
+  /* Navbar */
+  --nav-py:var(--sp-3); --nav-gap-links:40px; --nav-gap-actions:var(--sp-3);
+  --nav-gap-icon:var(--sp-1); --nav-icon:20px; --nav-icon-stroke:1.5;
+  --nav-logo-h:42px;
   /* one scrim for every text-over-video block on the site */
   --scrim:linear-gradient(to top,rgba(8,8,8,.88) 0%,rgba(8,8,8,.6) 32%,rgba(8,8,8,.1) 72%,rgba(8,8,8,0) 100%);
 }
@@ -51,22 +71,26 @@
 *{box-sizing:border-box}
 html{scroll-padding-top:80px}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);
-  font-size:var(--t-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+  font-size:var(--t-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+svg[data-icon]{stroke-width:var(--nav-icon-stroke)}
 img,svg,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:600;line-height:1.05;
-  letter-spacing:-.02em;text-wrap:balance}
+h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:var(--fw-semibold);
+  line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
 p{margin:0}
 .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
 .nums{font-variant-numeric:tabular-nums}
 .lbl{font-family:var(--f-body);font-size:var(--t-micro);font-weight:500;
   text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
 .lbl-ink{color:var(--ink)}
-.h1{font-size:var(--t-h1)} .h2{font-size:var(--t-h2)}
-.h3{font-size:1rem;font-family:var(--f-body);font-weight:600;letter-spacing:-.01em}
-.lede{font-size:clamp(.9375rem,1.2vw,1.0625rem);line-height:1.5;color:var(--ink-2);max-width:52ch}
+.h1{font-size:var(--t-h1);line-height:var(--lh-h1);font-weight:var(--fw-semibold)}
+.h2{font-size:var(--t-h2);line-height:var(--lh-h2);font-weight:var(--fw-semibold)}
+.h3{font-size:var(--t-h3);line-height:var(--lh-h3);font-weight:var(--fw-semibold)}
+.h4{font-size:var(--t-h4);line-height:var(--lh-h4);font-weight:var(--fw-medium)}
+.card-title{font-size:var(--t-body);font-weight:var(--fw-semibold);letter-spacing:-.01em}
+.lede{font-size:var(--t-body-lg);line-height:var(--lh-body-lg);color:var(--ink-2);max-width:52ch}
 .prose{max-width:65ch;color:var(--ink-2)}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -76,7 +100,7 @@ p{margin:0}
 /* the real logo drops into any wordmark slot as an <img> and takes its height */
 /* one vector for every slot — it inherits the CSS colour, so no per-theme file */
 .logo-svg{display:block;fill:currentColor;aspect-ratio:813.92/697.07}
-.mark-svg{height:30px;width:auto;margin-inline:auto}
+.mark-svg{height:var(--nav-logo-h);width:auto}
 
 /* words distributed edge to edge across an image */
 .spread{display:flex;justify-content:space-between;align-items:baseline;width:100%;gap:1rem;
@@ -129,25 +153,37 @@ body.notes .shot{display:block}
 header.site{position:sticky;top:0;z-index:40;background:var(--veil-bar);
   -webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
   border-bottom:1px solid var(--line)}
-.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;
-  padding-block:.85rem;max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
-nav.main{display:flex;gap:1.3rem}
-.bar-start{display:flex;align-items:center;gap:1.3rem;min-width:0}
-.nav-toggle{display:none;font-size:var(--t-micro);font-weight:500;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--ink);padding:0}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:var(--sp-4);
+  padding-block:var(--nav-py);max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+nav.main{display:flex;align-items:center;gap:var(--nav-gap-links)}
+.bar-start{display:flex;align-items:center;gap:var(--nav-gap-links);min-width:0;justify-self:start}
+.nav-toggle{display:none}
 @media(max-width:759px){
   .nav-toggle{display:block}
   nav.main{display:none}
+  /* 390px no aguanta texto+ícono a la derecha: el bloque desborda su track 1fr
+     y corre el logo del centro. Abajo de 760 quedan los íconos solos; la
+     etiqueta sigue ahí para lectores de pantalla. */
+  .a-lbl{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .action{gap:0}
+  #cartN{margin-right:var(--nav-gap-icon)}
 }
-nav.main a,.bar-end button,.bar-end a{font-family:var(--f-body);font-size:var(--t-micro);
-  text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2);white-space:nowrap;
-  padding-block:.3rem}
-nav.main a:hover,.bar-end button:hover{color:var(--ink)}
+/* links y acciones: Inter Medium 15/22, sin caja, ancho al contenido */
+nav.main a,.bar-end button,.bar-end a,.nav-toggle{font-family:var(--f-body);
+  font-size:var(--t-nav);line-height:var(--lh-nav);font-weight:var(--fw-medium);
+  letter-spacing:var(--ls-nav);text-transform:none;color:var(--ink);
+  white-space:nowrap;width:max-content;padding:var(--sp-1) 0}
+nav.main a:hover,.bar-end button:hover{color:var(--ink-2)}
 nav.main a[aria-current],nav.main a[aria-expanded="true"]{color:var(--ink);
   box-shadow:0 1px 0 var(--ink)}
-.mark{font-family:var(--f-display);font-weight:800;font-size:.875rem;line-height:.85;color:var(--olive);text-transform:uppercase;
-  letter-spacing:.02em;text-align:center}
-.bar-end{display:flex;gap:1.2rem;align-items:center;justify-content:flex-end}
+.mark{color:var(--olive);justify-self:center;display:inline-flex;align-items:center}
+.bar-end{display:flex;gap:var(--nav-gap-actions);align-items:center;justify-content:flex-end;
+  justify-self:end}
+/* texto + ícono en línea, no un botón con fondo */
+.action{display:inline-flex;align-items:center;gap:var(--nav-gap-icon)}
+#cartN:empty{display:none}
+.ico{width:var(--nav-icon);height:var(--nav-icon);aspect-ratio:1;flex:none}
 nav.main button{font-size:var(--t-micro);font-weight:500;text-transform:uppercase;
   letter-spacing:.08em;color:var(--ink-2);white-space:nowrap;padding:0}
 nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
@@ -187,7 +223,7 @@ nav.main button[aria-expanded="true"],nav.main button:hover{color:var(--ink)}
   .menu{max-height:calc(100vh - 88px);overflow-y:auto}
   .menu-in{gap:1.5rem}
 }
-.bar-end .cart-btn{color:var(--ink)}
+
 
 /* ============================================================ hero */
 .vhero{position:relative;height:min(84vh,820px);min-height:480px;overflow:hidden;
@@ -495,6 +531,8 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <path d="M921.18,741.88c23.62-1.3,32.76,24.72,16.74,40.69-12.3,12.26-32.14,11.08-45.38,18.73-9.63,5.56-9.41,15.51-10.51,25.39-5.21,46.8-6.89,94.3-15.8,140.62-4.34,22.59-10.26,56.99-40.98,52.9-23.6-3.14-22.62-28.53-19.89-46.24,6.33-41,18.37-81.52,20.24-123.36.6-13.56.68-31.11-16.03-33.53-19.02-2.75-59.78,8.21-63.36-21.26-4.33-35.58,37.9-30.12,60.16-31.97,21.9-1.81,43.97-5.07,65.41-9.81,14.56-3.22,35.54-11.39,49.4-12.16Z"/>
     </g>
   </g></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.1A2 2 0 0 1 15.8 21H8.2a2 2 0 0 1-2-1.9L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
   <symbol id="i-gourd" viewBox="0 0 200 240">
     <rect class="s1" x="124" y="14" width="9" height="74" rx="4.5" transform="rotate(14 128 51)"/>
     <rect class="s1" x="117" y="4" width="24" height="10" rx="5" transform="rotate(14 129 9)"/>
@@ -566,7 +604,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
               aria-expanded="false" aria-controls="shopMenu">Menu</button>
       <nav class="main" id="nav" aria-label="Main">
         <a href="#/shop" id="shopLink" aria-expanded="false" aria-controls="shopMenu">Shop</a>
-        <a href="#/ritual">How to mate</a>
+        <a href="#/ritual">What is Mate?</a>
         <a href="#/about">About</a>
       </nav>
     </div>
@@ -574,9 +612,14 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
          It inherits the CSS colour, so one file serves both themes. -->
     <a class="mark" href="#/" aria-label="Mate Coast — home"><svg class="logo-svg mark-svg" role="img" aria-label="Mate Coast"><use href="#i-logo"/></svg></a>
     <div class="bar-end">
-      <button type="button" id="searchBtn" aria-expanded="false" aria-controls="searchPanel">Search</button>
-      <button type="button" class="cart-btn" id="cartOpen" aria-haspopup="dialog">
-        Bag&nbsp;<span id="cartN">00</span></button>
+      <button type="button" class="action" id="searchBtn" aria-expanded="false" aria-controls="searchPanel">
+        <span class="a-lbl">Search</span>
+        <svg class="ico" data-icon fill="none" stroke="currentColor" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true"><use href="#i-search"/></svg></button>
+      <button type="button" class="action cart-btn" id="cartOpen" aria-haspopup="dialog">
+        <span class="a-lbl">Cart</span><span id="cartN"></span>
+        <svg class="ico" data-icon fill="none" stroke="currentColor" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true"><use href="#i-cart"/></svg></button>
     </div>
   </div>
   <div class="menu search-panel" id="searchPanel" hidden>
@@ -592,7 +635,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
       <div class="menu-col" id="menuCats"></div>
       <div class="menu-col menu-only-mobile">
         <span class="lbl">Menu</span>
-        <a href="#/ritual">How to mate</a>
+        <a href="#/ritual">What is Mate?</a>
         <a href="#/about">About</a>
       </div>
       <div class="menu-col">
@@ -757,7 +800,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
             <span id="qVal" aria-live="polite">1</span>
             <button type="button" id="qPlus" aria-label="Increase quantity">+</button>
           </div>
-          <button type="button" class="btn btn-block" id="addBtn">Add to bag — <span id="addPrice"></span></button>
+          <button type="button" class="btn btn-block" id="addBtn">Add to cart — <span id="addPrice"></span></button>
         </div>
         <div class="express">
           <button type="button" class="btn btn-express" id="apay">Apple&nbsp;Pay</button>
@@ -807,7 +850,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
     <p class="shot">
       <b>Guide opener</b> — close on the montañita as the first water goes in. Slow, 6 s.</p>
     <div class="hero-in"><div class="wrap">
-      <p class="wordmark" style="font-size:clamp(2.2rem,8vw,6rem)">How to mate</p>
+      <p class="wordmark" style="font-size:clamp(2.2rem,8vw,6rem)">What is mate?</p>
       <p class="lede">Mate is not tea. You refill the same gourd ten or fifteen times, and you
         pass it around.</p>
     </div></div>
@@ -991,15 +1034,17 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
   </div>
 
   <div class="wrap" style="padding-bottom:clamp(1.75rem,3vw,2.5rem)">
-    <div class="sec-head"><h2 class="h2">Type</h2><span class="lbl">One family</span></div>
+    <div class="sec-head"><h2 class="h2">Type</h2><span class="lbl">Inter, one family</span></div>
     <div class="scale">
-      <div><span class="display" style="font-size:2.5rem">Share a mate</span><code>Archivo 700 · −.035em</code></div>
-      <div><span class="h1">Everything you need</span><code>Archivo 600 · clamp(1.75–2.9rem)</code></div>
-      <div><span class="h2">Best sellers</span><code>Archivo 600 · clamp(1.3–1.9rem)</code></div>
-      <div><span style="font-size:1.0625rem;font-weight:600">Mate San Juan</span><code>Archivo 600 · 17px</code></div>
-      <div><span>Argentine mate gear, stocked in Broadbeach.</span><code>Archivo 400 · 16/1.5</code></div>
-      <div><span class="nums">$55.00 · 220 ml · 70–80 °C</span><code>Archivo 400 · tabular-nums</code></div>
-      <div><span class="lbl lbl-ink">Click &amp; collect</span><code>Archivo 500 · 12px · .08em · uppercase</code></div>
+      <div><span class="h1">Everything you need</span><code>H1 · Inter 600 · 60/66 · −.02em</code></div>
+      <div><span class="h2">Best sellers</span><code>H2 · Inter 600 · 40/48</code></div>
+      <div><span class="h3">Made on the Gold Coast</span><code>H3 · Inter 600 · 28/36</code></div>
+      <div><span class="h4">Mate San Juan</span><code>H4 · Inter 600 · 22/30</code></div>
+      <div><span class="lede">Argentine mate gear, stocked in Broadbeach.</span><code>Body L · Inter 400 · 18/28</code></div>
+      <div><span>Shipped Australia-wide, never used one? Start with a kit.</span><code>Body · Inter 400 · 16/24</code></div>
+      <div><span style="font-size:var(--t-nav);line-height:var(--lh-nav);font-weight:var(--fw-medium);letter-spacing:var(--ls-nav)">Shop · What is Mate? · About</span><code>Nav · Inter 500 · 15/22 · +.3px</code></div>
+      <div><span class="nums">$55.00 · 220 ml · 70–80 °C</span><code>Inter 400 · tabular-nums</code></div>
+      <div><span class="lbl lbl-ink">Click &amp; collect</span><code>Micro · Inter 500 · 12px · .08em</code></div>
     </div>
   </div>
 
@@ -1040,7 +1085,7 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
         <a href="#/shop/termos">Termos</a><a href="#/shop/yerba">Yerba</a>
         <a href="#/shop/accesorios">Yerberas &amp; canastos</a><a href="#/shop/kits">Kits</a></div>
       <div class="f-col"><span class="lbl">Help</span>
-        <a href="#/about">About us</a><a href="#/ritual">How to mate</a><a href="#/ritual">Curing a new gourd</a>
+        <a href="#/about">About us</a><a href="#/ritual">What is Mate?</a><a href="#/ritual">Curing a new gourd</a>
         <a href="#/">Shipping &amp; returns</a><a href="#/">Contact</a>
         <a href="#/">Join the WhatsApp group</a></div>
       <div class="f-col"><span class="lbl">Visit</span>
@@ -1060,9 +1105,9 @@ footer.site .lbl{color:rgba(233,234,230,.5)}
 </footer>
 
 <div class="scrim" id="scrim" hidden></div>
-<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Your bag" hidden>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Your cart" hidden>
   <div class="drawer-head">
-    <span class="lbl lbl-ink">Your bag — <span id="drawerN">0</span></span>
+    <span class="lbl lbl-ink">Your cart — <span id="drawerN">0</span></span>
     <button type="button" id="cartClose" class="lbl lbl-ink">Close</button>
   </div>
   <div class="drawer-body" id="drawerBody"></div>
@@ -1171,7 +1216,7 @@ var REELS=[
  {clip:'reel-4',t:'Don’t move the bombilla',s:'The one rule',pid:'bombilla-pico',
   shot:'Wrong way then right way, hard cut between. 6 s.'},
  {clip:'reel-2',t:'A kilo, opened',s:'Verde Flor',pid:'verde-flor',
-  shot:'Bag opens, close on the grind. Sound on for this one. 4 s.'}];
+  shot:'Cart opens, close on the grind. Sound on for this one. 4 s.'}];
 
 var STEPS=[
  {n:'01',t:'Fill it two-thirds',clip:'reel-3',p:'Pour dry yerba until the gourd is about two-thirds full. Less than you think — it swells.',note:'Two-thirds. Not to the brim.',shot:'Yerba pouring in, gourd held steady. 5 s.'},
@@ -1207,7 +1252,7 @@ function stepHTML(s){
   return '<article class="step"><div class="vframe">'+
     '<video data-clip="'+s.clip+'" muted loop playsinline preload="none" aria-hidden="true"></video>'+
     '<p class="shot"><b>Step '+s.n+'</b> — '+esc(s.shot)+'</p></div>'+
-    '<div class="step-txt"><span class="n">'+s.n+' / 06</span><h3 class="h3">'+s.t+'</h3>'+
+    '<div class="step-txt"><span class="n">'+s.n+' / 06</span><h3 class="card-title">'+s.t+'</h3>'+
     '<p>'+s.p+'</p><p class="note">'+s.note+'</p></div></article>';
 }
 
@@ -1335,7 +1380,7 @@ function mountVideos(root){
     if(e.key==='Escape'&&!panel.hidden){ close(); btn.focus(); }
   });
   document.addEventListener('click',function(e){
-    if(!panel.hidden && !panel.contains(e.target) && e.target!==btn) close();
+    if(!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)) close();
   });
   window.addEventListener('hashchange',close);
 })();
@@ -1367,7 +1412,7 @@ function setQty(i,q){ if(q<=0) cart.splice(i,1); else cart[i].q=q; saveCart(); r
 var FREE_SHIP=99;
 function renderCart(){
   var n=cartCount(), total=cartTotal();
-  $('#cartN').textContent=(n<10?'0':'')+n;
+  $('#cartN').textContent=n?'('+n+')':'';
   $('#drawerN').textContent=(n===1?'1 item':n+' items');
   $('#subtotal').textContent=money(total);
   $('#shipFill').style.width=Math.min(100,total/FREE_SHIP*100)+'%';
@@ -1375,7 +1420,7 @@ function renderCart(){
     : money(FREE_SHIP-total)+' away from free shipping';
   var body=$('#drawerBody');
   if(!cart.length){
-    body.innerHTML='<div class="empty"><p>Your bag is empty.</p>'+
+    body.innerHTML='<div class="empty"><p>Your cart is empty.</p>'+
       '<a class="btn btn-ghost" href="#/product/starter-kit">Shop the starter kit</a></div>';
     return;
   }

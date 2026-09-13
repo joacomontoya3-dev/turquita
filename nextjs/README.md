@@ -3,6 +3,11 @@
 Implementación de la spec del navbar, con los tokens del sitio como base
 reutilizable para el resto de las secciones.
 
+> **Esto no es el prototipo.** El prototipo de Mate Coast es `index.html`, generado
+> desde `src/index.template.html`, y ya tiene esta misma nav aplicada — mismos tokens,
+> mismas medidas. Esta carpeta queda como referencia por si algún día el sitio se porta
+> a Next + Shopify en vez de Wix. Si tocás medidas, tocá las dos.
+
 ## Archivos
 
 ```

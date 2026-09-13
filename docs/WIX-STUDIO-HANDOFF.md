@@ -12,7 +12,7 @@ No armes página por página. Armá el sistema primero y las páginas salen sola
 
 1. Colores del sitio
 2. Fuentes
-3. Temas de texto
+3. Temas de texto, espaciado y el header
 4. Custom CSS
 5. Catálogo en Wix Stores
 6. Video (ver `VIDEO.md` — es la mitad del diseño)
@@ -56,31 +56,77 @@ a aparecer en botones y títulos, el diseño se cae.
 
 | Rol | Fuente | Dónde conseguirla |
 |---|---|---|
-| Todo el sitio | **Archivo** (variable) | fonts.google.com/specimen/Archivo → descargar → subir el `.woff2`. Es la única fuente del proyecto |
+| Todo el sitio | **Inter** (variable) | fonts.google.com/specimen/Inter → descargar → subir el `.woff2`. Es la única fuente del proyecto |
 
 Si Wix te rechaza el variable, subí las estáticas en 400, 500, 600 y 700.
 
 **Es la única fuente del sitio.** Las referencias usan una sola familia y por eso se ven
-ordenadas; no agregues una segunda.
+ordenadas; no agregues una segunda. En particular **nada de monoespaciada**: ninguna de
+las referencias que mandaste la usa y es lo que más delataba el prototipo viejo.
 
 ## 3. Temas de texto
 
-`Site Design → Text themes`. Definilos una vez y usá siempre estos, nunca tamaños sueltos:
+`Site Design → Text themes`. Definilos una vez y usá siempre estos, nunca tamaños sueltos.
+Los tamaños son los del desktop de 1440; abajo de eso el prototipo los baja con `clamp()`
+y en Wix alcanza con poner el valor chico en el breakpoint de mobile.
 
-| Tema | Fuente | Tamaño | Detalle |
+| Tema | Fuente | Tamaño / interlineado | Detalle |
 |---|---|---|---|
-| Display | Archivo 700 | 42 → 96 px fluido | interlineado 0.92, tracking −0.035em |
-| H1 | Archivo 600 | 30 → 52 px | tracking −0.02em |
-| H2 | Archivo 600 | 22 → 34 px | tracking −0.02em |
-| H3 | Instrument Sans 600 | 17 px | |
-| Body | Instrument Sans 400 | 16 px | interlineado 1.55 |
-| Small | Instrument Sans 400 | 13 px | color `#5A6152` |
-| Data | DM Mono 400 | 14 px | para precios y specs |
-| Label | DM Mono 400 | 11 px | MAYÚSCULAS, tracking 0.16em |
+| H1 | Inter 600 | 60 / 66 | tracking −0.02em. Mobile: 32 / 35 |
+| H2 | Inter 600 | 40 / 48 | Mobile: 26 / 31 |
+| H3 | Inter 600 | 28 / 36 | Mobile: 22 / 28 |
+| H4 | Inter 500 | 22 / 30 | títulos de bloque y de ficha |
+| Body L | Inter 400 | 18 / 28 | bajadas y párrafos de apertura |
+| Body | Inter 400 | 16 / 24 | texto corrido |
+| Small | Inter 400 | 14 / 20 | color `#6B6B68` |
+| Nav | Inter 500 | 15 / 22 | tracking +0.3px, caja de oración (no mayúsculas) |
+| Micro / Label | Inter 500 | 12 px | MAYÚSCULAS, tracking 0.08em, color `#6B6B68` |
 
-Ese último tema —el label en mono, chiquito y espaciado— es el que carga la mitad del
-carácter del diseño. Está en los rótulos de categoría, en las specs, en los botones y
-en la barra de anuncios.
+El tema **Nav** es el que ordena la barra de arriba: 15/22 en Medium, caja de oración y
+sin caja de botón. Es el mismo valor que usan AKILA y A.P.C., y es lo que hace que el
+header no compita con el título de la página.
+
+## 3b. Espaciado
+
+Una sola escala, múltiplos de 8, cargada como espacios del sitio:
+
+| Token | px | Para qué |
+|---|---|---|
+| 1 | 8 | texto ↔ ícono, ítems de una lista |
+| 2 | 16 | separación interna de un bloque |
+| 3 | 20 | alto del header (arriba y abajo), gap entre acciones |
+| 4 | 24 | gap de grilla |
+| 6 | 48 | separación entre bloques de una sección |
+
+- **Margen de página:** 64 px en desktop, 20 px en mobile (fluido en el medio).
+- **Ancho del contenedor:** 1280 px máximo.
+- **Separación entre secciones:** 80 a 120 px (el prototipo usa `clamp(48px, 7vw, 96px)`).
+
+## 3c. El header, medida por medida
+
+Es la pieza más fácil de arruinar en Wix porque el editor te tienta a poner tres cajas
+sueltas. Armalo como **una sola grilla de tres columnas** (`1fr auto 1fr`):
+
+| Qué | Valor |
+|---|---|
+| Alto | 20 px arriba + 20 px abajo sobre el contenido |
+| Columnas | izquierda `1fr`, logo `auto`, derecha `1fr` |
+| Links | Shop · What is Mate? · About, gap 40 px |
+| Caja del link | padding 8 px arriba/abajo, 0 a los costados (el link mide lo que mide su texto) |
+| Logo | 42 px de alto, ilustrado a dos líneas, verde `#546742` |
+| Bloque derecho | Search y Cart, gap 20 px entre ellos |
+| Texto + ícono | gap 8 px, en línea |
+| Íconos | 20 × 20, trazo 1.5, la misma familia los dos |
+| Fondo | blanco al 82 % con `backdrop-filter: blur(16px)`, filete de 1px abajo |
+
+**Lo que hace que se vea bien:** el logo está centrado sobre el ancho **total** de la
+barra, no sobre el espacio que sobra entre los dos bloques. Por eso las columnas
+laterales son `1fr` y no `auto`. Si lo centrás sobre el hueco, el logo se corre cada vez
+que cambia el texto de la derecha (por ejemplo cuando el carrito pasa de vacío a `(1)`).
+
+Abajo de 760 px: hamburguesa a la izquierda, logo al centro, **solo los íconos** a la
+derecha. Las palabras "Search" y "Cart" no entran en 390 px sin correr el logo del
+centro; se esconden visualmente pero siguen en el HTML para los lectores de pantalla.
 
 ## 4. Custom CSS
 
@@ -88,23 +134,27 @@ en la barra de anuncios.
 
 ```css
 :root{
-  --line:#C6CBC0;
-  --panel:#DCE0D8;
+  --ground:#FFFFFF; --tile:#F1F1F0; --band:#111110;
+  --ink:#111110; --ink-2:#6B6B68; --line:#E3E3E1;
+  --olive:#546742;
 }
-/* Nada de esquinas redondeadas ni sombras: el look es de filete, no de tarjeta */
-[data-testid="container"], .product-card, button{ border-radius:2px !important; }
+/* Cero esquinas redondeadas y cero sombras: el look es de filete, no de tarjeta */
+[data-testid="container"], .product-card, button, img{ border-radius:0 !important; box-shadow:none !important; }
 
 /* Grilla de producto: filete en vez de sombra */
 .product-item{ border:0; }
-.product-item img{ background:var(--panel); }
+.product-item img{ background:var(--tile); }
 
 /* Números alineados en columna en precios y specs */
 .price, .spec-value{ font-variant-numeric:tabular-nums; }
+
+/* Header: el logo centrado sobre el ancho total, no sobre el hueco */
+header .header-grid{ display:grid; grid-template-columns:1fr auto 1fr; align-items:center; }
 ```
 
 Los selectores exactos cambian según los elementos que uses, así que inspeccioná con
-el navegador antes de escribirlos. La idea es la que importa: **radio 2px, cero
-sombras, filetes de 1px, números tabulares.**
+el navegador antes de escribirlos. La idea es la que importa: **radio 0, cero sombras,
+filetes de 1px, números tabulares, logo centrado por grilla.**
 
 ---
 
@@ -131,8 +181,8 @@ algunas fichas la tienen y otras no, la grilla se ve descuidada.
 | En el prototipo | En Wix Studio |
 |---|---|
 | Barra de anuncios | Announcement Bar nativa. El movimiento necesita un Custom Element — si complica, sacá el movimiento, es decoración |
-| Header fijo | Header nativo en modo Sticky |
-| Hero tipográfico | Section + Text sobre la grilla de Studio. No hay imagen, no hay nada que optimizar |
+| Header fijo | Header nativo en modo Sticky. Armá el contenido como una grilla `1fr auto 1fr` (ver §3c) |
+| Hero de video a sangre | Section con Video Box a pantalla completa, Loop + Mute + Play automático, y el texto encima con el degradado |
 | Fila de confianza | Repeater de 4 celdas, o 4 containers en grid |
 | Riel de categorías | Repeater horizontal o Slideshow, atado a las categorías de Stores |
 | Grilla de productos | Product Gallery de Wix Stores. Activá "Show second image on hover" |
@@ -143,7 +193,7 @@ algunas fichas la tienen y otras no, la grilla se ve descuidada.
 | Carrito lateral + barra de envío gratis | Side Cart nativo. La barra es el ajuste "Free shipping goal" |
 | Tabla de specs | Product Info Sections |
 | Acordeones | Accordion de Wix Studio |
-| Página "How to mate" | Página normal con un Video Box por paso. **No la pongas en un embed** — es tu mejor contenido para Google |
+| Página "What is Mate?" | Página normal con un Video Box por paso. **No la pongas en un embed** — es tu mejor contenido para Google |
 | Hero a sangre | Sección con fondo de video, o Video Box del tamaño de la sección. Loop + Mute + Play automático |
 | Degradado sobre el video | Color Overlay sobre el Video Box con el degradado — **no** el slider de opacidad del video |
 | Carrusel de reels | Repeater horizontal con un Video Box por celda |
@@ -155,10 +205,10 @@ algunas fichas la tienen y otras no, la grilla se ve descuidada.
 Wix Studio trae tres. Agregá uno más y usá estos anchos, que son los mismos del
 prototipo:
 
-- **≥ 1280 px** — grilla de 4-5 columnas
+- **≥ 1280 px** — grilla de 4-5 columnas, margen de página 64 px
 - **≥ 1000 px** — 3-4 columnas, ficha en dos columnas
-- **≥ 700 px** — 2-3 columnas, ficha en una columna
-- **< 700 px** — 2 columnas de producto
+- **≥ 760 px** — 2-3 columnas, ficha en una columna. **Este es el corte del header**: arriba se ven los links, abajo la hamburguesa
+- **< 760 px** — 2 columnas de producto, margen de página 20 px
 
 Dos columnas en celular, no una. El scroll infinito de una sola columna hace que la
 gente vea seis productos y se vaya.
@@ -175,10 +225,11 @@ gente vea seis productos y se vaya.
 - [ ] Un solo termo con opción de color
 - [ ] Express checkout activo y visible en la ficha
 - [ ] Pickup configurado con la dirección de Broadbeach
-- [ ] "How to mate" es una página indexable, no un embed
+- [ ] "What is Mate?" es una página indexable, no un embed
 - [ ] Todas las fotos con la misma receta (ver `CONTENT.md`)
 - [ ] Título y meta description propios por página, no los de la plantilla
 - [ ] Probado en celular real, no sólo en el preview de Studio
+- [ ] El logo queda centrado sobre el ancho total del header con el carrito vacío **y** con productos adentro
 
 ---
 

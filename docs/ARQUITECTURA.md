@@ -13,7 +13,7 @@ discusión.
 /shop                 Grilla completa
 /shop/:categoria      mates · bombillas · termos · yerba · accesorios · kits
 /producto/:id         Ficha
-/how-to-mate          Guía de cebado + etiqueta + curado
+/ritual               "What is Mate?" — cebado, etiqueta y curado
 /about                Quiénes somos + dónde encontrarnos
 carrito               Panel lateral, no página
 ```
@@ -21,9 +21,9 @@ carrito               Panel lateral, no página
 ## La navegación son tres ítems
 
 ```
-SHOP          → abre un panel; el click va al listado completo
-HOW TO MATE   → la guía
-ABOUT         → quiénes somos
+Shop            → abre un panel; el click va al listado completo
+What is Mate?   → la guía
+About           → quiénes somos
 ```
 
 Y nada más. AKILA tiene tres ítems, AGOLDE dos, Acne cuatro — todos con panel
@@ -35,7 +35,7 @@ El panel de **Shop** tiene tres columnas:
 | Columna | Contenido |
 |---|---|
 | Shop | Las seis categorías **con el contador de productos** al lado, más "All products" |
-| New to mate | El Starter Kit con su precio, y el link a la guía |
+| New to mate | El Starter Kit con su precio, y el link a "What is Mate?" |
 | Visit | Los dos puntos físicos |
 
 La segunda columna es la que trabaja: el que entra por el menú sin saber qué comprar se
@@ -44,11 +44,19 @@ lleva el kit puesto. Y los dos locales aparecen hasta en el menú, que es el cua
 **Comportamiento en escritorio:** el hover (o el foco con teclado) abre el panel; el click
 navega al listado completo.
 
+**El logo va centrado sobre el ancho total de la barra**, no sobre el espacio libre entre
+los dos bloques. Se resuelve con una grilla de tres columnas `1fr auto 1fr`: las
+laterales miden lo mismo pase lo que pase, así que el logo no se mueve cuando el carrito
+pasa de vacío a `(1)`. Si en cambio dejás que los bloques midan su contenido, el logo se
+corre unos píxeles cada vez que cambia un texto — y se nota.
+
 **En celular la barra cambia de forma.** Tres columnas con el logo centrado no caben en
 390 px: el nav se corta y se mete abajo del logo. Debajo de 760 px va
-**"Menu" a la izquierda · logo centrado · Search y Bag a la derecha**, y el panel pasa a
-ser el menú completo: las seis categorías, How to mate, About, el Starter Kit y los dos
-locales. El hover se desactiva por `@media (hover: hover)` — en una pantalla táctil el
+**"Menu" a la izquierda · logo centrado · Search y Cart a la derecha, solo los íconos**,
+y el panel pasa a ser el menú completo: las seis categorías, What is Mate?, About, el
+Starter Kit y los dos locales. Las palabras "Search" y "Cart" se esconden visualmente
+pero siguen en el HTML: con el texto puesto, el bloque derecho mide 155 px, desborda su
+columna y corre el logo 28 px del centro. El hover se desactiva por `@media (hover: hover)` — en una pantalla táctil el
 `mouseenter` se dispara con el toque y pelea con el link.
 
 **Búsqueda.** Sobre 16 productos no hace falta un motor, pero sí que ordene bien: la
@@ -73,7 +81,7 @@ Cada una tiene un trabajo. Si una sección no hace su trabajo, se saca.
 | 3 | **Reels** | Contenido vertical propio, **cada clip enlazado a un producto**. Es la sección más distintiva y la que ya tiene material filmado. En celular se desliza de costado, no en grilla: una grilla de 2 columnas de 9:16 queda despareja y esconde la mitad |
 | 4 | **Más vendidos** | Ocho productos. Entrada rápida al catálogo sin pasar por la grilla |
 | 5 | **El kit** | El bloque de conversión más importante. Qué trae, cuánto ahorrás, por qué esas tres piezas van juntas |
-| 6 | **How to mate** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
+| 6 | **What is Mate?** | Tres pasos como anticipo de la guía completa. Es lo que convierte al curioso |
 | 7 | **Comunidad** | El grupo de WhatsApp. Prueba social que la competencia no tiene |
 | 8 | **Visit us** | Los dos puntos físicos, con dirección y horario. Es el resumen; la versión completa vive en `/about` |
 
